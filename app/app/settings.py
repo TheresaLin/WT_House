@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_social_share'
 ]
 
 MIDDLEWARE = [
@@ -64,8 +65,12 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'builtins': [
+                'django.templatetags.static',
+            ],
         },
     },
+    
 ]
 
 WSGI_APPLICATION = 'app.wsgi.application'

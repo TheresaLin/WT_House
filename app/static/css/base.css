@@ -1,0 +1,31 @@
+/* table style*/
+.container {
+    padding: 2rem 0rem;
+  }
+  
+h4 {
+    margin: 2rem 0rem 1rem;
+  }
+  
+.table-image {
+    td, th {
+      vertical-align: middle;
+    }
+  }
+
+
+.img-format {
+
+    width: 150%;
+    height: auto;
+
+}
+
+
+
+.fa {
+    padding: 10px;
+    float: right;
+    margin: 5px;
+  }
+ 
