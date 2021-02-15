@@ -29,3 +29,25 @@ h4 {
     margin: 5px;
   }
  
+
+
+  .button_right {
+  float: right;
+    
+}
+
+.bs-example{
+  margin: 20px;
+}
+
+.button-center {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.social a {
+  padding: 0 .5em;
+}
