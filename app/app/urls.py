@@ -19,5 +19,10 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homeview)
+    path('', views.homeview, name='homeview'),
+    #path('',views.get_img_text),
+    #path(r'^$',views.homeview),
+    #path(r'^form1/$',views.homeview),
+    path('insert/', views.insert_view),
+    path('lookup/', views.lookup_view),
 ]

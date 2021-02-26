@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_social_share'
+    'django_social_share',
+    'mongoengine',
 ]
 
 MIDDLEWARE = [
@@ -76,17 +77,30 @@ TEMPLATES = [
 WSGI_APPLICATION = 'app.wsgi.application'
 
 
+MONGODB_DATABASES = {
+    "default": {
+        'ENGINE' : 'django_mongodb_engine',
+        #'ENGINE': 'djongo',
+        "name": "examples",
+        "host": '127.0.0.1',
+        "tz_aware": True, # 设置时区
+    },
+}
+
+
+
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3', # different from 'ENGINE': 'django.db.backends.dummy'
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-
+from mongoengine import connect
+connect('examples', host='127.0.0.1')
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 

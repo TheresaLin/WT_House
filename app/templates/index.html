@@ -3,7 +3,10 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-    <form>
+
+
+    <form method="post" name="form1" action="">
+      {% csrf_token %}
       <table class="table table-image">
         <thead>
           <tr>
@@ -15,39 +18,39 @@
         <tbody>
           <tr>
             <td class="w-25">
-              Example: <img src="{% static 'image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
+              Example: <img src="{% static 'image/pic1.png' %}" class="img-fluid img-thumbnail" alt="Sheep">
             </td>
             <td><p></p><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="4" >Handwritten letters will never go out of style!</textarea></td>
 
           </tr>
           <tr>
             <td class="w-25">
-              <img src="{% static 'image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
+              <img src="https://drive.google.com/file/d/1khiQKeYxwLD-mDHfBvrpZMqQZExdMwOR/view?usp=sharing" class="img-fluid img-thumbnail" alt="Sheep" name="pic1">
             </td>
-            <td><textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea></td>
+            <td><input type="text" class="form-control" id="exampleFormControlTextarea1" name="text1" rows="4" required></td>
           </tr>
           <tr>
             <td class="w-25">
-             <img src="{% static 'image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
+             <img src="{% static 'image/pic2.png' %}" class="img-fluid img-thumbnail" alt="Sheep" name="pic2">
              </td>
-             <td><textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea></td>
+             <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text2" rows="4" required></textarea></td>
           </tr>
          <tr>
             <td class="w-25">
-              <img src="{% static 'image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
+              <img src="{% static 'image/pic3.png' %}" class="img-fluid img-thumbnail" alt="Sheep" name="pic3">
             </td>
-            <td><textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea></td>
+            <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text3" rows="4" required></textarea></td>
          </tr>
          <tr>
             <td class="w-25">
-              <img src="{% static 'image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
+              <img src="{% static 'image/pic4.png' %}" class="img-fluid img-thumbnail" alt="Sheep" name="pic4">
             </td>
-            <td><textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea></td>
+            <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text4" rows="4" required></textarea></td>
          </tr>
         </tbody>
       </table>
       <div class="button-center">
-      <input style="position: absolute; left: 50%;"class="btn btn-primary" type="submit" value="Submit">
+      <input style="position: absolute; left: 50%;"class="btn btn-primary" type="submit" value="Submit" name="submitButton">
       </div>
     </form>   
       </div>
