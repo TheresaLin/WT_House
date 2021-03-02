@@ -18,6 +18,7 @@
   <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
 
 {% block header %}
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Annotation</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +41,16 @@
   <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </nav>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+  $(document).ready(function(){
+  var src = $('#try1').attr('src');
 
+  $('#button1').click(function(){
+      $("#try2").val(scr);
+  });
+  })
+    
+</script>
 
 
 {% endblock %}

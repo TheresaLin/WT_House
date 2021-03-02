@@ -66,20 +66,30 @@ def homeview(request):
     
     if request.method == 'POST' :
        #for i in range(1,4):
-           ann = Ann()
-           ann.img_path = request.POST['pic2']
-           ann.text = request.POST['text2']
-           ann.img_path = request.POST['pic3']
-           ann.text = request.POST['text3']
-           ann.img_path = request.POST['pic4']
-           ann.text = request.POST['text4']
-           #ann.img_path = str(request.POST.get('pic',i))
+           ann1 = Ann()
+           ann1.img_path = str(request.POST.get('pic1'))
+           ann1.text = str(request.POST.get('text1'))
+           ann1.save()
+           ann2 = Ann()
+           ann2.img_path = str(request.POST.get('pic2'))
+           ann2.text = str(request.POST.get('text2'))
+           ann2.save()
+           ann3 = Ann()
+           ann3.img_path = str(request.POST.get('pic3'))
+           ann3.text = str(request.POST.get('text3'))
+           ann3.save()
+           ann4 = Ann()
+           ann4.img_path = str(request.POST.get('pic4'))
+           ann4.text = str(request.POST.get('text4'))
+           ann4.save()
+           '''
+           ann+str(i).img_path = str(request.POST.get('pic',i))
            #ann.img_path = request.POST['pic'+i]
-           #ann.text = str(request.POST.get('text',i))
+           ann+str(i).text = str(request.POST.get('text',i))
            #ann.text = request.POST['text'+i]
-           ann.save()
-           
-           return render(request, "index.html")  
+           ann+str(i).save()
+           '''
+           return render(request, "index.html") 
         
     else:
 
