@@ -22,38 +22,48 @@
         <tbody>
           <tr>
             <td class="w-25">
-              Example: <img src="{% static 'image/pic1.png' %}" class="img-fluid img-thumbnail" alt="Sheep">
+              Example: <img src="{% static 'sample_image/pic1.png' %}" class="img-fluid img-thumbnail" alt="Sheep">
             </td>
             <td><p></p><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="4" >Handwritten letters will never go out of style!</textarea></td>
 
           </tr>
-        <div class="trytry">
+        
           <tr>
             <td class="w-25">
-              <img src="{% static 'image/pic5.png' %}" class="img-fluid img-thumbnail" alt="Sheep"><input type="hidden" name="pic1" value="image/pic5.png">
+              <img src="{{ img1 }}" class="img-fluid img-thumbnail" alt="Sheep">
+              <input type="hidden" name="pic1" value="{{ img1 }}"> 
             </td>
-            <td><input type="text" class="form-control" id="exampleFormControlTextarea1" name="text1" rows="4" required></td>
+            <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text1" rows="2" required></textarea></td>
           </tr>
-          <div class="trytry">
           <tr>
             <td class="w-25">
-             <img src="{% static 'image/pic2.png' %}" class="img-fluid img-thumbnail" alt="Sheep" id='try1'><input id="try2" type="hidden" name="pic2" value="image/pic2.png">
+             <img src="{{ img2 }}" class="img-fluid img-thumbnail" alt="Sheep" id='try1'>
+             <input id="try2" type="hidden" name="pic2" value="{{ img2 }}">
              </td>
              <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text2" rows="2" required></textarea></td>
           </tr>
-          </div>
+          
          <tr>
             <td class="w-25">
-              <img src="{% static 'image/pic3.png' %}" class="img-fluid img-thumbnail" alt="Sheep" name="pic3"><input type="hidden" name="pic3" value="image/pic3.png">
+              <img src="{{ img3 }}" class="img-fluid img-thumbnail" alt="Sheep" name="pic3">
+              <input type="hidden" name="pic3" value="{{ img3 }}">
             </td>
             <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text3" rows="2" required></textarea></td>
          </tr>
          <tr>
             <td class="w-25">
-              <img src="{% static 'image/pic4.png' %}" class="img-fluid img-thumbnail" alt="Sheep" name="pic4"><input type="hidden" name="pic4" value="image/pic4.png">
+              <img src="{{ img4 }}" class="img-fluid img-thumbnail" alt="Sheep" name="pic4">
+              <input type="hidden" name="pic4" value="{{ img4 }}">
             </td>
             <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text4" rows="2" required></textarea></td>
-         </tr>
+         </tr> 
+         <tr>
+          <td class="w-25">
+            <img src="{{ img5 }}" class="img-fluid img-thumbnail" alt="Sheep" name="pic5">
+            <input type="hidden" name="pic5" value="{{ img5 }}">
+          </td>
+          <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text5" rows="2" required></textarea></td>
+        </tr>
         </tbody>
       </table>
       <div class="button-center">

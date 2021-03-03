@@ -1,10 +1,80 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 from .modules import Examples, Ann
 from .forms import img_text_form
 import random
+import csv
+from django.core.files import File
+from django.conf import settings as django_settings
+import os
+from os.path import isfile, join
+from os import path, listdir
 
 
+def some_view(request):
+  
+    # try:
+    #     f = open('workfile.txt', 'r')
+    
+
+    #     hash = random.getrandbits(50)
+    #     file2 = 'workfile_'+str(hash)+'.txt'
+    #     f = open(file2, 'w')
+    #     f.write('This is a test\n')
+    #     f.write('Hi User!\n')
+    #     f.write('Welcome to Python Easy!\n')
+    #     f.close()
+       
+    #     d='Theresa'
+
+    #     return HttpResponse(d)
+
+    # except:
+    #     f = open('workfile.txt', 'w')
+    #     f.write('This is a test\n')
+    #     f.write('Hi User!\n')
+    #     f.write('Welcome to Python Easy!\n')
+    #     f.close()
+    #     f = open('workfile.txt')
+    #     content = f.read()
+    #     f.close()
+    #     d=django_settings.STATICFILES_DIRS
+    #     return HttpResponse(d)
+    
+    new_list = []
+    onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
+    new_list += random.sample(onlyfiles, 5)
+
+    if(path.isfile('workfile_2.txt')==True):
+        hash = random.getrandbits(2)
+        file2 = 'workfile_'+str(hash)+'.txt'
+        f = open(file2, 'w')
+        f.write('Thereas\n')
+        f.write('Hi Theresa!\n')
+        f.write('Theresa\n')
+        f.close()
+       
+
+        return HttpResponse(new_list)
+    
+    else:
+        hash = random.getrandbits(2)
+        file2 = 'workfile_'+str(hash)+'.txt'
+        f = open(file2, 'w')
+        f.write('This is a test\n')
+        f.write('Hi User!\n')
+        f.write('Welcome to Python Easy!\n')
+        f.close()
+       
+        d='Theresa'
+
+        return HttpResponse(d)
+
+
+
+
+
+        
 
 def insert_view(request):
     for i in range(5):
@@ -26,124 +96,100 @@ def lookup_view(request):
 
     return HttpResponse(mlist)
 
-'''
-def get_img_text(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = img_text_form(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return render(request, "index.html", {'form': form})
 
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = img_text_form()
-
-    return render(request, "index.html", {'form': form})
-
-'''
 def homeview(request): 
-    '''
-    if request.GET.get('submitButton') == 'Submit':
-        for i in range(1,4):
-            ann = Ann()
-            ann.img_path = str(request.GET.get('pic',i))
-            ann.text = str(request.GET.get('text',i))
-            ann.save()
-    
-       
-        pic2 = str(request.GET.get('pic2'))
-        text2 = request.GET.get('text2')
-        pic3 = request.GET.get('pic3')
-        text3 = request.GET.get('text3')
-        pic4 = request.GET.get('pic4')
-        text4 = request.GET.get('text4')
-    '''
+    new_list = []
+    onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
+    new_list += random.sample(onlyfiles, 5)
+    onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
     
     if request.method == 'POST' :
-       #for i in range(1,4):
-           ann1 = Ann()
-           ann1.img_path = str(request.POST.get('pic1'))
-           ann1.text = str(request.POST.get('text1'))
-           ann1.save()
-           ann2 = Ann()
-           ann2.img_path = str(request.POST.get('pic2'))
-           ann2.text = str(request.POST.get('text2'))
-           ann2.save()
-           ann3 = Ann()
-           ann3.img_path = str(request.POST.get('pic3'))
-           ann3.text = str(request.POST.get('text3'))
-           ann3.save()
-           ann4 = Ann()
-           ann4.img_path = str(request.POST.get('pic4'))
-           ann4.text = str(request.POST.get('text4'))
-           ann4.save()
-           '''
-           ann+str(i).img_path = str(request.POST.get('pic',i))
-           #ann.img_path = request.POST['pic'+i]
-           ann+str(i).text = str(request.POST.get('text',i))
-           #ann.text = request.POST['text'+i]
-           ann+str(i).save()
-           '''
-           return render(request, "index.html") 
+        for i in range(1, 6):
+            f1 = django_settings.STATICFILES_DIRS[0] + '/annotation/' 
+            file1 = request.POST.get('pic'+str(i))[14:-4]+".txt"
+
+            if(path.isfile(f1)==True):
+            
+            
+                hash = random.getrandbits(50)
+                file1 = file1[:-4]+"_"+str(hash)+".txt"
+
+            
+     
+                f1 = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + file1, 'w+')
+                f1.write(str(request.POST.get('text'+str(i))))
+                f1.close()
+
+                 
+
+            else:
+
+                hash = random.getrandbits(50)
+                file1 = file1[:-4]+"_"+str(hash)+".txt"
+
+ 
+                f1 = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + file1, 'w+')
+                f1.write(str(request.POST.get('text'+str(i))))
+                f1.close()
+ 
+       
+
+        return render(request, 'index.html',
+            {
+                'img1': "/static/image/"+new_list[0],
+                'img2': "/static/image/"+new_list[1],
+                'img3': "/static/image/"+new_list[2],
+                'img4': "/static/image/"+new_list[3],
+                'img5': "/static/image/"+new_list[4]
+            }
+        ) 
         
     else:
 
-        return render(request, "index.html") 
+        return render(
+            request, 
+            'index.html',
+            {
+                'img1': "/static/image/"+new_list[0],
+                'img2': "/static/image/"+new_list[1],
+                'img3': "/static/image/"+new_list[2],
+                'img4': "/static/image/"+new_list[3],
+                'img5': "/static/image/"+new_list[4]
+            }
+        ) 
 
+ # f2 = open( 'some_file.txt2', 'w+')  
+        # f2.write(str(request.POST.get('pic2')))   
+        # f2.write(str(request.POST.get('text2')))
+        # f2.close()
 
-'''
+        # f3 = open( 'some_file.txt3', 'w+')  
+        # f3.write(str(request.POST.get('pic3')))   
+        # f3.write(str(request.POST.get('text3')))
+        # f3.close()
 
-def add(request):
-    if request.method == 'POST':
-        author = request.POST.get('author', "")
-        poem = Poem(author=author)
-        poem.save()
-        title = request.POST.get("title", "")
-        poem.title = title
-        # 如果添加数据库没有的数据，添加试成功的，但是这个tag是不会被保存的
-        poem.tag = 'tag'
-        poem.save()
-        return HttpResponseRedirect('/')
-    else:
-        return render(request, 'add.html')
+        # f4 = open( 'some_file.txt4', 'w+')  
+        # f4.write(str(request.POST.get('pic4')))   
+        # f4.write(str(request.POST.get('text4')))
+        # f4.close()
 
-
-def search(request):
-    if request.method == 'POST':
-        author = request.POST.get('author')
-        poems = Poem.show_newest(author=author)
-        # 此处的查询结果poems是一个list
-        return render(request, 'home.html', {"show_title": "查询结果", "poems": poems})
-
-    else:
-        return render(request, 'search.html')
-
-
-def modify(request):
-    if request.method == 'POST':
-        id = request.POST.get('id')
-        author = request.POST.get('author', "")
-        title = request.POST.get("title", "")
-        poems = Poem.objects(poem_id=id)
-        for poem in poems:
-            poem.update(author=author, title=title)
-        return HttpResponseRedirect('/')
-    else:
-        return render(request, 'modify.html')
-
-
-def delete(request):
-    if request.method == 'POST':
-        id = request.POST.get('id')
-        poems = Poem.objects(poem_id=id)
-        for poem in poems:
-            poem.delete()
-        return HttpResponseRedirect('/')
-    else:
-        return render(request, 'delete.html')
-        '''
+#, FileResponse(f1, as_attachment=True, filename='some_file.txt'), FileResponse(f2, as_attachment=True, filename='some_file.txt'), FileResponse(f3, as_attachment=True, filename='some_file.txt'), FileResponse(f4, as_attachment=True, filename='some_file.txt')
+   #f1 = open('/home/theresa/Desktop/WT_House/app/static/annotation/' + file1[14:], 'w+')
+"""
+ann1 = Ann()
+        ann1.img_path = str(request.POST.get('pic1'))
+        ann1.text = str(request.POST.get('text1'))
+        ann1.save()
+        ann2 = Ann()
+        ann2.img_path = str(request.POST.get('pic2'))
+        ann2.text = str(request.POST.get('text2'))
+        ann2.save()
+        ann3 = Ann()
+        ann3.img_path = str(request.POST.get('pic3'))
+        ann3.text = str(request.POST.get('text3'))
+        ann3.save()
+        ann4 = Ann()
+        ann4.img_path = str(request.POST.get('pic4'))
+        ann4.text = str(request.POST.get('text4'))
+        ann4.save()
+"""
