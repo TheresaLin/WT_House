@@ -1,9 +1,6 @@
 {% extends "base.html" %}
   {% block content %}
 
-
-
-
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -22,54 +19,122 @@
         <tbody>
           <tr>
             <td class="w-25">
-              Example: <img src="{% static 'sample_image/pic1.png' %}" class="img-fluid img-thumbnail" alt="Sheep">
+              <p class="text-primary">Example: </p> <img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
             </td>
-            <td><p></p><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="4" >Handwritten letters will never go out of style!</textarea></td>
+            <td><p></p><br><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="6" >Handwritten letters will never go out of style!</textarea></td>
 
           </tr>
         
           <tr>
-            <td class="w-25">
+            <td class="w-50">
               <img src="{{ img1 }}" class="img-fluid img-thumbnail" alt="Sheep">
               <input type="hidden" name="pic1" value="{{ img1 }}"> 
             </td>
-            <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text1" rows="2" required></textarea></td>
+            <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text1" rows="3" required></textarea></td>
           </tr>
           <tr>
-            <td class="w-25">
-             <img src="{{ img2 }}" class="img-fluid img-thumbnail" alt="Sheep" id='try1'>
+            <td class="w-50">
+             <img src="{{ img2 }}" class="img-fluid img-thumbnail" alt="Sheep">
              <input id="try2" type="hidden" name="pic2" value="{{ img2 }}">
              </td>
-             <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text2" rows="2" required></textarea></td>
+             <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text2" rows="3" required></textarea></td>
           </tr>
           
          <tr>
-            <td class="w-25">
-              <img src="{{ img3 }}" class="img-fluid img-thumbnail" alt="Sheep" name="pic3">
+            <td class="w-50">
+              <img src="{{ img3 }}" class="img-fluid img-thumbnail" alt="Sheep">
               <input type="hidden" name="pic3" value="{{ img3 }}">
             </td>
-            <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text3" rows="2" required></textarea></td>
+            <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text3" rows="3" required></textarea></td>
          </tr>
          <tr>
-            <td class="w-25">
-              <img src="{{ img4 }}" class="img-fluid img-thumbnail" alt="Sheep" name="pic4">
+            <td class="w-50">
+              <img src="{{ img4 }}" class="img-fluid img-thumbnail" alt="Sheep">
               <input type="hidden" name="pic4" value="{{ img4 }}">
             </td>
-            <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text4" rows="2" required></textarea></td>
+            <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text4" rows="3" required></textarea></td>
          </tr> 
          <tr>
-          <td class="w-25">
-            <img src="{{ img5 }}" class="img-fluid img-thumbnail" alt="Sheep" name="pic5">
+          <td class="w-50">
+            <img src="{{ img5 }}" class="img-fluid img-thumbnail" alt="Sheep">
             <input type="hidden" name="pic5" value="{{ img5 }}">
           </td>
-          <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text5" rows="2" required></textarea></td>
+          <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text5" rows="3" required></textarea></td>
         </tr>
         </tbody>
       </table>
       <div class="button-center">
       <input style="position: absolute; left: 50%;"class="btn btn-primary" type="submit" value="Submit" name="submitButton" id="button1">
       </div>
-    </form>   
+    </form>  
+    
+    
+<br><br><br>
+
+
+    <form method="post" name="form1" action="">
+      {% csrf_token %}
+      <table class="table">
+        <thead>
+          <tr class="row m-0">
+            <th class="d-inline-block col-5" scope="col">Image</th>
+            <th class="d-inline-block col-7" scope="col">Type What You See in The Picture</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row m-0">
+            <td class="d-inline-block col-5">
+              <p class="text-primary">Example: </p> <img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
+            </td>
+            <td class="d-inline-block col-7"><p></p><br><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
+
+          </tr>
+        
+          <tr class="row m-0">
+            <td class="d-inline-block col-5">
+              <img src="{{ img1 }}" class="img-fluid img-thumbnail" alt="Sheep">
+              <input type="hidden" name="pic1" value="{{ img1 }}"> 
+            </td>
+            <td class="d-inline-block col-7"><textarea class="form-control" id="exampleFormControlTextarea1" name="text1" rows="2" required></textarea></td>
+          </tr>
+          <tr class="row m-0">
+            <td class="d-inline-block col-5">
+             <img src="{{ img2 }}" class="img-fluid img-thumbnail" alt="Sheep">
+             <input id="try2" type="hidden" name="pic2" value="{{ img2 }}">
+             </td>
+             <td class="d-inline-block col-7"><textarea class="form-control" id="exampleFormControlTextarea1" name="text2" rows="2" required></textarea></td>
+          </tr>
+          
+         <tr class="row m-0">
+            <td class="d-inline-block col-5">
+              <img src="{{ img3 }}" class="img-fluid img-thumbnail" alt="Sheep">
+              <input type="hidden" name="pic3" value="{{ img3 }}">
+            </td>
+            <td class="d-inline-block col-7"><textarea class="form-control" id="exampleFormControlTextarea1" name="text3" rows="2" required></textarea></td>
+         </tr>
+         <tr class="row m-0">
+            <td class="d-inline-block col-5">
+              <img src="{{ img4 }}" class="img-fluid img-thumbnail" alt="Sheep">
+              <input type="hidden" name="pic4" value="{{ img4 }}">
+            </td>
+            <td class="d-inline-block col-7"><textarea class="form-control" id="exampleFormControlTextarea1" name="text4" rows="2" required></textarea></td>
+         </tr> 
+         <tr class="row m-0">
+          <td class="d-inline-block col-5">
+            <img src="{{ img5 }}" class="img-fluid img-thumbnail" alt="Sheep">
+            <input type="hidden" name="pic5" value="{{ img5 }}">
+          </td>
+          <td class="d-inline-block col-7"><textarea class="form-control" id="exampleFormControlTextarea1" name="text5" rows="3" required></textarea></td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="button-center">
+      <input style="position: absolute; left: 50%;"class="btn btn-primary" type="submit" value="Submit" name="submitButton" id="button1">
+      </div>
+    </form> 
+
+
       </div>
     </div>
   </div>

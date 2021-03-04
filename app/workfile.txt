@@ -1,3 +1,0 @@
-This is a test
-Hi User!
-Welcome to Python Easy!
