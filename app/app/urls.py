@@ -19,7 +19,8 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homeview, name='homeview'),
+    path('annotation/', views.homeview, name='homeview'),
+    path('validation/', views.validation, name='validation'),
     #path('',views.get_img_text),
     #path(r'^$',views.homeview),
     #path(r'^form1/$',views.homeview),

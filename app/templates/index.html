@@ -18,7 +18,7 @@
         </thead>
         <tbody>
           <tr>
-            <td class="w-25">
+            <td class="w-50">
               <p class="text-primary">Example: </p> <img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
             </td>
             <td><p></p><br><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="6" >Handwritten letters will never go out of style!</textarea></td>
@@ -35,7 +35,7 @@
           <tr>
             <td class="w-50">
              <img src="{{ img2 }}" class="img-fluid img-thumbnail" alt="Sheep">
-             <input id="try2" type="hidden" name="pic2" value="{{ img2 }}">
+             <input type="hidden" name="pic2" value="{{ img2 }}">
              </td>
              <td><textarea class="form-control" id="exampleFormControlTextarea1" name="text2" rows="3" required></textarea></td>
           </tr>
@@ -71,7 +71,7 @@
     
 <br><br><br>
 
-
+<!-- 
     <form method="post" name="form1" action="">
       {% csrf_token %}
       <table class="table">
@@ -125,14 +125,14 @@
             <img src="{{ img5 }}" class="img-fluid img-thumbnail" alt="Sheep">
             <input type="hidden" name="pic5" value="{{ img5 }}">
           </td>
-          <td class="d-inline-block col-7"><textarea class="form-control" id="exampleFormControlTextarea1" name="text5" rows="3" required></textarea></td>
+          <td class="d-inline-block col-7"><textarea class="form-control" id="exampleFormControlTextarea1" name="text5" rows="2" required></textarea></td>
         </tr>
         </tbody>
       </table>
       <div class="button-center">
       <input style="position: absolute; left: 50%;"class="btn btn-primary" type="submit" value="Submit" name="submitButton" id="button1">
       </div>
-    </form> 
+    </form>  -->
 
 
       </div>

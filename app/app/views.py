@@ -102,48 +102,34 @@ def homeview(request):
     onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
     new_list += random.sample(onlyfiles, 5)
     onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
-    
+
+
     if request.method == 'POST' :
         for i in range(1, 6):
-            f1 = django_settings.STATICFILES_DIRS[0] + '/annotation/' 
-            file1 = request.POST.get('pic'+str(i))[14:-4]+".txt"
-
-            if(path.isfile(f1)==True):
-            
-            
+            f = django_settings.STATICFILES_DIRS[0] + '/annotation/' 
+            files = str(request.POST.get('pic'+str(i))[14:])
+            text = str(request.POST.get('text'+str(i)))
+            if text == Ann().find_same_text:
                 hash = random.getrandbits(50)
-                file1 = file1[:-4]+"_"+str(hash)+".txt"
+                files = files[:-4]+"_"+str(hash)+".txt"
+                f = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + file1, 'w+')
+                f1.write(text)
+                f1.close() 
 
-            
-     
-                f1 = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + file1, 'w+')
-                f1.write(str(request.POST.get('text'+str(i))))
-                f1.close()
-
-                 
-
+                return render(request, 'index.html',
+                    {
+                    'img1': "/static/image/"+new_list[0],
+                    'img2': "/static/image/"+new_list[1],
+                    'img3': "/static/image/"+new_list[2],
+                    'img4': "/static/image/"+new_list[3],
+                    'img5': "/static/image/"+new_list[4]
+                    }
+                )                                                    
             else:
+                Ann.img_path = files
+                Ann.text = text
+                Ann.save()
 
-                hash = random.getrandbits(50)
-                file1 = file1[:-4]+"_"+str(hash)+".txt"
-
- 
-                f1 = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + file1, 'w+')
-                f1.write(str(request.POST.get('text'+str(i))))
-                f1.close()
- 
-       
-
-        return render(request, 'index.html',
-            {
-                'img1': "/static/image/"+new_list[0],
-                'img2': "/static/image/"+new_list[1],
-                'img3': "/static/image/"+new_list[2],
-                'img4': "/static/image/"+new_list[3],
-                'img5': "/static/image/"+new_list[4]
-            }
-        ) 
-        
     else:
 
         return render(
@@ -157,6 +143,71 @@ def homeview(request):
                 'img5': "/static/image/"+new_list[4]
             }
         ) 
+
+
+
+
+
+
+
+
+
+
+    
+    # if request.method == 'POST' :
+    #     for i in range(1, 6):
+    #         f1 = django_settings.STATICFILES_DIRS[0] + '/annotation/' 
+    #         file1 = request.POST.get('pic'+str(i))[14:-4]+".txt"
+
+    #         if(path.isfile(f1)==True):
+            
+            
+    #             hash = random.getrandbits(50)
+    #             file1 = file1[:-4]+"_"+str(hash)+".txt"
+
+            
+     
+    #             f1 = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + file1, 'w+')
+    #             f1.write(str(request.POST.get('text'+str(i))))
+    #             f1.close()
+
+                 
+
+    #         else:
+
+    #             hash = random.getrandbits(50)
+    #             file1 = file1[:-4]+"_"+str(hash)+".txt"
+
+ 
+    #             f1 = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + file1, 'w+')
+    #             f1.write(str(request.POST.get('text'+str(i))))
+    #             f1.close()
+ 
+       
+
+    #     return render(request, 'index.html',
+    #         {
+    #             'img1': "/static/image/"+new_list[0],
+    #             'img2': "/static/image/"+new_list[1],
+    #             'img3': "/static/image/"+new_list[2],
+    #             'img4': "/static/image/"+new_list[3],
+    #             'img5': "/static/image/"+new_list[4]
+    #         }
+    #     ) 
+        
+    # else:
+
+    #     return render(
+    #         request, 
+    #         'index.html',
+    #         {
+    #             'img1': "/static/image/"+new_list[0],
+    #             'img2': "/static/image/"+new_list[1],
+    #             'img3': "/static/image/"+new_list[2],
+    #             'img4': "/static/image/"+new_list[3],
+    #             'img5': "/static/image/"+new_list[4]
+    #         }
+    #     ) 
 
  # f2 = open( 'some_file.txt2', 'w+')  
         # f2.write(str(request.POST.get('pic2')))   
@@ -193,3 +244,9 @@ ann1 = Ann()
         ann4.text = str(request.POST.get('text4'))
         ann4.save()
 """
+
+def validation(request): 
+    return render(request, 'validation.html')
+
+
+
