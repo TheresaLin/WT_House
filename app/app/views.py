@@ -12,35 +12,6 @@ from os import path, listdir
 
 
 def some_view(request):
-  
-    # try:
-    #     f = open('workfile.txt', 'r')
-    
-
-    #     hash = random.getrandbits(50)
-    #     file2 = 'workfile_'+str(hash)+'.txt'
-    #     f = open(file2, 'w')
-    #     f.write('This is a test\n')
-    #     f.write('Hi User!\n')
-    #     f.write('Welcome to Python Easy!\n')
-    #     f.close()
-       
-    #     d='Theresa'
-
-    #     return HttpResponse(d)
-
-    # except:
-    #     f = open('workfile.txt', 'w')
-    #     f.write('This is a test\n')
-    #     f.write('Hi User!\n')
-    #     f.write('Welcome to Python Easy!\n')
-    #     f.close()
-    #     f = open('workfile.txt')
-    #     content = f.read()
-    #     f.close()
-    #     d=django_settings.STATICFILES_DIRS
-    #     return HttpResponse(d)
-    
     new_list = []
     onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
     new_list += random.sample(onlyfiles, 5)
@@ -83,52 +54,75 @@ def insert_view(request):
         examples.text = "test" + str(random.randint(1, 500))
         examples.save()
 
-    return HttpResponse("批次新增資料完成")
+    return HttpResponse("insert 5 data")
 
 
 
 def lookup_view(request):
-    result = Examples.objects.all()
+    result = Ann.objects.all()
     mlist = []
     for item in result:
-        content = {"id": item.id, "path": item.path, "text": item.text}
-        mlist.append(content)        
+        #content = {"text": item.text}
+        mlist.append(item.text)
 
-    return HttpResponse(mlist)
+    if 'MPs' in mlist:
+        return HttpResponse("MPs is in list"+ str(mlist))
+    else:
+        return HttpResponse("MPs is not in list"+ str(mlist))
 
 
 def homeview(request): 
+    
+    # list all files name and path in image directory 
+    # And random choose 5 image for index.html
     new_list = []
     onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
     new_list += random.sample(onlyfiles, 5)
-    onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
 
 
+    
     if request.method == 'POST' :
         for i in range(1, 6):
+            
+            # get picture files name and value of textarea 
             f = django_settings.STATICFILES_DIRS[0] + '/annotation/' 
             files = str(request.POST.get('pic'+str(i))[14:])
             text = str(request.POST.get('text'+str(i)))
-            if text == Ann().find_same_text:
+            
+            # list all data of "text" in database
+            result = Ann.objects.all()
+            text_list = []
+            for item in result:
+                #content = {"text": item.text}
+                text_list.append(item.text)
+            
+            ann = Ann()
+
+            # check whether the text exists in database 
+            # if yes, the text will be saved with a txt file in annotation directory; if not, it will be saved in database
+            if text in text_list:
                 hash = random.getrandbits(50)
                 files = files[:-4]+"_"+str(hash)+".txt"
-                f = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + file1, 'w+')
-                f1.write(text)
-                f1.close() 
+                f = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + files, 'w+')
+                f.write(text)
+                f.close() 
 
-                return render(request, 'index.html',
-                    {
-                    'img1': "/static/image/"+new_list[0],
-                    'img2': "/static/image/"+new_list[1],
-                    'img3': "/static/image/"+new_list[2],
-                    'img4': "/static/image/"+new_list[3],
-                    'img5': "/static/image/"+new_list[4]
-                    }
-                )                                                    
+                                                                
             else:
-                Ann.img_path = files
-                Ann.text = text
-                Ann.save()
+                ann.img_path = files
+                ann.text = text
+                ann.save()
+        
+        
+        return render(request, 'index.html',
+            {
+                'img1': "/static/image/"+new_list[0],
+                'img2': "/static/image/"+new_list[1],
+                'img3': "/static/image/"+new_list[2],
+                'img4': "/static/image/"+new_list[3],
+                'img5': "/static/image/"+new_list[4]
+            }
+        )
 
     else:
 
@@ -145,105 +139,6 @@ def homeview(request):
         ) 
 
 
-
-
-
-
-
-
-
-
-    
-    # if request.method == 'POST' :
-    #     for i in range(1, 6):
-    #         f1 = django_settings.STATICFILES_DIRS[0] + '/annotation/' 
-    #         file1 = request.POST.get('pic'+str(i))[14:-4]+".txt"
-
-    #         if(path.isfile(f1)==True):
-            
-            
-    #             hash = random.getrandbits(50)
-    #             file1 = file1[:-4]+"_"+str(hash)+".txt"
-
-            
-     
-    #             f1 = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + file1, 'w+')
-    #             f1.write(str(request.POST.get('text'+str(i))))
-    #             f1.close()
-
-                 
-
-    #         else:
-
-    #             hash = random.getrandbits(50)
-    #             file1 = file1[:-4]+"_"+str(hash)+".txt"
-
- 
-    #             f1 = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + file1, 'w+')
-    #             f1.write(str(request.POST.get('text'+str(i))))
-    #             f1.close()
- 
-       
-
-    #     return render(request, 'index.html',
-    #         {
-    #             'img1': "/static/image/"+new_list[0],
-    #             'img2': "/static/image/"+new_list[1],
-    #             'img3': "/static/image/"+new_list[2],
-    #             'img4': "/static/image/"+new_list[3],
-    #             'img5': "/static/image/"+new_list[4]
-    #         }
-    #     ) 
-        
-    # else:
-
-    #     return render(
-    #         request, 
-    #         'index.html',
-    #         {
-    #             'img1': "/static/image/"+new_list[0],
-    #             'img2': "/static/image/"+new_list[1],
-    #             'img3': "/static/image/"+new_list[2],
-    #             'img4': "/static/image/"+new_list[3],
-    #             'img5': "/static/image/"+new_list[4]
-    #         }
-    #     ) 
-
- # f2 = open( 'some_file.txt2', 'w+')  
-        # f2.write(str(request.POST.get('pic2')))   
-        # f2.write(str(request.POST.get('text2')))
-        # f2.close()
-
-        # f3 = open( 'some_file.txt3', 'w+')  
-        # f3.write(str(request.POST.get('pic3')))   
-        # f3.write(str(request.POST.get('text3')))
-        # f3.close()
-
-        # f4 = open( 'some_file.txt4', 'w+')  
-        # f4.write(str(request.POST.get('pic4')))   
-        # f4.write(str(request.POST.get('text4')))
-        # f4.close()
-
-#, FileResponse(f1, as_attachment=True, filename='some_file.txt'), FileResponse(f2, as_attachment=True, filename='some_file.txt'), FileResponse(f3, as_attachment=True, filename='some_file.txt'), FileResponse(f4, as_attachment=True, filename='some_file.txt')
-   #f1 = open('/home/theresa/Desktop/WT_House/app/static/annotation/' + file1[14:], 'w+')
-"""
-ann1 = Ann()
-        ann1.img_path = str(request.POST.get('pic1'))
-        ann1.text = str(request.POST.get('text1'))
-        ann1.save()
-        ann2 = Ann()
-        ann2.img_path = str(request.POST.get('pic2'))
-        ann2.text = str(request.POST.get('text2'))
-        ann2.save()
-        ann3 = Ann()
-        ann3.img_path = str(request.POST.get('pic3'))
-        ann3.text = str(request.POST.get('text3'))
-        ann3.save()
-        ann4 = Ann()
-        ann4.img_path = str(request.POST.get('pic4'))
-        ann4.text = str(request.POST.get('text4'))
-        ann4.save()
-"""
 
 def validation(request): 
     return render(request, 'validation.html')

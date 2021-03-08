@@ -23,7 +23,7 @@ class Examples(Document):
 
 class Ann(Document):
     meta = {
-        # 数据库中显示的名字
+        # data collection
         'collection': 'annotation'
     }
 
@@ -31,24 +31,4 @@ class Ann(Document):
     img_path = StringField()
     text = StringField()
 
-    # 可以定义查询集
-    @queryset_manager
-    def find_same_id(doc_cls, queryset):
-        for img_path in annotation.objects:
-            return img_path
 
-    def find_same_text(doc_cls, queryset):
-        for text in annotation.objects:
-            return text
-
-
-
-class Ann_Find(Document):
-    meta = {
-        # 数据库中显示的名字
-        'collection': 'annotation'
-    }
-
-    _id = SequenceField(required=True, primary_key=True)
-    img_path = StringField()
-    text = StringField()
