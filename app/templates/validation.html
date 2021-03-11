@@ -1,6 +1,24 @@
 {% extends "base.html" %}
   {% block content %}
-  
+
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<style type="text/css">
+.fa_custom {
+color: #0099CC
+}
+</style>
+
+
+
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
+</head>
+
+
+
+
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -21,18 +39,17 @@
         <tbody>
           <tr class="row m-0">
             <td class="d-inline-block col-5">
-              <p class="text-primary">Example: </p> <img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
+              <p class="text-primary"></p> <img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
             </td>
-            <td class="d-inline-block col-5"><p></p><br><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
+            <td class="d-inline-block col-5"><p></p><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
             <td class="d-inline-block col-2">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                    <label class="form-check-label" for="inlineRadio1"><img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep"></label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">Incorrect</label>
-                  </div>
+              <br>
+              <button type="button" class="btn btn-default btn-sm">
+                <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" data-width="50" data-height="50"></span>
+              </button>
+              <button type="button" class="btn btn-default btn-sm">
+                <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" data-width="50" data-height="50"></span>
+              </button>
             </td>
           </tr>
         
@@ -42,31 +59,29 @@
             </td>
             <td class="d-inline-block col-5"><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
             <td class="d-inline-block col-2">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                    <label class="form-check-label" for="inlineRadio1">Correct</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">Incorrect</label>
-                  </div>
+              <br>
+                <button type="button" class="btn btn-default btn-sm">
+                  <span class="iconify icon:bi-hand-thumbs-up icon-inline:false icon-width:60 icon-height:60"></span>
+              </button>
+                <button type="button" class="btn btn-default btn-sm">
+                  <span class="iconify icon:bi-hand-thumbs-down icon-inline:false icon-width:60 icon-height:60"></span>
+                </button>
             </td>
           </tr>
           
           <tr class="row m-0">
             <td class="d-inline-block col-5">
-              <p class="text-primary"></p> <img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
+              <p class="text-primary"><img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
             </td>
             <td class="d-inline-block col-5"><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
             <td class="d-inline-block col-2">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                    <label class="form-check-label" for="inlineRadio1">Correct</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">Incorrect</label>
-                  </div>
+              <p></p>
+            <button type="button" class="btn btn-default btn-sm">
+                <span class="fa fa-thumbs-up fa-3x"></span>
+            </button>
+              <button type="button" class="btn btn-default btn-sm">
+                <span class="fa fa-thumbs-down fa-3x"></span>
+              </button>
             </td>
           </tr>
           <tr class="row m-0">
@@ -75,16 +90,37 @@
             </td>
             <td class="d-inline-block col-5"><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
             <td class="d-inline-block col-2">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                    <label class="form-check-label" for="inlineRadio1">Correct</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">Incorrect</label>
-                  </div>
+              <br><p></p>
+              <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-thumbs-up"></span> Correct
+              </button>
+              <button type="button" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-thumbs-down"></span> Incorrect
+              </button>
             </td>
           </tr>
+          </tr>
+          <tr class="row m-0">
+            <td class="d-inline-block col-5">
+              <p class="text-primary"><img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
+            </td>
+            <td class="d-inline-block col-4"><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
+            <td class="d-inline-block col-3">
+              <br>
+                <a href="#" class="btn btn-info btn-lg">
+                  <span class="glyphicon glyphicon-thumbs-up"></span> Correct
+                </a>
+                <a href="#" class="btn btn-info btn-lg">
+                  <span class="glyphicon glyphicon-thumbs-down"></span> Incorrect
+                </a>
+            </td>
+          </tr>
+
+
+
+
+
+
         </tbody>
       </table>
       <div class="button-center">
