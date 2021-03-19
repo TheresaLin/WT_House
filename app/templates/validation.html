@@ -10,39 +10,14 @@
 color: #0099CC
 }
 </style>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
-
-
-
-
-    <meta charset="utf-8">
-<title>菜鸟教程(runoob.com)</title>
-
-
-
 </head>
-
-
-
 
   <div class="container">
     <div class="row">
       <div class="col-12">
-
-
-
-
-
-
-
-
-
-
-
-
     <form method="post" name="form2" action="">
       {% csrf_token %}
       <table class="table table-image">
@@ -51,11 +26,10 @@ color: #0099CC
             <th class="d-inline-block col-5" scope="col">Image</th>
             <th class="d-inline-block col-5" scope="col">Corresponding Text</th>
             <th class="d-inline-block col-2"scope="col">Is it correct?</th>
-
           </tr>
         </thead>
-        
         <tbody>
+        <!-- First block -->
           <tr class="row m-0">
             <td class="d-inline-block col-5">
               <p class="text-primary"></p> <img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
@@ -63,25 +37,27 @@ color: #0099CC
             <td class="d-inline-block col-5"><p></p><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
             <td class="d-inline-block col-2">
               <br>
+                <!-- button of correct -->
               <button type="button" class="btn btn-default btn-sm">
                 <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" data-width="50" data-height="50"></span>
               </button>
-
-              <button onclick="myFunction1()" class="btn btn-default btn-sm">
+                <!-- button of incorrect -->
+              <button onclick="Promptbox1()" class="btn btn-default btn-sm">
                 <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" data-width="50" data-height="50"></span>
               </button>
-<script>
-function myFunction1(){
-	var x;
-	var person=prompt("Please enter the correct sentence","Type here");
-	if (person!=null && person!=""){
-	    x= person;
-	}
-}
-</script>
+                <!-- Prompt box function -->
+                <script>
+                    var sentence1;
+                    function Promptbox1(){
+                        var person=prompt("Please enter the correct sentence","Type here");
+                        if (person!=null && person!=""){
+                            sentence1 = person;
+                        }
+                    }
+                </script>
             </td>
           </tr>
-        
+        <!-- Second block -->
           <tr class="row m-0">
             <td class="d-inline-block col-5">
               <p class="text-primary"><img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
@@ -89,24 +65,28 @@ function myFunction1(){
             <td class="d-inline-block col-5"><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
             <td class="d-inline-block col-2">
               <br>
+                <!-- button of correct -->
                 <button type="button" class="btn btn-default btn-sm">
                   <span class="iconify icon:bi-hand-thumbs-up icon-inline:false icon-width:60 icon-height:60"></span>
               </button>
-                <button onclick="myFunction1()" class="btn btn-default btn-sm">
+                <!-- button of incorrect -->
+                <button onclick="Promptbox2()" class="btn btn-default btn-sm">
                   <span class="iconify icon:bi-hand-thumbs-down icon-inline:false icon-width:60 icon-height:60"></span>
                 </button>
-<script>
-function myFunction1(){
-	var x;
-	var person=prompt("Please enter the correct sentence","Type here");
-	if (person!=null && person!=""){
-	    x= person;
-	}
-}
-</script>
+                <!-- prompt box function -->
+                <script>
+                    var sentence2;
+                    function Promptbox2(){
+                        var person=prompt("Please enter the correct sentence","Type here");
+                        if (person!=null && person!=""){
+                            sentence2 = person;
+                        }
+                    }
+                </script>
             </td>
           </tr>
-          
+
+          <!-- Third block -->
           <tr class="row m-0">
             <td class="d-inline-block col-5">
               <p class="text-primary"><img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
@@ -114,23 +94,27 @@ function myFunction1(){
             <td class="d-inline-block col-5"><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
             <td class="d-inline-block col-2">
               <p></p>
+                <!-- button of correct -->
             <button type="button" class="btn btn-default btn-sm">
                 <span class="fa fa-thumbs-up fa-3x"></span>
             </button>
-              <button onclick="myFunction1()" class="btn btn-default btn-sm">
+                <!-- button of incorrect -->
+              <button onclick="Promptbox3()" class="btn btn-default btn-sm">
                 <span class="fa fa-thumbs-down fa-3x"></span>
               </button>
-<script>
-function myFunction1(){
-	var x;
-	var person=prompt("Please enter the correct sentence","Type here");
-	if (person!=null && person!=""){
-	    x= person;
-	}
-}
-</script>
+                <!-- prompt box function -->
+                <script>
+                    var sentence3;
+                    function Promptbox3(){
+                        var person=prompt("Please enter the correct sentence","Type here");
+                        if (person!=null && person!=""){
+                            sentence3 = person;
+                        }
+                    }
+                </script>
             </td>
           </tr>
+        <!-- fourth block -->
           <tr class="row m-0">
             <td class="d-inline-block col-5">
               <p class="text-primary"><img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
@@ -138,29 +122,28 @@ function myFunction1(){
             <td class="d-inline-block col-5"><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
             <td class="d-inline-block col-2">
               <br><p></p>
+                <!-- button of correct -->
               <button type="button" class="btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-thumbs-up"></span> Correct
               </button>
-              <button onclick="myFunction1()" class="btn btn-default btn-sm">
+                <!-- button of incorrect -->
+              <button onclick="Promptbox4()" class="btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-thumbs-down"></span> Incorrect
               </button>
-<script>
-function myFunction1(){
-	var x;
-	var person=prompt("Please enter the correct sentence","Type here");
-	if (person!=null && person!=""){
-	    x= person;
-	}
-}
-</script>
-
-
-
-
-
-
+                <!-- prompt box function -->
+                <script>
+                    var sentence4;
+                    function Promptbox4(){
+                        var person=prompt("Please enter the correct sentence","Type here");
+                        if (person!=null && person!=""){
+                            sentence4 = person;
+                        }
+                    }
+                </script>
             </td>
           </tr>
+
+        <!-- fifth block -->
           </tr>
           <tr class="row m-0">
             <td class="d-inline-block col-5">
@@ -169,42 +152,32 @@ function myFunction1(){
             <td class="d-inline-block col-4"><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
             <td class="d-inline-block col-3">
               <br>
+                <!-- button of correct -->
                 <button type="button" class="btn btn-info btn-lg">
                   <span class="glyphicon glyphicon-thumbs-up"></span> Correct
                 </button>
-
-                <button onclick="myFunction1()" class="btn btn-info btn-lg">
+                <!-- button of incorrect -->
+                <button onclick="Promptbox5()" class="btn btn-info btn-lg">
                   <span class="glyphicon glyphicon-thumbs-up"></span> Incorrect
                 </button>
-<script>
-function myFunction1(){
-	var x;
-	var person=prompt("Please enter the correct sentence","Type here");
-	if (person!=null && person!=""){
-	    x= person;
-	}
-}
-</script>
-
-
-
-
+                <!-- prompt box function -->
+                <script>
+                    var sentence5;
+                    function Promptbox5(){
+                        var person=prompt("Please enter the correct sentence","Type here");
+                        if (person!=null && person!=""){
+                            sentence5 = person;
+                        }
+                    }
+                </script>
             </td>
           </tr>
-
-
-
-
-
-
         </tbody>
       </table>
       <div class="button-center">
       <input style="position: absolute; left: 50%;"class="btn btn-primary" type="submit" value="Submit" name="submitButton" id="button1">
       </div>
-    </form> 
-
-
+    </form>
       </div>
     </div>
   </div>

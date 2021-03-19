@@ -19,9 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0bf2fadf-b092-4b46-8cbb-aad16f638fac" name="Default Changelist" comment="">
+    <list default="true" id="0bf2fadf-b092-4b46-8cbb-aad16f638fac" name="Default Changelist" comment="Finished the click function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/validation.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/validation.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,8 +55,16 @@
       <option name="presentableId" value="Default" />
       <updated>1615225515418</updated>
       <workItem from="1615225519043" duration="20222000" />
-      <workItem from="1616022511963" duration="2701000" />
+      <workItem from="1616022511963" duration="4414000" />
     </task>
+    <task id="LOCAL-00001" summary="Finished the click function">
+      <created>1616189637178</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1616189637178</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -85,6 +92,10 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Finished the click function" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished the click function" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="556" y="199" key="RollbackChangesDialog" timestamp="1615589348037">
       <screen x="0" y="25" width="1536" height="935" />
@@ -94,5 +105,9 @@
       <screen x="0" y="25" width="1536" height="935" />
     </state>
     <state x="277" y="128" key="SettingsEditor/0.25.1536.935@0.25.1536.935" timestamp="1615230828378" />
+    <state x="560" y="349" key="Vcs.Push.Dialog.v2" timestamp="1616189666238">
+      <screen x="0" y="25" width="1920" height="1175" />
+    </state>
+    <state x="560" y="349" key="Vcs.Push.Dialog.v2/0.25.1920.1175/-1792.105.1792.1095@0.25.1920.1175" timestamp="1616189666238" />
   </component>
 </project>
