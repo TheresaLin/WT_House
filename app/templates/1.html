@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+ 
+	<head>
+		<meta charset="UTF-8">
+		<title>动态添加表格</title>
+		<script>
+            //封装document.getElemenyById();
+        function $(id) {
+	        return document.getElementById(id);
+        }
+        </script>
+	</head>
+ 
+	<body>
+		<script>
+			//动态添加数据显示在tbody中，拼字符串放到tbody的innerHTML
+			function add() {
+				//1拼字符串
+				
+					var html = "<td>01</td>";
+					html += "<td>书1</td>";
+					html += "<td>作者1</td>";
+					html += "<td>";
+						html += "<button>修改</button>";
+						html += "<button>删除</button>";
+					html += "</td>";
+				html += "</tr>";
+				
+				html += "<tr>";
+					html += "<td>02</td>";
+					html += "<td>书2</td>";
+					html += "<td>作者2</td>";
+					html += "<td>";
+						html += "<button>修改</button>";
+						html += "<button>删除</button>";
+					html += "</td>";
+				//2获取tbody
+				var tr=$("show_data");
+				//3拼字符串放到tbody的innerHTML
+				tr.innerHTML=html;
+			}
+		</script>
+		<button id="show" onclick="add()">显示数据</button>
+		<table border="1" width="500">
+			<thead>
+				<tr>
+					<th>编号</th>
+					<th>书名</th>
+					<th>作者</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+        <tr>
+					<td>编号</td>
+					<td>书名</td>
+					<td>作者</td>
+					<td>操作</td>
+				</tr>
+        <tr id="show_data">
+
+        </tr>
+			</tbody>
+		</table>
+	</body>
+ 
+</html>

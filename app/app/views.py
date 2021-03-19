@@ -10,36 +10,54 @@ import os
 from os.path import isfile, join
 from os import path, listdir
 
+def test_1(request):
+    return render(request, '1.html')
+
 
 def some_view(request):
-    new_list = []
-    onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
-    new_list += random.sample(onlyfiles, 5)
+    # new_list = []
+    # onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
+    # new_list += random.sample(onlyfiles, 5)
 
-    if(path.isfile('workfile_2.txt')==True):
-        hash = random.getrandbits(2)
-        file2 = 'workfile_'+str(hash)+'.txt'
-        f = open(file2, 'w')
-        f.write('Thereas\n')
-        f.write('Hi Theresa!\n')
-        f.write('Theresa\n')
-        f.close()
+    # if(path.isfile('workfile_2.txt')==True):
+    #     hash = random.getrandbits(2)
+    #     file2 = 'workfile_'+str(hash)+'.txt'
+    #     f = open(file2, 'w')
+    #     f.write('Thereas\n')
+    #     f.write('Hi Theresa!\n')
+    #     f.write('Theresa\n')
+    #     f.close()
        
 
-        return HttpResponse(new_list)
+    #     return HttpResponse(new_list)
     
-    else:
-        hash = random.getrandbits(2)
-        file2 = 'workfile_'+str(hash)+'.txt'
-        f = open(file2, 'w')
-        f.write('This is a test\n')
-        f.write('Hi User!\n')
-        f.write('Welcome to Python Easy!\n')
-        f.close()
+    # else:
+    #     hash = random.getrandbits(2)
+    #     file2 = 'workfile_'+str(hash)+'.txt'
+    #     f = open(file2, 'w')
+    #     f.write('This is a test\n')
+    #     f.write('Hi User!\n')
+    #     f.write('Welcome to Python Easy!\n')
+    #     f.close()
        
-        d='Theresa'
+    #     d='Theresa'
 
-        return HttpResponse(d)
+    #     return HttpResponse(d)
+    if request.method == 'POST':
+    # create a form instance and populate it with data from the request:
+        form = img_text_form(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = img_text_form()
+
+    return render(request, 'name.html', {'form': form})
 
 
 
@@ -77,7 +95,7 @@ def homeview(request):
     # And random choose 5 image for index.html
     new_list = []
     onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
-    new_list += random.sample(onlyfiles, 5)
+    new_list += random.sample(onlyfiles, 100)
 
 
     
@@ -120,7 +138,8 @@ def homeview(request):
                 'img2': "/static/image/"+new_list[1],
                 'img3': "/static/image/"+new_list[2],
                 'img4': "/static/image/"+new_list[3],
-                'img5': "/static/image/"+new_list[4]
+                'img5': "/static/image/"+new_list[4],
+                
             }
         )
 
@@ -134,7 +153,8 @@ def homeview(request):
                 'img2': "/static/image/"+new_list[1],
                 'img3': "/static/image/"+new_list[2],
                 'img4': "/static/image/"+new_list[3],
-                'img5': "/static/image/"+new_list[4]
+                'img5': "/static/image/"+new_list[4],
+                'all_pic': new_list
             }
         ) 
 
