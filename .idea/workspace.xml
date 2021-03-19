@@ -20,7 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0bf2fadf-b092-4b46-8cbb-aad16f638fac" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/validation.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/validation.html" afterDir="false" />
     </list>
@@ -41,6 +41,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
@@ -54,7 +55,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1615225515418</updated>
-      <workItem from="1615225519043" duration="12899000" />
+      <workItem from="1615225519043" duration="20222000" />
+      <workItem from="1616022511963" duration="2701000" />
     </task>
     <servers />
   </component>
@@ -81,8 +83,13 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="556" y="199" key="RollbackChangesDialog" timestamp="1615589348037">
+      <screen x="0" y="25" width="1536" height="935" />
+    </state>
+    <state x="556" y="199" key="RollbackChangesDialog/0.25.1536.935@0.25.1536.935" timestamp="1615589348037" />
     <state x="277" y="128" key="SettingsEditor" timestamp="1615230828378">
       <screen x="0" y="25" width="1536" height="935" />
     </state>
