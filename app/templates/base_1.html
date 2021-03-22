@@ -1,0 +1,238 @@
+<html>
+<head>
+    {% load social_share %}
+  <title>WT House</title>
+<link rel="stylesheet" href="{%  static 'css/base.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/sharer.js/latest/sharer.min.js"></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="static/js/jquery-3.2.1.min.js"></script>
+
+</head>
+
+
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0" nonce="daVN8XUk"></script>
+  <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+
+{% block header %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/annotation/">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/annotation/">Annotation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/validation/">Validation</a>
+      </li>
+    </ul>
+  </div>     
+
+  <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small"></div>
+  <script type="IN/Share" data-url="https://www.linkedin.com"></script>   
+  <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</nav>
+
+
+
+
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+
+
+    <script>
+
+// <td class="w-50">
+//               <img src='{{ img1 }}' class='img-fluid img-thumbnail' alt='Sheep'>
+//               <input type='hidden' name='pic1' value='{{ img1 }}''> 
+//             </td>
+//             <td><textarea class="form-control" id="text1" name="text1" rows="3" required></textarea></td>
+
+const sliced_list = [];
+
+function bind(page) {
+            $(`#tr${page} :input`).keypress(function (event) {
+                if (event.keyCode == 13) {
+
+                    if ($(`#tr${page} :input`).val() != "") {
+                        const current_page = Number(sessionStorage.getItem("currentPage"));
+
+                        if (Number(current_page) < sliced_list.length - 1) {
+                            const current_tr_inputs = $(`#tr${current_page} :input`);
+
+                            current_tr_inputs.each(function () {
+                                console.log($(this).val());
+                                $(this).val();
+                            });
+
+                            // 詳情請閱公開說明書: https://developer.mozilla.org/zh-TW/docs/Web/API/Fetch_API/Using_Fetch
+                            // fetch("表單網址", {
+                            //     body: JSON.stringify({
+                            //         // TODO: 參數
+                            //         "subject_subscription_ids": [328]
+                            //     }),
+                            //     method: "POST"
+                            // }).then(res => res.json())
+                            //     .catch(error => console.error('Error:', error))
+                            //     .then(response => {
+                            //         sessionStorage.setItem("currentPage", String(current_page + 1));
+                            //         next(sliced_list);
+                            //         console.log('Success:', response);
+                            //     });
+
+                            sessionStorage.setItem("currentPage", String(current_page + 1));
+                            next(sliced_list);
+                        } else {
+                            alert("完成");
+                        }
+                    } else {
+                        alert("輸入框如青春別留白！");
+                    }
+                }
+            });
+        }
+
+        function next(sliced_list) {
+            const current_page = Number(sessionStorage.getItem("currentPage"));
+            const paged_list = sliced_list[current_page];
+
+            $("#table").append(`<div id="tr${current_page}"></div>`);
+
+            for (let i = 0; i < paged_list.length; i++) {
+                $(`#tr${current_page}`).append(`<tr><td class='w-50'><img src='{{ "/static/image/${paged_list[i]}" }}' class='img-fluid img-thumbnail' alt='Sheep'><input type='hidden' name='pic_${i+5}' value='{{ '${paged_list[i]}' }}'></td>
+                  <td><textarea class='form-control' id='text_${i+5}' name='text_${i+5}' rows='3' required></textarea></td></tr>`);
+            }
+            
+          bind(current_page);
+        }
+        $(document).ready(function () {
+            sessionStorage.setItem("currentPage", String(0));
+
+            const string_all_pic = document.getElementById("all_pic").value;
+            const formatted_arr = [];
+            string_all_pic.substring(1, string_all_pic.length - 1).split(", ").forEach((item) => {
+                formatted_arr.push(item.substring(1, item.length - 1));
+            });
+
+            const size = 5
+            for (let i = 0; i < formatted_arr.length; i += size) {
+                sliced_list.push(formatted_arr.slice(i, i + size));
+            }
+
+            const first_sliced_list = sliced_list[0];
+
+
+            $("#table").append('<div id="tr0"></div>');
+
+            for (let i = 0; i < first_sliced_list.length; i++) {
+                $("#tr0").append(`<p><input type="text" id="text_${first_sliced_list[i]}" value="${first_sliced_list[i]}"></p>`);
+            }
+
+            bind(0);
+        });
+
+
+
+
+
+  // for(i = 5; i < 20; i++){
+ 
+  // document.getElementById("text"+i).addEventListener("focusin", myFunction);
+  
+  // function myFunction() {
+    
+  //   var html = "<tr>";
+	// 				html += "<td class='w-50'><img src='{{ '"+sliced_list+"' }}' class='img-fluid img-thumbnail' alt='Sheep'><input type='hidden' name='pic"+i+"' value='{{ '"+path+"' }}'> </td>";
+	// 				html += "<td><textarea class='form-control' id='text"+ i+"' name='text"+i+"' rows='3' required></textarea></td></tr>";
+  //         html += "<tr><td class='w-50'><img src='{{ '"+path_1+"' }}' class='img-fluid img-thumbnail' alt='Sheep'><input type='hidden' name='pic"+(i+1)+"' value='{{ '"+path_1+"' }}'> </td>";
+	// 				html += "<td><textarea class='form-control' id='text"+ (i+1)+"' name='text"+(i+1)+"' rows='3' required></textarea></td></tr>";
+  //         html += "<tr><td class='w-50'><img src='{{ '"+path_2+"' }}' class='img-fluid img-thumbnail' alt='Sheep'><input type='hidden' name='pic"+(i+2)+"' value='{{ '"+path_2+"' }}'> </td>";
+	// 				html += "<td><textarea class='form-control' id='text"+ (i+2)+"' name='text"+(i+2)+"' rows='3' required></textarea></td></tr>";
+  //         html += "<tr><td class='w-50'><img src='{{ '"+path_3+"' }}' class='img-fluid img-thumbnail' alt='Sheep'><input type='hidden' name='pic"+(i+3)+"' value='{{ '"+path_3+"' }}'> </td>";
+	// 				html += "<td><textarea class='form-control' id='text"+ (i+3)+"' name='text"+(i+3)+"' rows='3' required></textarea></td></tr>";
+  //         html += "<tr><td class='w-50'><img src='{{ '"+path_4+"' }}' class='img-fluid img-thumbnail' alt='Sheep'><input type='hidden' name='pic"+(i+4)+"' value='{{ '"+path_4+"' }}'> </td>";
+	// 				html += "<td><textarea class='form-control' id='text"+ (i+4)+"' name='text"+(i+4)+"' rows='3' required></textarea></td></tr>";
+    
+				
+  //       document.getElementById("go").innerHTML = html;
+
+
+
+  //         }
+  //       }
+
+
+
+// var len = String(all_pic[7]).length-1;
+// var string = String(all_pic[7]).substring(1,len);
+// var path = "/static/image/"+string;
+
+// var len_1 = String(all_pic[8]).length-1;
+// var string_1 = String(all_pic[8]).substring(1,len_1);
+// var path_1 = "/static/image/"+string_1;
+
+// var len_2 = String(all_pic[9]).length-1;
+// var string_2 = String(all_pic[9]).substring(1,len_2);
+// var path_2 = "/static/image/"+string_2;
+
+// var len_3 = String(all_pic[10]).length-1;
+// var string_3 = String(all_pic[10]).substring(1,len_3);
+// var path_3 = "/static/image/"+string_3;
+
+// var len_4 = String(all_pic[11]).length-1;
+// var string_4 = String(all_pic[11]).substring(1,len_4);
+// var path_4 = "/static/image/"+string_4;
+
+// // function get_url() {
+// //   queryString = window.location.search;
+// //   const urlParams = new URLSearchParams(queryString);
+// //   const page_type = urlParams.get('id');
+// //   return parseInt(page_type);
+// // }
+
+// // var idx = get_url();
+
+//   // if(idx % 5 == 0) {
+//   //   document.getElementById('text' + idx).addEventListener("focusin", myFunction);
+
+//   //   function myFunction() {
+//   //       // console.log(1);
+//   //       var html = "<tr>";
+//   //       html += "<td class='w-50'><img src='{{ '"+path+"' }}' class='img-fluid img-thumbnail' alt='Sheep'><input type='hidden' name='pic"+(idx + 1)+"' value='{{ '"+path+"' }}'> </td>";
+//   //       html += "<td><textarea class='form-control' id='text" + (idx + 1) + "' name='text" +  (idx + 1) + "' rows='3' required></textarea></td></tr>";
+//   //       html += "<td class='w-50'><img src='{{ '"+path+"' }}' class='img-fluid img-thumbnail' alt='Sheep'><input type='hidden' name='pic"+(idx + 2)+"' value='{{ '"+path+"' }}'> </td>";
+//   //       html += "<td><textarea class='form-control' id='text" + (idx + 2) + "' name='text" +  (idx + 2) + "' rows='3' required></textarea></td></tr>";
+//   //       html += "<td class='w-50'><img src='{{ '"+path+"' }}' class='img-fluid img-thumbnail' alt='Sheep'><input type='hidden' name='pic"+(idx + 3)+"' value='{{ '"+path+"' }}'> </td>";
+//   //       html += "<td><textarea class='form-control' id='text" + (idx + 3) + "' name='text" +  (idx + 3) + "' rows='3' required></textarea></td></tr>";
+//   //       html += "<td class='w-50'><img src='{{ '"+path+"' }}' class='img-fluid img-thumbnail' alt='Sheep'><input type='hidden' name='pic"+(idx + 4)+"' value='{{ '"+path+"' }}'> </td>";
+//   //       html += "<td><textarea class='form-control' id='text" + (idx + 4) + "' name='text" +  (idx + 4) + "' rows='3' required></textarea></td></tr>";
+//   //       html += "<td class='w-50'><img src='{{ '"+path+"' }}' class='img-fluid img-thumbnail' alt='Sheep'><input type='hidden' name='pic"+(idx + 5)+"' value='{{ '"+path+"' }}'> </td>";
+//   //       html += "<td><textarea class='form-control' id='text" + (idx + 5) + "' name='text" +  (idx + 5) + "' rows='3' required></textarea></td></tr>";
+        
+//   //       document.getElementById("go").innerHTML = html;
+//   //       // change url
+//   //   //     const nextURL = 'http://localhost:8000/annotation/?id=' + (idx + 5);
+//   //   //     const nextTitle = '';
+//   //   //     const nextState = {};
+//   //   //     window.history.replaceState(nextState, nextTitle, nextURL);
+//   //    }
+//   // }
+
+  
+    </script>
+
+
+</html>

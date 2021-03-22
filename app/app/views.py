@@ -9,6 +9,7 @@ from django.conf import settings as django_settings
 import os
 from os.path import isfile, join
 from os import path, listdir
+import logging
 
 def test_1(request):
     return render(request, '1.html')
@@ -90,22 +91,20 @@ def lookup_view(request):
 
 
 def homeview(request): 
-    
     # list all files name and path in image directory 
     # And random choose 5 image for index.html
     new_list = []
     onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
     new_list += random.sample(onlyfiles, 100)
-
-
     
     if request.method == 'POST' :
-        for i in range(1, 6):
-            
+        return HttpResponse("Hello")
+        for i in range(len(all_pic)):
             # get picture files name and value of textarea 
             f = django_settings.STATICFILES_DIRS[0] + '/annotation/' 
-            files = str(request.POST.get('pic'+str(i))[14:])
+            files = str(request.POST.get('pic'+str(i))[17:])
             text = str(request.POST.get('text'+str(i)))
+            status = "legible"
             
             # list all data of "text" in database
             result = Ann.objects.all()
@@ -134,11 +133,11 @@ def homeview(request):
         
         return render(request, 'index.html',
             {
-                'img1': "/static/image/"+new_list[0],
-                'img2': "/static/image/"+new_list[1],
-                'img3': "/static/image/"+new_list[2],
-                'img4': "/static/image/"+new_list[3],
-                'img5': "/static/image/"+new_list[4],
+                # 'img1': "/static/image/"+new_list[0],
+                # 'img2': "/static/image/"+new_list[1],
+                # 'img3': "/static/image/"+new_list[2],
+                # 'img4': "/static/image/"+new_list[3],
+                # 'img5': "/static/image/"+new_list[4],
                 
             }
         )
@@ -149,11 +148,11 @@ def homeview(request):
             request, 
             'index.html',
             {
-                'img1': "/static/image/"+new_list[0],
-                'img2': "/static/image/"+new_list[1],
-                'img3': "/static/image/"+new_list[2],
-                'img4': "/static/image/"+new_list[3],
-                'img5': "/static/image/"+new_list[4],
+                # 'img1': "/static/image/"+new_list[0],
+                # 'img2': "/static/image/"+new_list[1],
+                # 'img3': "/static/image/"+new_list[2],
+                # 'img4': "/static/image/"+new_list[3],
+                # 'img5': "/static/image/"+new_list[4],
                 'all_pic': new_list
             }
         ) 
