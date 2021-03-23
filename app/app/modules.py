@@ -30,5 +30,6 @@ class Ann(Document):
     _id = SequenceField(required=True, primary_key=True)
     img_path = StringField()
     text = StringField()
+    status = StringField()
 
 

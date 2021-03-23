@@ -10,6 +10,7 @@ import os
 from os.path import isfile, join
 from os import path, listdir
 import logging
+import json
 
 def test_1(request):
     return render(request, '1.html')
@@ -77,17 +78,17 @@ def insert_view(request):
 
 
 
-def lookup_view(request):
-    result = Ann.objects.all()
-    mlist = []
-    for item in result:
-        #content = {"text": item.text}
-        mlist.append(item.text)
+# def lookup_view(request):
+#     result = Ann.objects.all()
+#     mlist = []
+#     for item in result:
+#         #content = {"text": item.text}
+#         mlist.append(item.text)
 
-    if 'MPs' in mlist:
-        return HttpResponse("MPs is in list"+ str(mlist))
-    else:
-        return HttpResponse("MPs is not in list"+ str(mlist))
+#     if 'MPs' in mlist:
+#         return HttpResponse("MPs is in list"+ str(mlist))
+#     else:
+#         return HttpResponse("MPs is not in list"+ str(mlist))
 
 
 def homeview(request): 
@@ -95,17 +96,21 @@ def homeview(request):
     # And random choose 5 image for index.html
     new_list = []
     onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
-    new_list += random.sample(onlyfiles, 100)
+    new_list += random.sample(onlyfiles, 13)
     
     if request.method == 'POST' :
-        return HttpResponse("Hello")
-        for i in range(len(all_pic)):
+        a = 0
+        for i in range(a,a+5):
             # get picture files name and value of textarea 
             f = django_settings.STATICFILES_DIRS[0] + '/annotation/' 
-            files = str(request.POST.get('pic'+str(i))[17:])
-            text = str(request.POST.get('text'+str(i)))
+            # files = str(request.POST['pic'+str(i)])
+            # text = str(request.POST['text'+str(i)])
+            files = str(request.POST.get('pic'+str(i),False))
+            text = str(request.POST.get('text'+str(i),False))
             status = "legible"
-            
+            # [17:]
+            a = a+5
+
             # list all data of "text" in database
             result = Ann.objects.all()
             text_list = []
@@ -126,9 +131,12 @@ def homeview(request):
 
                                                                 
             else:
+                # return HttpResponse("Hello")
                 ann.img_path = files
                 ann.text = text
+                ann.status = status
                 ann.save()
+                # return HttpResponse("Hello")
         
         
         return render(request, 'index.html',
