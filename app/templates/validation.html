@@ -13,6 +13,16 @@ color: #0099CC
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
+    <!-- prompt box -->
+    <link href="dist/attention.css" rel="stylesheet">
+    <script src="dist/attention.js"></script>
+
+       <!-- prompt box 2-->
+
+    <link href="dist/gModal.min.css" rel="stylesheet" />
+<script src="dist/gModal.min.js"></script>
+
 </head>
 
   <div class="container">
@@ -41,6 +51,49 @@ color: #0099CC
               <button type="button" class="btn btn-default btn-sm">
                 <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" data-width="50" data-height="50"></span>
               </button>
+                <button onclick="promptDemo.show()" class="btn btn-default btn-sm">
+                    <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" data-width="50" data-height="50"></span>
+                </button>
+
+<script src="dist/gModal.min.js"></script>
+
+                <script>
+var promptDemo = new gModal({
+    title: "Let's know you better",
+    body: "<center><p>What is your name?</p><input type='text' id='name'></center>",
+    buttons: [{
+      content: "Continue",
+      classes: "gmodal-button-blue",
+      bindKey: 13, /* Enter */
+      callback: function(modal){
+        var name = document.getElementById("name").value;
+        name = name == "" ? "Mr. Unnamed" : name;
+        console.log("Welcome home "+ name);
+        modal.hide();
+      }
+    }],
+    close: {
+      closable: false,
+    },onHide: function(modal) { console.log('Hidden') },
+  });
+                </script>
+
+
+
+             <script>
+              function Promptbox6({
+              title: 'Nice prompt',
+              content: 'This is my content',
+              onSubmit: function(component, value) {
+              demo.innerHTML += `<h4>Prompt was submited by following value: ${value}</h4>`;
+              }
+              });
+              });
+             </script>
+
+
+
+
                 <!-- button of incorrect -->
               <button onclick="Promptbox1()" class="btn btn-default btn-sm">
                 <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" data-width="50" data-height="50"></span>
@@ -160,16 +213,6 @@ color: #0099CC
                 <button onclick="Promptbox5()" class="btn btn-info btn-lg">
                   <span class="glyphicon glyphicon-thumbs-up"></span> Incorrect
                 </button>
-                <!-- prompt box function -->
-                <script>
-                    var sentence5;
-                    function Promptbox5(){
-                        var person=prompt("Please enter the correct sentence","Type here");
-                        if (person!=null && person!=""){
-                            sentence5 = person;
-                        }
-                    }
-                </script>
             </td>
           </tr>
         </tbody>
@@ -185,4 +228,50 @@ color: #0099CC
 
 
 
+
+
+
+
+<script>
+
+
+
+
+
+
+
+
+
+
+                    var sentence5;
+                    function Promptbox5(){
+                        var person=prompt("Please enter the correct sentence","Type here");
+                        if (person!=null && person!=""){
+                            sentence5 = person;
+                        }
+                    }
+                </script>
+
   {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
