@@ -85,21 +85,17 @@
              "text": $(`#text${k-remainder+i}`).val()
 
            });
-          //data['pic' + String(i)] = $("#pic" + i).val();
-          //data['text' + String(i)] = $("#text" + i).val();
+
 
         }
         const request = {pictures: pictures};
 
         //console.log("pictures:",pictures);
 
-        詳情請閱公開說明書: https://developer.mozilla.org/zh-TW/docs/Web/API/Fetch_API/Using_Fetch
+
         fetch('', {
           headers :{
           "X-CSRFToken":document.cookie.split(';')[0].substring(10)},
-          //"content-type": "application/json",
-          //"X-CSRFTOKEN": "{{csrf_token}}"},
-          // 'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content,
           credentials: 'same-origin',
           body: JSON.stringify(request),
           method: "POST"
@@ -182,7 +178,7 @@
     bind(current_page);
   }
 
-  setInterval("onload()", "10000");
+  setInterval("onload()", "1000");
 
   function onload() {
     var nextflag = false;

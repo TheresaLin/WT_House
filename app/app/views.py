@@ -78,17 +78,17 @@ def insert_view(request):
 
 
 
-# def lookup_view(request):
-#     result = Ann.objects.all()
-#     mlist = []
-#     for item in result:
-#         #content = {"text": item.text}
-#         mlist.append(item.text)
+def lookup_view(request):
+    result = Ann.objects.all()
+    mlist = []
+    for item in result:
+        #content = {"text": item.text}
+        mlist.append(item.text)
 
-#     if 'MPs' in mlist:
-#         return HttpResponse("MPs is in list"+ str(mlist))
-#     else:
-#         return HttpResponse("MPs is not in list"+ str(mlist))
+    if 'MPs' in mlist:
+        return HttpResponse("MPs is in list"+ str(mlist))
+    else:
+        return HttpResponse("MPs is not in list"+ str(mlist))
 
 
 def homeview(request):
@@ -96,54 +96,101 @@ def homeview(request):
     # And random choose 5 image for index.html
     new_list = []
     onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
-    new_list += random.sample(onlyfiles, 13)
+    # result = Ann.objects.all()
+    # if Ann.objects(status = "illegible") or Ann.objects(status = "legible"):
+
+    num_pic = len(onlyfiles)
+    new_list += random.sample(onlyfiles, num_pic)
 
     if request.method == 'POST' :
-        # a = 0
-        # for i in range(a,a+5):
 
-        #     # files = str(request.POST['pic'+str(i)])
-        #     # text = str(request.POST['text'+str(i)])
-        #     files = str(request.POST.get('pic'+str(i),False))
-        #     text = str(request.POST.get('text'+str(i),False))
-        #     status = "legible"
-        #     a = a+5
         json_data = json.loads(request.body)
         # logging.getLogger(__name__).error('test' + str(len(json_data['pictures'])))
 
-        #     # get picture files name and value of textarea
-        # f = django_settings.STATICFILES_DIRS[0] + '/annotation/'
-
+        # get picture files name and value of textarea
         for i in json_data['pictures']:
             files = i['pic']
             text = i['text']
-            status = "legible"
+            status = "unconfirmed"
 
-            # return HttpResponse(files[16:])
-            # list all data of "text" in database
-
+        # return HttpResponse(files[16:])
+        # list all data of "text" in database
             result = Ann.objects.all()
+            #logging.getLogger(__name__).error('result' + str(result))
             text_list = []
-            for item in result:
-                text_list.append(item.text)
+            pic_text = {}
             ann = Ann()
-            #
-            # # check whether the text exists in database
-            # # if yes, the text will be saved with a txt file in annotation directory; if not, it will be saved in database
-            if text in text_list:
-                hash = random.getrandbits(50)
-                files_mod = files[16:-4]+"_"+str(hash)+".txt"
-                f = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + files_mod, 'w+')
-                f.write(text)
-                f.close()
+
+            # iterate all of document in the annotation collection
+            for item in result:
+
+                # check whether img exists in the pic_text
+                if item.img_path in pic_text.keys():
+                    # if img exists in the pic_text and the len of its length is 1
+                    if len(pic_text[item.img_path]) == 1:
+                        if item.text not in pic_text[item.img_path]:
+                            pic_text[item.img_path].append(item.text)
+                        else:
+                            Ann.objects(img_path = item.img_path).update(status = "legible")
+                    elif len(pic_text[item.img_path]) == 2:
+                        if item.text not in pic_text[item.img_path]:
+                            Ann.objects(img_path = item.img_path).update(status = "illegible")
+                        else:
+                            Ann.objects(img_path = item.img_path).update(status = "legible")
+                else:
+                    pic_text[item.img_path] = [item.text]
+                    Ann.objects(img_path = item.img_path).update(status = "unconfirmed")
 
 
+
+            # check whether the img(user annotated) exists in the pic_text
+            if files in pic_text.keys():
+                # save the information to document when the text is not in pic_text
+                if text not in pic_text[files]:
+                    ann.img_path = files
+                    ann.text = text
+                    ann.status = status
+                    ann.save()
+                # save the information to txt file and change the status when the text isin the pic_text
+                else:
+                    ann.img_path = files
+                    ann.text = text
+                    ann.status = status
+                    ann.save()
+                    Ann.objects(img_path = item.img_path).update(status = "legible")
+                    hash = random.getrandbits(50)
+                    files_mod = files[16:-4]+"_"+str(hash)+".txt"
+                    f = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + files_mod, 'w+')
+                    f.write(text)
+                    f.close()
             else:
                 ann.img_path = files
                 ann.text = text
                 ann.status = status
                 ann.save()
-                # return HttpResponse("Hello")
+
+            # else:
+            #
+            # pic_text[item.img_path] = item.text
+            # logging.getLogger(__name__).error('pic_text' + str(pic_text))
+            #
+            #
+            # # check whether the text exists in database
+            # # if yes, the text will be saved with a txt file in annotation directory; if not, it will be saved in database
+            # if files in pic_text:
+            #     hash = random.getrandbits(50)
+            #     files_mod = files[16:-4]+"_"+str(hash)+".txt"
+            #     f = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + files_mod, 'w+')
+            #     f.write(text)
+            #     f.close()
+            #
+            #
+            # else:
+            #     ann.img_path = files
+            #     ann.text = text
+            #     ann.status = status
+            #     ann.save()
+            #     # return HttpResponse("Hello")
 
 
         return render(request, 'index.html',

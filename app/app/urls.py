@@ -26,6 +26,6 @@ urlpatterns = [
     #path(r'^$',views.homeview),
     #path(r'^form1/$',views.homeview),
     path('insert/', views.insert_view),
-    # path('lookup/', views.lookup_view),
+    path('lookup/', views.lookup_view),
     path('some_view/',views.some_view),
 ]
