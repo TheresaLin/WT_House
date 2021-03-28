@@ -132,7 +132,7 @@ def homeview(request):
                             pic_text[item.img_path].append(item.text)
                         else:
                             Ann.objects(img_path = item.img_path).update(status = "legible")
-                    elif len(pic_text[item.img_path]) == 2:
+                    elif len(pic_text[item.img_path]) >= 2:
                         if item.text not in pic_text[item.img_path]:
                             Ann.objects(img_path = item.img_path).update(status = "illegible")
                         else:
