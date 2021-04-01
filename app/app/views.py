@@ -17,9 +17,9 @@ def test_1(request):
 
 
 def some_view(request):
-    # new_list = []
+    # all_pic = []
     # onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
-    # new_list += random.sample(onlyfiles, 5)
+    # all_pic += random.sample(onlyfiles, 5)
 
     # if(path.isfile('workfile_2.txt')==True):
     #     hash = random.getrandbits(2)
@@ -31,7 +31,7 @@ def some_view(request):
     #     f.close()
 
 
-    #     return HttpResponse(new_list)
+    #     return HttpResponse(all_pic)
 
     # else:
     #     hash = random.getrandbits(2)
@@ -93,14 +93,25 @@ def lookup_view(request):
 
 def homeview(request):
     # list all files name and path in image directory
-    # And random choose 5 image for index.html
-    new_list = []
-    onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
-    # result = Ann.objects.all()
-    # if Ann.objects(status = "illegible") or Ann.objects(status = "legible"):
+    all_pic = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
+    random_pic = []
+    # all data in database
+    remove_data = {}
+    result = Ann.objects.all()
+    for all_item in result:
+        if all_item.img_path in remove_data.keys():
+            remove_data[all_item.img_path[16:]].append(all_item.status)
+        else:
+            remove_data[all_item.img_path[16:]] = list([all_item.status])
+    
+    for key, value in remove_data.items():
+        if value == 'illegible' or value == 'legible':
+            all_pic.remove(key)
+    
+    
 
-    num_pic = len(onlyfiles)
-    new_list += random.sample(onlyfiles, num_pic)
+    num_pic = len(all_pic)
+    random_pic += random.sample(all_pic, num_pic)
 
     if request.method == 'POST' :
 
@@ -114,8 +125,7 @@ def homeview(request):
             status = "unconfirmed"
 
         # return HttpResponse(files[16:])
-        # list all data of "text" in database
-            result = Ann.objects.all()
+            
             #logging.getLogger(__name__).error('result' + str(result))
             text_list = []
             pic_text = {}
@@ -195,11 +205,11 @@ def homeview(request):
 
         return render(request, 'index.html',
             {
-                # 'img1': "/static/image/"+new_list[0],
-                # 'img2': "/static/image/"+new_list[1],
-                # 'img3': "/static/image/"+new_list[2],
-                # 'img4': "/static/image/"+new_list[3],
-                # 'img5': "/static/image/"+new_list[4],
+                # 'img1': "/static/image/"+random_pic[0],
+                # 'img2': "/static/image/"+random_pic[1],
+                # 'img3': "/static/image/"+random_pic[2],
+                # 'img4': "/static/image/"+random_pic[3],
+                # 'img5': "/static/image/"+random_pic[4],
 
             }
         )
@@ -210,12 +220,12 @@ def homeview(request):
             request,
             'index.html',
             {
-                # 'img1': "/static/image/"+new_list[0],
-                # 'img2': "/static/image/"+new_list[1],
-                # 'img3': "/static/image/"+new_list[2],
-                # 'img4': "/static/image/"+new_list[3],
-                # 'img5': "/static/image/"+new_list[4],
-                'all_pic': new_list
+                # 'img1': "/static/image/"+random_pic[0],
+                # 'img2': "/static/image/"+random_pic[1],
+                # 'img3': "/static/image/"+random_pic[2],
+                # 'img4': "/static/image/"+random_pic[3],
+                # 'img5': "/static/image/"+random_pic[4],
+                'all_pic': random_pic
             }
         )
 
@@ -223,3 +233,16 @@ def homeview(request):
 
 def validation(request):
     return render(request, 'validation.html')
+
+def check_data(request):
+    all_data = []
+    every_data = []
+    result = Ann.objects.all()
+    for item in result:
+        every_data = list([item.img_path, item.text, item.status])
+        all_data.append(every_data)
+    return render(request, 'check_data.html',
+    {
+        'annotated' = all_data
+    })
+

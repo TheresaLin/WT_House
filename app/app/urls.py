@@ -28,4 +28,5 @@ urlpatterns = [
     path('insert/', views.insert_view),
     path('lookup/', views.lookup_view),
     path('some_view/',views.some_view),
+    path('check_data/',views.check_data)
 ]
