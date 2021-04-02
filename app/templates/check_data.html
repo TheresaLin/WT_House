@@ -1,8 +1,5 @@
-<html>
-    <head>
-
-    </head>
-    <body>
-        <label name="annotated" id="annotated"></label>
-    </body>
-</html>
+{% for i in annotated %}
+    {{ i.img_path }}
+    {{ i.text }}
+    {{ i.status }}
+{% endfor %}
