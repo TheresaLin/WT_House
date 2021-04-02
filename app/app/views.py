@@ -11,6 +11,7 @@ from os.path import isfile, join
 from os import path, listdir
 import logging
 import json
+import string
 
 def test_1(request):
     return render(request, '1.html')
@@ -90,6 +91,15 @@ def lookup_view(request):
     else:
         return HttpResponse("MPs is not in list"+ str(mlist))
 
+# ignore whitespace and case
+# return true if input_txt isnt matched to any string in db_txt_list
+def cmp_txt(input_txt, db_txt_list):
+    flag = True
+    new_input_txt = input_txt.lower()
+    for txt in db_txt_list:
+        new_db_txt = txt.lower()
+        flag = flag and (new_input_txt.replace(" ", "") != new_db_txt.replace(" ", ""))
+    return flag
 
 def homeview(request):
     # list all files name and path in image directory
@@ -156,7 +166,7 @@ def homeview(request):
             # check whether the img(user annotated) exists in the pic_text
             if files in pic_text.keys():
                 # save the information to document when the text is not in pic_text
-                if text not in pic_text[files]:
+                if cmp_txt(text, pic_text[files]):
                     ann.img_path = files
                     ann.text = text
                     ann.status = status
