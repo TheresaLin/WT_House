@@ -243,6 +243,6 @@ def check_data(request):
         all_data.append(every_data)
     return render(request, 'check_data.html',
     {
-        'annotated' = all_data
+        'annotated' : all_data
     })
 
