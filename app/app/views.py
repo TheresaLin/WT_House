@@ -177,9 +177,10 @@ def homeview(request):
                     ann.text = text
                     ann.status = status
                     ann.save()
-                    Ann.objects(img_path = item.img_path).update(status = "legible")
-                    hash = random.getrandbits(50)
-                    files_mod = files[16:-4]+"_"+str(hash)+".txt"
+                    logging.getLogger(__name__).error('already in pic_Text')
+                    Ann.objects(img_path = files).update(status = "legible")
+                    #hash = random.getrandbits(50)
+                    files_mod = files[16:-4] + ".txt"
                     f = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + files_mod, 'w+')
                     f.write(text)
                     f.close()
