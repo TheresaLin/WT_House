@@ -127,8 +127,8 @@
 
       $("#next" + parseInt(k - 1)).attr("style", "display:none;");
       $("#first").append(`<tr>
-					                   <td class='w-50'><img src='{{ "../static/image/${paged_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
-						                   <input type="hidden" name="pic`+ parseInt(k + i) + `" id="pic`+ parseInt(k + i) + `" value="../static/image/${paged_list[i]}"></td>
+					                   <td class='w-50'><img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
+						                   <input type="hidden" name="pic`+ parseInt(k + i) + `" id="pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}"></td>
 					                   <td><textarea class='form-control' id='text`+ parseInt(k + i) + `' name='text` + parseInt(k + i) + `' rows="3" value='{{ csrf_token }}' required></textarea></td>
 				                  </tr>`);
     }
@@ -159,8 +159,8 @@
       var page = Number(sessionStorage.getItem("currentPage"));
 
       $("#first").append(`<tr>
-					                  <td class='w-50'><img src='{{ "../static/image/${first_sliced_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
-						                  <input type="hidden" name="pic`+ parseInt(k + i) + `" id="pic`+ parseInt(k + i) + `" value="../static/image/${first_sliced_list[i]}"></td>
+					                  <td class='w-50'><img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
+						                  <input type="hidden" name="pic`+ parseInt(k + i) + `" id="pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}"></td>
 					                  <td><textarea class='form-control' id='text`+ parseInt(k + i) + `'  name='text` + parseInt(k + i) + `' rows="3" value='{{ csrf_token }}' required></textarea></td>
 				                  </tr>`);
 

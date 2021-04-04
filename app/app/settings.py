@@ -26,7 +26,7 @@ SECRET_KEY = 'qpc2th(bif&fgu3v4*gk$k=8ji@y^xu^((#bhvcgwtwz4!-m3h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['100.25.119.150']
+ALLOWED_HOSTS = ['100.25.119.150', 'localhost']
 
 # S3 configuration
 AWS_ACCESS_KEY_ID = 'ASIA3S4I34W6CV7D37VU'
