@@ -20,9 +20,10 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', views.test_1, name='tset'),
-    path('', views.homeview, name='homeview'),
+    path('annotation/', views.homeview, name='homeview'),
+    path('', views.s3, name='s3'),
     path('validation/', views.validation, name='validation'),
-    #path('',views.get_img_text),
+   # path('',views.get_img_text),
     #path(r'^$',views.homeview),
     #path(r'^form1/$',views.homeview),
     path('insert/', views.insert_view),

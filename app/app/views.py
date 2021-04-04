@@ -12,10 +12,25 @@ from os import path, listdir
 import logging
 import json
 import string
+import boto3
 
 def test_1(request):
     return render(request, '1.html')
 
+def s3():
+    s3 = boto3.client('s3')
+    #logging.getLogger(__name__).error(s3.list_objects(Bucket = 'segmentedimagesoutdir', Prefix='Images_Segmented_outputdir')['Contents'][0]['Key'])
+    s3_img_list = []
+    for dic in s3.list_objects(Bucket = 'segmentedimagesoutdir', Prefix='Images_Segmented_outputdir')['Contents']:
+        s3_img_list.append(dic['Key'])
+    s3_txt_list = []
+    for dic in s3.list_objects(Bucket = 'segmentedimagesoutdir', Prefix='Boundary Boxes')['Contents']:
+        s3_txt_list.append(dic['Key'])
+    return s3_img_list, s3_txt_list
+    #return render(request, 's3test.html', {
+    #        'img_list': s3_img_list,
+    #        'txt_list': s3_txt_list
+    #    })
 
 def some_view(request):
     # all_pic = []
@@ -63,11 +78,6 @@ def some_view(request):
     return render(request, 'name.html', {'form': form})
 
 
-
-
-
-
-
 def insert_view(request):
     for i in range(5):
         examples = Examples()
@@ -103,7 +113,9 @@ def cmp_txt(input_txt, db_txt_list):
 
 def homeview(request):
     # list all files name and path in image directory
-    all_pic = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
+    s3_img_list, s3_txt_list = s3()
+    all_pic = [i for i in s3_img_list]
+    #all_pic = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
     random_pic = []
     # all data in database
     remove_data = {}

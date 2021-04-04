@@ -1,3 +1,5 @@
 mongoengine
 django_static_jquery
 django_social_share
+django-storages
+boto3

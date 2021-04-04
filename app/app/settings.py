@@ -26,7 +26,17 @@ SECRET_KEY = 'qpc2th(bif&fgu3v4*gk$k=8ji@y^xu^((#bhvcgwtwz4!-m3h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['100.25.119.150', '172.31.51.53', 'localhost']
+ALLOWED_HOSTS = ['100.25.119.150']
+
+# S3 configuration
+AWS_ACCESS_KEY_ID = 'ASIA3S4I34W6CV7D37VU'
+AWS_SECRET_ACCESS_KEY = 'C3iAj6LgG2IDBOkmi4EyxX79eGO7BydtpZK12KMP'
+AWS_STORAGE_BUCKET_NAME = 'segmentedimagesoutdir'
+
+# storages configuration
+AWS_S3_FILE_OVERWRITE = True
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 # Application definition
@@ -41,6 +51,7 @@ INSTALLED_APPS = [
     'django_static_jquery',
     'django_social_share',
     'mongoengine',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -137,10 +148,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+#STATIC_URL = '/static/'
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, 'static')
+#]
+
+STATIC_URL = 'https://%s/' % ( 'segmentedimagesoutdir.s3.amazonaws.com' )
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
