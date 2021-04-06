@@ -3,111 +3,51 @@
 
 <html>
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <style type="text/css">
 .fa_custom {
 color: #0099CC
 }
 </style>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
-
-    <!-- prompt box -->
-    <link href="dist/attention.css" rel="stylesheet">
-    <script src="dist/attention.js"></script>
-
-       <!-- prompt box 2-->
-
-    <link href="dist/gModal.min.css" rel="stylesheet" />
-<script src="dist/gModal.min.js"></script>
-
 </head>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-    <form method="post" name="form2" action="">
-      {% csrf_token %}
-      <table class="table table-image">
-        <thead>
-          <tr class="row m-0">
-            <th class="d-inline-block col-5" scope="col">Image</th>
-            <th class="d-inline-block col-5" scope="col">Corresponding Text</th>
-            <th class="d-inline-block col-2"scope="col">Is it correct?</th>
-          </tr>
-        </thead>
-        <tbody>
-        <!-- First block -->
-          <tr class="row m-0">
-            <td class="d-inline-block col-5">
-              <p class="text-primary"></p> <img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
-            </td>
-            <td class="d-inline-block col-5"><p></p><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
-            <td class="d-inline-block col-2">
-              <br>
-                <!-- button of correct -->
-              <button type="button" class="btn btn-default btn-sm">
-                <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" data-width="50" data-height="50"></span>
-              </button>
-                <button onclick="promptDemo.show()" class="btn btn-default btn-sm">
-                    <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" data-width="50" data-height="50"></span>
-                </button>
-
-<script src="dist/gModal.min.js"></script>
-
-                <script>
-var promptDemo = new gModal({
-    title: "Let's know you better",
-    body: "<center><p>What is your name?</p><input type='text' id='name'></center>",
-    buttons: [{
-      content: "Continue",
-      classes: "gmodal-button-blue",
-      bindKey: 13, /* Enter */
-      callback: function(modal){
-        var name = document.getElementById("name").value;
-        name = name == "" ? "Mr. Unnamed" : name;
-        console.log("Welcome home "+ name);
-        modal.hide();
-      }
-    }],
-    close: {
-      closable: false,
-    },onHide: function(modal) { console.log('Hidden') },
-  });
-                </script>
-
-
-
-             <script>
-              function Promptbox6({
-              title: 'Nice prompt',
-              content: 'This is my content',
-              onSubmit: function(component, value) {
-              demo.innerHTML += `<h4>Prompt was submited by following value: ${value}</h4>`;
-              }
-              });
-              });
-             </script>
-
-
-
-
-                <!-- button of incorrect -->
-              <button onclick="Promptbox1()" class="btn btn-default btn-sm">
-                <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" data-width="50" data-height="50"></span>
-              </button>
-                <!-- Prompt box function -->
-                <script>
-                    var sentence1;
-                    function Promptbox1(){
-                        var person=prompt("Please enter the correct sentence","Type here");
-                        if (person!=null && person!=""){
-                            sentence1 = person;
-                        }
-                    }
-                </script>
+      <body>
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+                  <form method="post" name="form2" action="">
+                      {% csrf_token %}
+                      <table class="table table-image">
+                          <thead>
+                          <tr class="row m-0">
+                              <th class="d-inline-block col-5" scope="col">Image</th>
+                              <th class="d-inline-block col-5" scope="col">Corresponding Text</th>
+                              <th class="d-inline-block col-2"scope="col">Is it correct?</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <!-- First block -->
+                          <tr class="row m-0">
+                              <td class="d-inline-block col-5">
+                                  <p class="text-primary"></p> <img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
+                              </td>
+                              <td class="d-inline-block col-5"><p></p><textarea class="form-control" id="Textarea1" rows="5" disabled=true>Handwritten letters will never go out of style!</textarea></td>
+                              <td class="d-inline-block col-2">
+                                  <br>
+                                  <!-- button of correct -->
+                                  <button type="button" class="btn btn-default btn-sm" onclick="ChangeDisabled(6)">
+                                      <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
+                                  </button>
+                                  <!-- button of incorrect -->
+                                  <button type = "button" class="btn btn-default btn-sm" onclick="ChangeDisabled(1)">
+                                      <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
+                                  </button>
             </td>
           </tr>
         <!-- Second block -->
@@ -115,27 +55,18 @@ var promptDemo = new gModal({
             <td class="d-inline-block col-5">
               <p class="text-primary"><img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
             </td>
-            <td class="d-inline-block col-5"><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
+            <td class="d-inline-block col-5"><textarea class="form-control" id="Textarea2" rows="5" disabled=true>Handwritten letters will never go out of style!</textarea></td>
             <td class="d-inline-block col-2">
               <br>
                 <!-- button of correct -->
-                <button type="button" class="btn btn-default btn-sm">
-                  <span class="iconify icon:bi-hand-thumbs-up icon-inline:false icon-width:60 icon-height:60"></span>
+               <button type="button" class="btn btn-default btn-sm" onclick="ChangeDisabled(7)">
+                  <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
               </button>
                 <!-- button of incorrect -->
-                <button onclick="Promptbox2()" class="btn btn-default btn-sm">
-                  <span class="iconify icon:bi-hand-thumbs-down icon-inline:false icon-width:60 icon-height:60"></span>
+                <button type = "button" class="btn btn-default btn-sm" onclick="ChangeDisabled(2)">
+                  <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
                 </button>
-                <!-- prompt box function -->
-                <script>
-                    var sentence2;
-                    function Promptbox2(){
-                        var person=prompt("Please enter the correct sentence","Type here");
-                        if (person!=null && person!=""){
-                            sentence2 = person;
-                        }
-                    }
-                </script>
+
             </td>
           </tr>
 
@@ -144,27 +75,18 @@ var promptDemo = new gModal({
             <td class="d-inline-block col-5">
               <p class="text-primary"><img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
             </td>
-            <td class="d-inline-block col-5"><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
+            <td class="d-inline-block col-5"><textarea disabled class="form-control" id="Textarea3" rows="5" >Handwritten letters will never go out of style!</textarea></td>
             <td class="d-inline-block col-2">
               <p></p>
-                <!-- button of correct -->
-            <button type="button" class="btn btn-default btn-sm">
-                <span class="fa fa-thumbs-up fa-3x"></span>
-            </button>
-                <!-- button of incorrect -->
-              <button onclick="Promptbox3()" class="btn btn-default btn-sm">
-                <span class="fa fa-thumbs-down fa-3x"></span>
+            <!-- button of correct -->
+               <button type="button" class="btn btn-default btn-sm" onclick="ChangeDisabled(8)">
+                  <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
               </button>
-                <!-- prompt box function -->
-                <script>
-                    var sentence3;
-                    function Promptbox3(){
-                        var person=prompt("Please enter the correct sentence","Type here");
-                        if (person!=null && person!=""){
-                            sentence3 = person;
-                        }
-                    }
-                </script>
+                <!-- button of incorrect -->
+                <button type = "button" class="btn btn-default btn-sm" onclick="ChangeDisabled(3)">
+                  <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
+                </button>
+
             </td>
           </tr>
         <!-- fourth block -->
@@ -172,27 +94,17 @@ var promptDemo = new gModal({
             <td class="d-inline-block col-5">
               <p class="text-primary"><img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
             </td>
-            <td class="d-inline-block col-5"><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
+            <td class="d-inline-block col-5"><textarea disabled class="form-control" id="Textarea4" rows="5" >Handwritten letters will never go out of style!</textarea></td>
             <td class="d-inline-block col-2">
               <br><p></p>
                 <!-- button of correct -->
-              <button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-thumbs-up"></span> Correct
+               <button type="button" class="btn btn-default btn-sm" onclick="ChangeDisabled(9)">
+                  <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
               </button>
                 <!-- button of incorrect -->
-              <button onclick="Promptbox4()" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-thumbs-down"></span> Incorrect
-              </button>
-                <!-- prompt box function -->
-                <script>
-                    var sentence4;
-                    function Promptbox4(){
-                        var person=prompt("Please enter the correct sentence","Type here");
-                        if (person!=null && person!=""){
-                            sentence4 = person;
-                        }
-                    }
-                </script>
+                <button type = "button" class="btn btn-default btn-sm" onclick="ChangeDisabled(4)">
+                  <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
+                </button>
             </td>
           </tr>
 
@@ -202,76 +114,57 @@ var promptDemo = new gModal({
             <td class="d-inline-block col-5">
               <p class="text-primary"><img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
             </td>
-            <td class="d-inline-block col-4"><textarea disabled class="form-control" id="exampleFormControlTextarea1" rows="5" >Handwritten letters will never go out of style!</textarea></td>
-            <td class="d-inline-block col-3">
+            <td class="d-inline-block col-5"><textarea disabled class="form-control" id="Textarea5" rows="5" >Handwritten letters will never go out of style!</textarea></td>
+            <td class="d-inline-block col-2">
               <br>
                 <!-- button of correct -->
-                <button type="button" class="btn btn-info btn-lg">
-                  <span class="glyphicon glyphicon-thumbs-up"></span> Correct
-                </button>
+                 <button type="button" class="btn btn-default btn-sm" onclick="ChangeDisabled(10)">
+                  <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
+              </button>
                 <!-- button of incorrect -->
-                <button onclick="Promptbox5()" class="btn btn-info btn-lg">
-                  <span class="glyphicon glyphicon-thumbs-up"></span> Incorrect
+                <button type = "button" class="btn btn-default btn-sm" onclick="ChangeDisabled(5)">
+                  <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
                 </button>
             </td>
           </tr>
         </tbody>
       </table>
-      <div class="button-center">
-      <input style="position: absolute; left: 50%;"class="btn btn-primary" type="submit" value="Submit" name="submitButton" id="button1">
-      </div>
     </form>
       </div>
     </div>
   </div>
+</body>
 
 
+<script>  //https://www.wibibi.com/info.php?tid=184
+function ChangeDisabled(value){
+　if(value==1){
+    document.getElementById('Textarea1').disabled=false;　
+　}else if(value==2){
+    document.getElementById('Textarea2').disabled=false;
+　}else if(value==3){
+    document.getElementById('Textarea3').disabled=false;
+ }else if(value==4){
+    document.getElementById('Textarea4').disabled=false;
+ }else if(value==5){
+    document.getElementById('Textarea5').disabled=false;
+ }else if(value==6){
+    document.getElementById('Textarea1').disabled=true;
+ }else if(value==7){
+    document.getElementById('Textarea2').disabled=true;
+ }else if(value==8){
+    document.getElementById('Textarea3').disabled=true;
+ }else if(value==9){
+    document.getElementById('Textarea4').disabled=true;
+ }else if(value==10){
+     document.getElementById('Textarea5').disabled=true;
+ }
+}
+</script>
 
 
-
-
-
-
-<script>
-
-
-
-
-
-
-
-
-
-
-                    var sentence5;
-                    function Promptbox5(){
-                        var person=prompt("Please enter the correct sentence","Type here");
-                        if (person!=null && person!=""){
-                            sentence5 = person;
-                        }
-                    }
-                </script>
 
   {% endblock %}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script>

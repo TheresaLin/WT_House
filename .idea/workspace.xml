@@ -20,7 +20,52 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0bf2fadf-b092-4b46-8cbb-aad16f638fac" name="Default Changelist" comment="Finished the click function">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/rSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000u-05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000u-06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000x-00.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000x-01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000x-02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000x-03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000x-04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000x-05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/base_2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/base_3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/base_yzy.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/check_data.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/index_Roy.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/name.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/s3test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app/modules.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/modules.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-00_1016690307327076.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-00_84536874023525.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-01_1050915816829569.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-01_1124260813393445.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-02_272415308365853.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-02_570710900495979.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-03_556974767247894.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-03_583578801475890.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-04_146198500853974.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-04_648238562216531.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-04_965803313977184.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000u-05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000u-06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000x-00.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000x-01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000x-02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000x-03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000x-04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000x-05.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/validation.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/validation.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,13 +89,15 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mongo" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="database.main" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -63,7 +110,17 @@
       <option name="presentableId" value="Default" />
       <updated>1615225515418</updated>
       <workItem from="1615225519043" duration="20222000" />
-      <workItem from="1616022511963" duration="10099000" />
+      <workItem from="1616022511963" duration="11199000" />
+      <workItem from="1616603589219" duration="5000" />
+      <workItem from="1616603851569" duration="1054000" />
+      <workItem from="1616621794988" duration="78000" />
+      <workItem from="1617651116344" duration="97000" />
+      <workItem from="1617651225880" duration="178000" />
+      <workItem from="1617664713495" duration="462000" />
+      <workItem from="1617665189212" duration="1418000" />
+      <workItem from="1617672228673" duration="2124000" />
+      <workItem from="1617675081670" duration="250000" />
+      <workItem from="1617675416901" duration="16000" />
     </task>
     <task id="LOCAL-00001" summary="Finished the click function">
       <created>1616189637178</created>
@@ -79,7 +136,21 @@
       <option name="project" value="LOCAL" />
       <updated>1616191165555</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Finished the click function">
+      <created>1616602221326</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1616602221328</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Finished the click function">
+      <created>1616602232464</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1616602232464</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,17 +183,58 @@
     <option name="LAST_COMMIT_MESSAGE" value="Finished the click function" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="454" y="291" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617673097669">
+      <screen x="0" y="25" width="1920" height="1175" />
+    </state>
+    <state x="454" y="291" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1920.1175/-1792.105.1792.1095@0.25.1920.1175" timestamp="1617673097669" />
+    <state width="254" height="195" key="DatabaseViewActions_Filter" timestamp="1617672359394">
+      <screen x="0" y="25" width="1920" height="1175" />
+    </state>
+    <state width="254" height="195" key="DatabaseViewActions_Filter/0.25.1920.1175/-1792.105.1792.1095@0.25.1920.1175" timestamp="1617672359394" />
+    <state width="1294" height="327" key="GridCell.Tab.0.bottom" timestamp="1617675330409">
+      <screen x="0" y="25" width="1920" height="1175" />
+    </state>
+    <state width="1294" height="327" key="GridCell.Tab.0.bottom/0.25.1920.1175/-1792.105.1792.1095@0.25.1920.1175" timestamp="1617675330409" />
+    <state width="1294" height="327" key="GridCell.Tab.0.center" timestamp="1617675330408">
+      <screen x="0" y="25" width="1920" height="1175" />
+    </state>
+    <state width="1294" height="327" key="GridCell.Tab.0.center/0.25.1920.1175/-1792.105.1792.1095@0.25.1920.1175" timestamp="1617675330408" />
+    <state width="1294" height="327" key="GridCell.Tab.0.left" timestamp="1617675330408">
+      <screen x="0" y="25" width="1920" height="1175" />
+    </state>
+    <state width="1294" height="327" key="GridCell.Tab.0.left/0.25.1920.1175/-1792.105.1792.1095@0.25.1920.1175" timestamp="1617675330408" />
+    <state width="1294" height="327" key="GridCell.Tab.0.right" timestamp="1617675330409">
+      <screen x="0" y="25" width="1920" height="1175" />
+    </state>
+    <state width="1294" height="327" key="GridCell.Tab.0.right/0.25.1920.1175/-1792.105.1792.1095@0.25.1920.1175" timestamp="1617675330409" />
+    <state width="237" height="457" key="HiddenNamespacesPopup" timestamp="1617672388195">
+      <screen x="0" y="25" width="1920" height="1175" />
+    </state>
+    <state width="237" height="457" key="HiddenNamespacesPopup/0.25.1920.1175/-1792.105.1792.1095@0.25.1920.1175" timestamp="1617672388195" />
     <state x="556" y="199" key="RollbackChangesDialog" timestamp="1615589348037">
       <screen x="0" y="25" width="1536" height="935" />
     </state>
     <state x="556" y="199" key="RollbackChangesDialog/0.25.1536.935@0.25.1536.935" timestamp="1615589348037" />
-    <state x="277" y="128" key="SettingsEditor" timestamp="1615230828378">
-      <screen x="0" y="25" width="1536" height="935" />
+    <state x="346" y="154" key="SettingsEditor" timestamp="1617674889867">
+      <screen x="0" y="25" width="1920" height="1175" />
     </state>
     <state x="277" y="128" key="SettingsEditor/0.25.1536.935@0.25.1536.935" timestamp="1615230828378" />
+    <state x="346" y="154" key="SettingsEditor/0.25.1920.1175/-1792.105.1792.1095@0.25.1920.1175" timestamp="1617674889867" />
     <state x="560" y="349" key="Vcs.Push.Dialog.v2" timestamp="1616189666238">
       <screen x="0" y="25" width="1920" height="1175" />
     </state>
     <state x="560" y="349" key="Vcs.Push.Dialog.v2/0.25.1920.1175/-1792.105.1792.1095@0.25.1920.1175" timestamp="1616189666238" />
+    <state x="897" y="559" key="com.intellij.database.run.ParametersPanel.Standalone" timestamp="1617674887514">
+      <screen x="0" y="25" width="1920" height="1175" />
+    </state>
+    <state x="897" y="559" key="com.intellij.database.run.ParametersPanel.Standalone/0.25.1920.1175/-1792.105.1792.1095@0.25.1920.1175" timestamp="1617674887514" />
+    <state x="528" y="321" key="com.intellij.execution.console.ConsoleHistoryController$MyBrowseAction$1" timestamp="1617674901129">
+      <screen x="0" y="25" width="1920" height="1175" />
+    </state>
+    <state x="528" y="321" key="com.intellij.execution.console.ConsoleHistoryController$MyBrowseAction$1/0.25.1920.1175/-1792.105.1792.1095@0.25.1920.1175" timestamp="1617674901129" />
+    <state x="786" y="550" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617665151070">
+      <screen x="0" y="25" width="1920" height="1175" />
+    </state>
+    <state x="786" y="550" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1920.1175/-1792.105.1792.1095@0.25.1920.1175" timestamp="1617665151070" />
   </component>
 </project>

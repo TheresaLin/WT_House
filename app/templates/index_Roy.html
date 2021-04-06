@@ -1,0 +1,95 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        const sliced_list = [];
+
+        function bind(page) {
+            $(`#tr${page} :input`).keypress(function (event) {
+                if (event.keyCode == 13) {
+
+                    if ($(`#tr${page} :input`).val() != "") {
+                        const current_page = Number(sessionStorage.getItem("currentPage"));
+
+                        if (Number(current_page) < sliced_list.length - 1) {
+                            const current_tr_inputs = $(`#tr${current_page} :input`);
+
+                            current_tr_inputs.each(function () {
+                                console.log($(this).val());
+                                $(this).val();
+                            });
+
+                            // 詳情請閱公開說明書: https://developer.mozilla.org/zh-TW/docs/Web/API/Fetch_API/Using_Fetch
+                            // fetch("表單網址", {
+                            //     body: JSON.stringify({
+                            //         // TODO: 參數
+                            //         "subject_subscription_ids": [328]
+                            //     }),
+                            //     method: "POST"
+                            // }).then(res => res.json())
+                            //     .catch(error => console.error('Error:', error))
+                            //     .then(response => {
+                            //         sessionStorage.setItem("currentPage", String(current_page + 1));
+                            //         next(sliced_list);
+                            //         console.log('Success:', response);
+                            //     });
+
+                            sessionStorage.setItem("currentPage", String(current_page + 1));
+                            next(sliced_list);
+                        } else {
+                            alert("完成");
+                        }
+                    } else {
+                        alert("輸入框如青春別留白！");
+                    }
+                }
+            });
+        }
+
+        function next(sliced_list) {
+            const current_page = Number(sessionStorage.getItem("currentPage"));
+            const paged_list = sliced_list[current_page];
+
+            $("#table").append(`<div id="tr${current_page}"></div>`);
+
+            for (let i = 0; i < paged_list.length; i++) {
+                $(`#tr${current_page}`).append(`<p><input type="text" id="text_${paged_list[i]}" value="${paged_list[i]}"></p>`);
+            }
+
+            bind(current_page);
+        }
+
+        $(document).ready(function () {
+            sessionStorage.setItem("currentPage", String(0));
+
+            const string_all_pic = "['a01-072u-06.png', 'a03-050-06.png', 'a03-027-03.png', 'a01-068u-08.png', 'a01-003u-02.png', 'a01-053-01.png', 'a01-030x-00.png', 'a02-067-09.png', 'a02-017-01.png', 'a01-014x-05.png', 'a02-111-02.png', 'a03-043-01.png', 'a01-020-03.png', 'a01-007x-06.png', 'a03-020-02.png', 'a01-011u-04.png', 'a01-063u-08.png', 'a02-106-06.png', 'a02-046-03.png', 'a01-014-06.png', 'a01-132-01.png', 'a01-132x-01.png', 'a01-000u-04.png', 'a01-077u-06.png', 'a01-072u-05.png', 'a01-038x-08.png', 'a01-053u-01.png', 'a01-128u-01.png', 'a01-026x-06.png', 'a01-007u-02.png', 'a01-087-05.png', 'a02-046-02.png', 'a02-017-05.png', 'a02-120-08.png', 'a03-014-09.png', 'a01-128u-05.png', 'a02-042-02.png', 'a01-068u-00.png', 'a01-132-00.png', 'a01-077u-02.png', 'a01-072u-04.png', 'a01-082u-03.png', 'a02-024-01.png', 'a01-000x-05.png', 'a01-003-08.png', 'a03-034-07.png', 'a01-063x-06.png', 'a02-072-06.png', 'a02-093-08.png', 'a02-032-01.png', 'a01-077-05.png', 'a03-047-09.png', 'a01-007-00.png', 'a01-128-02.png', 'a01-068u-07.png', 'a02-004-06.png', 'a01-063-10.png', 'a01-014u-06.png', 'a03-047-08.png', 'a01-003u-06.png', 'a01-014x-03.png', 'a01-128-08.png', 'a01-063-07.png', 'a01-132-11.png', 'a01-049x-10.png', 'a03-011-05.png', 'a02-116-05.png', 'a01-003-04.png', 'a01-007x-03.png', 'a03-006-08.png', 'a01-122u-00.png', 'a01-038-09.png', 'a02-124-01.png', 'a01-049-09.png', 'a01-014u-00.png', 'a01-049x-03.png', 'a01-011x-01.png', 'a01-087u-01.png', 'a01-132-04.png', 'a01-030u-00.png', 'a03-027-02.png', 'a01-049-01.png', 'a01-003x-00.png', 'a01-117u-06.png', 'a01-113u-03.png', 'a01-087u-04.png', 'a01-049u-03.png', 'a01-128-07.png', 'a01-000u-02.png', 'a01-007-01.png', 'a01-003u-07.png', 'a02-124-04.png', 'a01-128u-06.png', 'a01-132u-02.png', 'a01-014u-08.png', 'a02-050-03.png', 'a02-116-06.png', 'a02-027-00.png', 'a03-006-00.png', 'a01-007x-05.png']";
+            const formatted_arr = [];
+            string_all_pic.substring(1, string_all_pic.length - 1).split(", ").forEach((item) => {
+                formatted_arr.push(item.substring(1, item.length - 1));
+            });
+
+            const size = 5
+            for (let i = 0; i < formatted_arr.length; i += size) {
+                sliced_list.push(formatted_arr.slice(i, i + size));
+            }
+
+            const first_sliced_list = sliced_list[0];
+
+
+            $("#table").append('<div id="tr0"></div>');
+
+            for (let i = 0; i < first_sliced_list.length; i++) {
+                $("#tr0").append(`<p><input type="text" id="text_${first_sliced_list[i]}" value="${first_sliced_list[i]}"></p>`);
+            }
+
+            bind(0);
+        });
+    </script>
+</head>
+
+<body>
+    <div id="table"></div>
+</body>
+
+</html>
