@@ -56,7 +56,7 @@ MONGODB_DATABASES = {
         "tz_aware": True,
     },
 }
-
+```
 # Switch into shell for mongodb and create database
 
 ## Install MongoDB on your machine

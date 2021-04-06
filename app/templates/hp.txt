@@ -1,0 +1,39 @@
+User-agent: *\n 
+Disallow: / 
+
+User-agent: Googlebot 
+Disallow: 
+
+User-agent: bingbot 
+Disallow: /not-for-bing/ 
+
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+
+// record my system ignore here
+/vendor/
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
+
+# Laravel 5 & Lumen specific
+public/storage
+public/hot
+
+# Laravel 5 & Lumen specific with changed public path
+public_html/storage
+public_html/hot
+
+fuck_torage/*.key
+you_.env
+ass_Homestead.yaml
+hole_Homestead.json
+
+/.vagrant
+.phpunit.result.cache
+
+[05/Apr/2021 19:01:27] "GET /?s=/Index/\think\app/invokefunction&function=call_user_func_array&vars[0]=md5&vars[1][]=__HelloThinkPHP HTTP/1.1" 404 2851
