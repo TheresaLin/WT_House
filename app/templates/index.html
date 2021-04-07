@@ -1,12 +1,21 @@
 {% extends "base.html" %}
   {% block content %}
 
-
+<div class="container">
+	<div class = "row">
+		<div class="col-5"></div>
+		<div class="col-6"></div>
+		<div class="col-1">
+			<button type="button" class="btn btn-primary float-right">
+				Visitors <span class="badge bg-secondary">{{ visitors }}</span>
+		</div>
+	</div>
+</button>
+</div>
 
   <div class="container">
     <div class="row">
       <div class="col-12">
-    
     <form method="post" name="form2" action="views.py">
       {% csrf_token %}
       <table class="table table-image" id="table">

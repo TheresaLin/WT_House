@@ -106,10 +106,6 @@ def homeview(request):
     s3_img_list = []
     for dic in s3.list_objects(Bucket = 'segmentedimagesoutdir', Prefix='Images_Segmented_outputdir')['Contents']:
         s3_img_list.append(dic['Key'])
-    # get txt list from s3 bucket
-    s3_txt_list = []
-    for dic in s3.list_objects(Bucket = 'segmentedimagesoutdir', Prefix='Boundary Boxes')['Contents']:
-        s3_txt_list.append(dic['Key'])
     all_pic = [i for i in s3_img_list]
     #all_pic = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
     random_pic = []
@@ -131,8 +127,22 @@ def homeview(request):
     num_pic = len(all_pic)
     random_pic += random.sample(all_pic, num_pic)
 
-    if request.method == 'POST' :
+    # get client ip first
+    cip = get_client_ip(request)
+    cur_saved_ip = []
+    
+    with open(str(django_settings.BASE_DIR) + '/static/clientip.txt', 'r') as lip:
+        cur_saved_ip = lip.read().split(',')
+    cur_saved_ip.pop()
+    visitors = len(cur_saved_ip)
+    if cip not in cur_saved_ip:
+        f = open(str(django_settings.BASE_DIR) + '/static/clientip.txt', 'a+')
+        f.write(cip + ',')
+        visitors = visitors + 1
+    
 
+    if request.method == 'POST' :
+        logging.getLogger(__name__).error('Here is post')
         json_data = json.loads(request.body)
         # logging.getLogger(__name__).error('test' + str(len(json_data['pictures'])))
 
@@ -233,7 +243,7 @@ def homeview(request):
                 # 'img3': "/static/image/"+random_pic[2],
                 # 'img4': "/static/image/"+random_pic[3],
                 # 'img5': "/static/image/"+random_pic[4],
-
+                'visitors': visitors
             }
         )
 
@@ -248,7 +258,8 @@ def homeview(request):
                 # 'img3': "/static/image/"+random_pic[2],
                 # 'img4': "/static/image/"+random_pic[3],
                 # 'img5': "/static/image/"+random_pic[4],
-                'all_pic': random_pic
+                'all_pic': random_pic,
+                'visitors': visitors
             }
         )
 
@@ -269,3 +280,10 @@ def check_data(request):
         'annotated' : result
     })
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip

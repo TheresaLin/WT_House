@@ -75,7 +75,22 @@ Then we would store data in collection of `annotation` with following command:
 ```
 db.createCollection('annotation')
 ```
-Now everything in database is ready. Run server up and enjoy it in next section.
+Now everything in database is ready. Run server up and enjoy it in next section.  
+
+## Some other useful commands
+Learning following commands would help you get information from mongo shell.  
+To show the collections:  
+```
+show collections
+```
+To see all the data
+```
+db.<collection-name>.find()
+```
+To remove the data from collection
+```
+db.<collection-name>.remove({})
+```
 
 ## Run up the server
 ```

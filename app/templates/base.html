@@ -102,7 +102,8 @@
           .catch(error => console.error('Error:', error))
           .then(response => {
             sessionStorage.setItem("currentPage", String(current_page + 1));
-            next(sliced_list);
+	    console.log('why');
+	    next(sliced_list);
             console.log('Success:', response);
           });
 
@@ -200,6 +201,7 @@
     }
     //console.log("count:",count);
     if (count == remainder) {
+      console.log('go')
       go();
 
     }
