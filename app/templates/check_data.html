@@ -1,11 +1,18 @@
 <html>
 	<body>
+		<table>
+			<tr>
+				<th>Image Path</th>
+				<th>Text</th>
+				<th>Image Status</th>
+			</tr>
 		{% for i in annotated %}
-    			<div>
-    				<a>{{ i.img_path }}</a>
-				<a>{{ i.text }}</a>
-    				<a>{{ i.status }}</a>
-    			</div>
+    		<tr>	
+    			<td>{{ i.img_path }}</td>
+				<td>{{ i.text }}</td>
+    			<td>{{ i.status }}</td>
+    		</tr>	
 		{% endfor %}
+		</table>
 	</body>
 </html>
