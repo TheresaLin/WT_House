@@ -19,53 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0bf2fadf-b092-4b46-8cbb-aad16f638fac" name="Default Changelist" comment="Finished the click function">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/rSettings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000u-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000u-06.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000x-00.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000x-01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000x-02.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000x-03.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000x-04.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/static/image/a01-000x-05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/base_2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/base_3.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/base_yzy.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/check_data.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/index_Roy.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/name.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/s3test.html" afterDir="false" />
+    <list default="true" id="0bf2fadf-b092-4b46-8cbb-aad16f638fac" name="Default Changelist" comment="Fix the pop up window problem">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app/modules.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/modules.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-00_1016690307327076.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-00_84536874023525.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-01_1050915816829569.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-01_1124260813393445.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-02_272415308365853.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-02_570710900495979.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-03_556974767247894.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-03_583578801475890.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-04_146198500853974.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-04_648238562216531.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/annotation/a01-000u-04_965803313977184.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000u-05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000u-06.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000x-00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000x-01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000x-02.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000x-03.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000x-04.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/other_image/a01-000x-05.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/validation.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/validation.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -121,6 +77,9 @@
       <workItem from="1617672228673" duration="2124000" />
       <workItem from="1617675081670" duration="250000" />
       <workItem from="1617675416901" duration="16000" />
+      <workItem from="1617675434760" duration="774000" />
+      <workItem from="1617677183284" duration="8694000" />
+      <workItem from="1617918487621" duration="9637000" />
     </task>
     <task id="LOCAL-00001" summary="Finished the click function">
       <created>1616189637178</created>
@@ -180,7 +139,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Finished the click function" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished the click function" />
+    <MESSAGE value="Fix the pop up window problem" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix the pop up window problem" />
   </component>
   <component name="WindowStateProjectService">
     <state x="454" y="291" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617673097669">

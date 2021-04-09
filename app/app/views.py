@@ -175,4 +175,17 @@ def homeview(request):
 
 
 def validation(request):
-    return render(request, 'validation.html')
+    new_list = []
+    onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/') if
+                 isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
+    new_list += random.sample(onlyfiles, 13)
+    return render(request, 'validation.html',
+                  {
+                      # 'img1': "/static/image/"+new_list[0],
+                      # 'img2': "/static/image/"+new_list[1],
+                      # 'img3': "/static/image/"+new_list[2],
+                      # 'img4': "/static/image/"+new_list[3],
+                      # 'img5': "/static/image/"+new_list[4],
+                      'all_pic': new_list
+                  }
+                  )

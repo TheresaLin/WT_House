@@ -4,12 +4,20 @@
 <html>
 <head>
 
+    <style type="text/css">
+.customize-radio label > input[type = 'radio'] {
+    visibility: hidden;
+    position: absolute;
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<style type="text/css">
-.fa_custom {
-color: #0099CC
+    .customize-radio label > input[type = 'radio']:checked ~ span.haha-img{
+     background-image: url('haha.png');
 }
+.customize-radio label > input[type = 'radio']:checked ~ span.kiss-img{
+    background-image: url('kiss.png');
+}
+
+}
+
 </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -31,7 +39,8 @@ color: #0099CC
                               <th class="d-inline-block col-2"scope="col">Is it correct?</th>
                           </tr>
                           </thead>
-                          <tbody>
+                          <tbody> //id = "val_first">
+
                           <!-- First block -->
                           <tr class="row m-0">
                               <td class="d-inline-block col-5">
@@ -40,14 +49,38 @@ color: #0099CC
                               <td class="d-inline-block col-5"><p></p><textarea class="form-control" id="Textarea1" rows="5" disabled=true>Handwritten letters will never go out of style!</textarea></td>
                               <td class="d-inline-block col-2">
                                   <br>
+                                  <label class = "val1">
                                   <!-- button of correct -->
-                                  <button type="button" class="btn btn-default btn-sm" onclick="ChangeDisabled(6)">
+                                      <input type = "radio" id = "rad1"  name ="rad1" value="correct" checked onclick="Change(2)">
+                                  <button type="button" class="btn btn-default btn-sm" onclick="Change(2)">
                                       <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
                                   </button>
+                                  </label>
                                   <!-- button of incorrect -->
-                                  <button type = "button" class="btn btn-default btn-sm" onclick="ChangeDisabled(1)">
+                                  <label class = "val1">
+                                      <input type = "radio" id = "rad2" name ="rad1" value="Incorrect" onclick="Change(1)">
+                                  <button type = "button" class="btn btn-default btn-sm" onclick="Change(1)">
                                       <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
                                   </button>
+                                  </label>
+
+                                  <!-- button of incorrect -->
+
+    <div class="customize-radio">
+    <label>
+        <input type = "radio" name = "validation1" id ="correct1" value = "true" onclick="Change(2)">
+        <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
+    </label>
+    <label>
+        <input type = "radio" name = "validation1" id ="correct2" value = "False" onclick="Change(1)">
+        <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
+    </label>
+</div>
+
+
+
+
+
             </td>
           </tr>
         <!-- Second block -->
@@ -59,7 +92,7 @@ color: #0099CC
             <td class="d-inline-block col-2">
               <br>
                 <!-- button of correct -->
-               <button type="button" class="btn btn-default btn-sm" onclick="ChangeDisabled(7)">
+               <button type="button" class="btn btn-default btn-sm" onclick="displayResult()">
                   <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
               </button>
                 <!-- button of incorrect -->
@@ -94,7 +127,7 @@ color: #0099CC
             <td class="d-inline-block col-5">
               <p class="text-primary"><img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
             </td>
-            <td class="d-inline-block col-5"><textarea disabled class="form-control" id="Textarea4" rows="5" >Handwritten letters will never go out of style!</textarea></td>
+            <td class="d-inline-block col-5"><textarea disabled class="form-control" id="Textarea4"  rows="5" >Handwritten letters will never go out of style!</textarea></td>
             <td class="d-inline-block col-2">
               <br><p></p>
                 <!-- button of correct -->
@@ -134,33 +167,262 @@ color: #0099CC
     </div>
   </div>
 </body>
+      <input type="hidden" id ="all_pic" name="all_pic" value="{{ all_pic }}">
+
+
+<script>
+// how to get the value of Radio(multiple selection) https://www.runoob.com/try/try.php?filename=tryjsref_radio_value
+function displayResult(){
+	var radios = document.getElementsByName('validation1');
+	for (var i = 0, length = radios.length; i < length; i++) {
+		if (radios[i].checked) {
+			// 弹出选中值
+			alert(radios[i].value);
+			// 选中后退出循环
+			break;
+		}
+	}
+}
+
+function Change(value){
+　if(value==1){
+    document.getElementById('Textarea1').disabled=false;　
+　}else{
+    document.getElementById('Textarea1').disabled=true;　
+ }
+}
+</script>
 
 
 <script>  //https://www.wibibi.com/info.php?tid=184
 function ChangeDisabled(value){
 　if(value==1){
-    document.getElementById('Textarea1').disabled=false;　
-　}else if(value==2){
-    document.getElementById('Textarea2').disabled=false;
-　}else if(value==3){
-    document.getElementById('Textarea3').disabled=false;
- }else if(value==4){
-    document.getElementById('Textarea4').disabled=false;
- }else if(value==5){
-    document.getElementById('Textarea5').disabled=false;
- }else if(value==6){
-    document.getElementById('Textarea1').disabled=true;
- }else if(value==7){
-    document.getElementById('Textarea2').disabled=true;
- }else if(value==8){
-    document.getElementById('Textarea3').disabled=true;
- }else if(value==9){
-    document.getElementById('Textarea4').disabled=true;
- }else if(value==10){
-     document.getElementById('Textarea5').disabled=true;
+    document.getElementById('val_text`+ parseInt + i + `').disabled=false;　
+　}else{
+    document.getElementById('val_text`+ parseInt + i + `').disabled=true;　
  }
 }
+
+ {#$("#val_first").append(` <tr class="row m-0">#}
+ {#                            <td class="d-inline-block col-5">#}
+ {#                                  <img src='{% static 'sample_image/pic1.jpg' %}' class="img-fluid img-thumbnail" alt="Sheep">#}
+	{#					            <input type="hidden" name="val_pic" id="val_pic" ></td>#}
+	{#				          <td class="d-inline-block col-5"><textarea class='form-control' id='val_text' name='val_text' rows="3" disabled=true required>Handwritten letters will never go out of style!</textarea></td>#}
+ {#                            <td class="d-inline-block col-2">#}
+ {#                            <br>#}
+ {#                                  <button type="button" class="btn btn-default btn-sm" name = "val_thumb_up" onclick="ChangeDisabled(6)">#}
+ {#                                    <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>#}
+ {#                                  </button>#}
+ {#                                  <button type = "button" class="btn btn-default btn-sm" name = "val_thumb_down" onclick="ChangeDisabled(1)">#}
+ {#                                    <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>#}
+ {#                                  </button>#}
+	{#			            </tr>`#}
+ {#    );#}
+
+
+
+const sliced_list = [];
+var flag = false;
+var k = 0;
+var remainder = 5;
+var finalFlag = false;
+
+function bind(page) {
+
+    if (flag) {
+      const current_page = Number(sessionStorage.getItem("currentPage"));
+//
+      if (Number(current_page) < sliced_list.length - 1 || remainder != 5) {
+        const pictures = []
+
+        if (remainder!= 5){
+          finalFlag = False;
+        }
+        //data = {};
+
+        for(i = 0; i < sliced_list[current_page].length; i++) {
+           pictures.push({
+             "pic": $(`#pic${k-remainder+i}`).val(),
+             "text": $(`#text${k-remainder+i}`).val()
+
+           });
+
+
+        }
+        const request = {pictures: pictures};
+
+        //console.log("pictures:",pictures);
+
+
+        {#fetch('', {#}
+        {#  headers :{#}
+        {#  "X-CSRFToken":document.cookie.split(';')[0].substring(10)},#}
+        {#  credentials: 'same-origin',#}
+        {#  body: JSON.stringify(request),#}
+        {#  method: "POST"}).then(res => res.json())#}
+        {#  .catch(error => console.error('Error:', error))#}
+        {#  .then(response => {#}
+        {#    sessionStorage.setItem("currentPage", String(current_page + 1));#}
+        {#    next(sliced_list);#}
+        {#    console.log('Success:', response);#}
+        {#  });#}
+
+        sessionStorage.setItem("currentPage", String(current_page + 1));
+
+        //onload();
+        {#next(sliced_list);#}
+      } else {
+
+        alert("All pictures are annotated!");
+      }
+    }
+    //onload();
+    //$(function(){ window.location.hash = "#text"+parseInt(k-5); })
+  }
+  function next(sliced_list) {
+
+    const current_page = Number(sessionStorage.getItem("currentPage"));
+    const paged_list = sliced_list[current_page];
+
+    for (let i = 0; i < paged_list.length; i++) {
+
+      $("#next" + parseInt(k - 1)).attr("style", "display:none;");
+      $("#val_first").append(` <tr class="row m-0">
+                              <td class="d-inline-block col-5">
+                                    <img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
+						            <input type="hidden" name="val_pic`+ parseInt(k + i) + `" id="val_pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}"></td>
+					          <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="3" value='{{ csrf_token }}' disabled=true required></textarea></td>
+                              <td class="d-inline-block col-2">
+                              <br>
+                                  <label class = "val1">
+                                  <input type = "radio" name ="rad1" value="correct" checked onclick="ChangeDisabled(6)">
+                                    <button type="button" class="btn btn-default btn-sm" id = "val_thumb_up`+ parseInt(k + i) `" name = "val_thumb_up`+ parseInt(k + i) +`" value = "thumb_up" onclick="ChangeDisabled(1)">
+                                      <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
+                                    </button>
+                                    </label>
+                                    <label class = "val1">
+                                    <input type = "radio" name ="rad1" value="incorrect" onclick="ChangeDisabled(1)">
+                                    <button type = "button" class="btn btn-default btn-sm" id = "val_thumb_down`+ parseInt(k + i) + `" name = "val_thumb_down`+ parseInt(k + i) + `" value = "thumb_down" onclick="ChangeDisabled(2)">
+                                      <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
+                                    </button>
+                                    </label>
+                                    <div class="customize-radio">
+                                    <label>
+                                    <input type = "radio" name = "validation1`+ parseInt(k + i) + `" id ="correct1 `+ parseInt(k + i) + `" value = "true" onclick="ChangeDisabled(1)">
+                                    <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
+                                    </label>
+                                    <label>
+                                    <input type = "radio" name = "validation1`+ parseInt(k + i) + `" id ="incorrect1`+ parseInt(k + i) + `" value = "False" onclick="ChangeDisabled(2)">
+                                    <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
+                                    </label>
+                                    </div>
+
+
+
+
+
+
+
+				            </tr>`
+
+
+
+
+
+
+      );
+    }
+    k += paged_list.length;
+    flag = false;
+    bind(current_page);
+  }
+
+
+  $(document).ready(function () {
+
+      console.log("hello")
+    sessionStorage.setItem("currentPage", String(0));
+
+    const string_all_pic = document.getElementById("all_pic").value;
+    const formatted_arr = [];
+    string_all_pic.substring(1, string_all_pic.length - 1).split(", ").forEach((item) => {
+      formatted_arr.push(item.substring(1, item.length - 1));
+    });
+{#console.log(currentPage)#}
+    const size = 5
+    for (let i = 0; i < formatted_arr.length; i += size) {
+      sliced_list.push(formatted_arr.slice(i, i + size));
+    }
+    const first_sliced_list = sliced_list[0];
+    console.log(first_sliced_list)
+    for (let i = 0; i < first_sliced_list.length; i++) {
+        console.log("hi")
+      var page = Number(sessionStorage.getItem("currentPage"));
+        console.log(page)
+      $("#val_first").append(` <tr class="row m-0">
+                              <td class="d-inline-block col-5">
+                                    <img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
+						            <input type="hidden" name="val_pic`+ parseInt(k + i) + `" id="val_pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}"></td>
+					          <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="3" value='{{ csrf_token }}' disabled=true required></textarea></td>
+                              <td class="d-inline-block col-2">
+                              <br>
+
+                                    <button type="button" class="btn btn-default btn-sm" id = "val_thumb_up`+ parseInt(k + i) +`" name = "val_thumb_up`+ parseInt(k + i) +`" onclick="ChangeDisabled(`+ parseInt(k + i) +`)">
+                                      <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
+                                    </button>
+                                    <button type = "button" class="btn btn-default btn-sm" id = "val_thumb_down`+ parseInt(k + i) + `"  name = "val_thumb_down`+ parseInt(k + i) + `" onclick="ChangeDisabled(`+ parseInt(k + i) +`)">
+                                      <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
+                                    </button>
+				            </tr>`
+      );
+    }
+    k += first_sliced_list.length;
+    bind(0);
+    //onload();
+  });
+
+  function go() {
+    const current_page = Number(sessionStorage.getItem("currentPage"));
+    flag = true;
+    bind(current_page);
+
+    console.log(current_page)
+
+  }
+
+  setInterval("onload()", "1000");
+
+  function onload() {
+    var nextflag = false;
+
+
+    var count = 0;
+    var page = Number(sessionStorage.getItem("currentPage"));
+    remainder = 5;
+    if(k%5>0 && finalFlag){
+      remainder = k%5;
+    }
+    for (var i = k-remainder; i < k; i++) {
+      //console.log("k:",k);
+      //console.log("i:",i);
+      var thumb_up = document.getElementById("val_thumb_up" + i).value;
+      var thumb_down = document.getElementById("val_thumb_down" + i).value
+      if (thumb_up == "thumb_up" || thumb_down == "thumb_down") {
+        count++;
+      }
+    }
+    //console.log("count:",count);
+    if (count == remainder) {
+      go();
+    }
+  }
+
+
+
 </script>
+
+
+
 
 
 
