@@ -106,7 +106,7 @@
       $("#first").append(`<tr>
 					                   <td class='w-50'><img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
 						                   <input type="hidden" name="pic`+ parseInt(k + i) + `" id="pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}"></td>
-					                   <td><textarea class='form-control' id='text`+ parseInt(k + i) + `' name='text` + parseInt(k + i) + `' onfocus='getText(`+parseInt(k+i)+`)'  rows="3" value='{{ csrf_token }}' required></textarea></td>
+					                   <td><textarea class='form-control' id='text`+ parseInt(k + i) + `' name='text` + parseInt(k + i) + `' onfocus='getText(`+parseInt(k+i)+`)'  rows="1" value='{{ csrf_token }}' required></textarea></td>
 				                  </tr>`);
     }
     k += paged_list.length;
@@ -123,7 +123,7 @@
     string_all_pic.substring(1, string_all_pic.length - 1).split(", ").forEach((item) => {
       formatted_arr.push(item.substring(1, item.length - 1));
     });
-
+	const pictures = [];
     const size = 5
     for (let i = 0; i < formatted_arr.length; i += size) {
       sliced_list.push(formatted_arr.slice(i, i + size));
@@ -138,13 +138,12 @@
       $("#first").append(`<tr>
 					                  <td class='w-50'><img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
 						                  <input type="hidden" name="pic`+ parseInt(k + i) + `" id="pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}"></td>
-					                  <td><textarea class='form-control' id='text`+ parseInt(k + i) + `'  name='text` + parseInt(k + i) + `' onfocus='getText(`+parseInt(k+i)+`)'  rows="3" value='{{ csrf_token }}' required></textarea></td>
+					                  <td><textarea class='form-control' id='text`+ parseInt(k + i) + `'  name='text` + parseInt(k + i) + `' onfocus='getText(`+parseInt(k+i)+`)'  rows="1" value='{{ csrf_token }}' required></textarea></td>
 				                  </tr>`);
 
     }
     k += first_sliced_list.length;
     bind(0);
-    //onload();
 
   });
 
@@ -161,10 +160,14 @@
 	if(k%5>0 && finalFlag){
       remainder = k%5;
     }
+	alert("1");
+	console.log("id:",id);
+	console.log("k:",k);
+	console.log("remainder:",remainder);
+	console.log("pictures:",pictures);
 		if(id==k-1){
 			go();
 		}else if(id==k-remainder&&id!=0){
-			//请求后台
 			 const request = {pictures: pictures};
 
 			fetch('', {
