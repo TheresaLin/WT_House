@@ -64,27 +64,17 @@
   var flag = false;
   var k = 0;
   var remainder = 5;
-  var finalFlag = false;
+  var finalFlag = false;    
+  const formatted_arr = [];
   function bind(page) {
 
     if (flag) {
       const current_page = Number(sessionStorage.getItem("currentPage"));
 
       if (Number(current_page) < sliced_list.length - 1 || remainder != 5) {
-        const pictures = []
+        
 
-        if (remainder!= 5){
-          finalFlag = False;
-        }
-
-        for(i = 0; i < sliced_list[current_page].length; i++) {
-           pictures.push({
-             "pic": $(`#pic${k-remainder+i}`).val(),
-             "text": $(`#text${k-remainder+i}`).val()
-
-           });
-        }
-
+		next(sliced_list);
         sessionStorage.setItem("currentPage", String(current_page + 1));
 
       } else {
@@ -118,12 +108,12 @@
   $(document).ready(function () {
     sessionStorage.setItem("currentPage", String(0));
 
-    const string_all_pic = document.getElementById("all_pic").value;
-    const formatted_arr = [];
+	const string_all_pic = document.getElementById("all_pic").value;
+	
     string_all_pic.substring(1, string_all_pic.length - 1).split(", ").forEach((item) => {
       formatted_arr.push(item.substring(1, item.length - 1));
     });
-	const pictures = [];
+	
     const size = 5
     for (let i = 0; i < formatted_arr.length; i += size) {
       sliced_list.push(formatted_arr.slice(i, i + size));
@@ -152,23 +142,47 @@
     flag = true;
     bind(current_page);
   }
-
-
+ 
   
-  function getText(id){
-	remainder = 5;
-	if(k%5>0 && finalFlag){
-      remainder = k%5;
-    }
-	alert("1");
-	console.log("id:",id);
-	console.log("k:",k);
-	console.log("remainder:",remainder);
-	console.log("pictures:",pictures);
-		if(id==k-1){
+	function getText(id){
+		if(k==formatted_arr.length){
+			finalFlag=true;
+		}
+		remainder = 5;
+		if(k%5>0 && k==formatted_arr.length){
+			remainder = k%5;
+		}
+		alert("1");
+		console.log("id:",id);
+		console.log("k:",k);
+		console.log("remainder:",remainder);
+		if(id==k-1&&!finalFlag){
 			go();
-		}else if(id==k-remainder&&id!=0){
-			 const request = {pictures: pictures};
+		}else if(id==k-remainder&&id!=0&&!finalFlag||(finalFlag&&id==k-1)){
+			 isFinalText(id);
+		}
+	}
+	
+	function isFinalText(id){
+		if(finalFlag&&id==k-1){
+			console.log("进来");
+			setTimeout("sendLastPost()", "10000");
+		}else{
+			sendPost();
+		}
+	}
+	function sendPost(){
+		 const current_page = Number(sessionStorage.getItem("currentPage"));
+			const pictures = [];
+			for(i = 0; i < sliced_list[current_page].length; i++) {
+			pictures.push({
+				"pic": $(`#pic${k-remainder-5+i}`).val(),
+				"text": $(`#text${k-remainder-5+i}`).val()
+				});
+			}
+			console.log("pictures:",pictures);
+			//请求后台
+			const request = {pictures: pictures};
 
 			fetch('', {
 				headers :{
@@ -180,13 +194,16 @@
 				.catch(error => console.error('Error:', error))
 				.then(response => {
 				sessionStorage.setItem("currentPage", String(current_page + 1));
-				console.log('why');
-				next(sliced_list);
 				console.log('Success:', response);
 			});
-			
-		}
+					
 	}
+	function sendLastPost(){
+		sendPost();
+		go();
+		$("#text"+parseInt(k-1)).blur();
+	}
+	
 </script>
 
 </html>
