@@ -76,7 +76,6 @@
         if (remainder!= 5){
           finalFlag = False;
         }
-        //data = {};
 
         for(i = 0; i < sliced_list[current_page].length; i++) {
            pictures.push({
@@ -84,33 +83,10 @@
              "text": $(`#text${k-remainder+i}`).val()
 
            });
-
-
         }
-        const request = {pictures: pictures};
-
-        //console.log("pictures:",pictures);
-
-
-        fetch('', {
-          headers :{
-          "X-CSRFToken":document.cookie.split(';')[0].substring(10)},
-          credentials: 'same-origin',
-          body: JSON.stringify(request),
-          method: "POST"
-        }).then(res => res.json())
-          .catch(error => console.error('Error:', error))
-          .then(response => {
-            sessionStorage.setItem("currentPage", String(current_page + 1));
-	    console.log('why');
-	    next(sliced_list);
-            console.log('Success:', response);
-          });
 
         sessionStorage.setItem("currentPage", String(current_page + 1));
 
-        //onload();
-        //next(sliced_list);
       } else {
 
         alert("All pictures are annotated!");
@@ -130,7 +106,7 @@
       $("#first").append(`<tr>
 					                   <td class='w-50'><img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
 						                   <input type="hidden" name="pic`+ parseInt(k + i) + `" id="pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}"></td>
-					                   <td><textarea class='form-control' id='text`+ parseInt(k + i) + `' name='text` + parseInt(k + i) + `' rows="3" value='{{ csrf_token }}' required></textarea></td>
+					                   <td><textarea class='form-control' id='text`+ parseInt(k + i) + `' name='text` + parseInt(k + i) + `' onfocus='getText(`+parseInt(k+i)+`)'  rows="3" value='{{ csrf_token }}' required></textarea></td>
 				                  </tr>`);
     }
     k += paged_list.length;
@@ -162,7 +138,7 @@
       $("#first").append(`<tr>
 					                  <td class='w-50'><img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
 						                  <input type="hidden" name="pic`+ parseInt(k + i) + `" id="pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}"></td>
-					                  <td><textarea class='form-control' id='text`+ parseInt(k + i) + `'  name='text` + parseInt(k + i) + `' rows="3" value='{{ csrf_token }}' required></textarea></td>
+					                  <td><textarea class='form-control' id='text`+ parseInt(k + i) + `'  name='text` + parseInt(k + i) + `' onfocus='getText(`+parseInt(k+i)+`)'  rows="3" value='{{ csrf_token }}' required></textarea></td>
 				                  </tr>`);
 
     }
@@ -178,34 +154,36 @@
     bind(current_page);
   }
 
-  setInterval("onload()", "1000");
 
-  function onload() {
-    var nextflag = false;
-
-
-    var count = 0;
-    var page = Number(sessionStorage.getItem("currentPage"));
-    remainder = 5;
-    if(k%5>0 && finalFlag){
+  
+  function getText(id){
+	remainder = 5;
+	if(k%5>0 && finalFlag){
       remainder = k%5;
     }
-    for (var i = k-remainder; i < k; i++) {
-      //console.log("k:",k);
-      //console.log("i:",i);
-      var aaa = document.getElementById("text" + i).value;
-      if (aaa != '') {
-        count++;
-      }
+		if(id==k-1){
+			go();
+		}else if(id==k-remainder&&id!=0){
+			//请求后台
+			 const request = {pictures: pictures};
 
-    }
-    //console.log("count:",count);
-    if (count == remainder) {
-      console.log('go')
-      go();
-
-    }
-  }
+			fetch('', {
+				headers :{
+				"X-CSRFToken":document.cookie.split(';')[0].substring(10)},
+				credentials: 'same-origin',
+				body: JSON.stringify(request),
+				method: "POST"
+				}).then(res => res.json())
+				.catch(error => console.error('Error:', error))
+				.then(response => {
+				sessionStorage.setItem("currentPage", String(current_page + 1));
+				console.log('why');
+				next(sliced_list);
+				console.log('Success:', response);
+			});
+			
+		}
+	}
 </script>
 
 </html>
