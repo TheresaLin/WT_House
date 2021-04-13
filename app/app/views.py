@@ -272,6 +272,8 @@ def validation(request):
     for dic in s3.list_objects(Bucket = 'segmentedimagesoutdir', Prefix='Images_Segmented_outputdir')['Contents']:
         s3_img_list.append(dic['Key'])
     all_pic = [i for i in s3_img_list]
+    num_pic = len(all_pic)
+    random_pic += random.sample(all_pic, num_pic)
 
 
     return render(request, 'validation.html',
