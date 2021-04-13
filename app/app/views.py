@@ -185,18 +185,8 @@ def homeview(request):
 
             # check whether the img(user annotated) exists in the pic_text
             if files in pic_text.keys():
-                # save the information to document when the text is not in pic_text
-                if cmp_txt(text, pic_text[files]):
-                    ann.img_path = files
-                    ann.text = text
-                    ann.status = status
-                    ann.save()
-                # save the information to txt file and change the status when the text isin the pic_text
-                else:
-                    ann.img_path = files
-                    ann.text = text
-                    ann.status = status
-                    ann.save()
+                # save the information to txt file and change the status when the text is in the pic_text
+                if not cmp_txt(text, pic_text[files]):
                     logging.getLogger(__name__).error('already in pic_Text')
                     Ann.objects(img_path = files).update(status = "legible")
                     #hash = random.getrandbits(50)
@@ -208,11 +198,12 @@ def homeview(request):
                     # then upload to s3 bucket
                     s3_client = boto3.client('s3')
                     s3_client.upload_file(str(django_settings.BASE_DIR) + '/static/annotation/' + files_mod, 'segmentedimagesoutdir', 'annotation/' + files_mod)
-            else:
-                ann.img_path = files
-                ann.text = text
-                ann.status = status
-                ann.save()
+
+                
+            ann.img_path = files
+            ann.text = text
+            ann.status = status
+            ann.save() 
 
             # else:
             #
