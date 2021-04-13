@@ -273,6 +273,7 @@ def validation(request):
         s3_img_list.append(dic['Key'])
     all_pic = [i for i in s3_img_list]
     num_pic = len(all_pic)
+    random_pic = []
     random_pic += random.sample(all_pic, num_pic)
 
 
