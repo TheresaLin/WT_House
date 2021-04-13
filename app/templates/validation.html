@@ -145,10 +145,9 @@
                               <td class="d-inline-block col-5">
                                     <img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
 						            <input type="hidden" name="val_pic`+ parseInt(k + i) + `" id="val_pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}"></td>
-					          <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="3" value='{{ csrf_token }}' disabled=true></textarea></td><div class = 'submitSentence` + parseInt(k + i) + `'></div>
+					          <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="1" value='{{ csrf_token }}' disabled=true></textarea></td><div class = 'submitSentence` + parseInt(k + i) + `'></div>
                               <td class="d-inline-block col-2">
-                              <br>
-                                    <div class="customize-radio">
+                                 <div class="customize-radio">
                                     <label>
                                     <input type = "radio" name = "validation`+ parseInt(k + i) + `" id ="correct`+ parseInt(k + i) + `" value = "1" onclick="ChangeDisabled(2);enableSubmitButton(2)">
                                     <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
@@ -190,9 +189,8 @@
                               <td class="d-inline-block col-5">
                                     <img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
 						            <input type="hidden" name="val_pic`+ parseInt(k + i) + `" id="val_pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}"></td>
-					          <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="3" value='{{ csrf_token }}' disabled=true></textarea></td><div class = 'submitSentence` + parseInt(k + i) + `'></div>
+					          <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="1" value='{{ csrf_token }}' disabled=true></textarea></td><div class = 'submitSentence` + parseInt(k + i) + `'></div>
                               <td class="d-inline-block col-2">
-                              <br>
                                  <div class="customize-radio">
                                     <label>
                                     <input type = "radio" name = "validation`+ parseInt(k + i) + `" id ="correct`+ parseInt(k + i) + `" value = "1" onclick="ChangeDisabled(2);enableSubmitButton(2)">
