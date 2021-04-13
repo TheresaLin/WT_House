@@ -1,0 +1,111 @@
+ <!-- First block -->
+ <tr class="row m-0">
+    <td class="d-inline-block col-5">
+        <p class="text-primary"></p> <img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
+    </td>
+    <td class="d-inline-block col-5"><p></p><textarea class="form-control" id="Textarea1" rows="3" disabled=true>Handwritten letters will never go out of style!</textarea><div class = "submitSentence"></div>
+    </td>
+    <td class="d-inline-block col-2">
+        <br>
+        <label class = "val1">
+            <!-- button-->
+            <div class="customize-radio">
+                <label>
+                    <input type = "radio" name = "validation1" id ="Correct1" value = "0" onclick="Change(2);enableSubmitButton(2)">
+                    <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
+                </label>
+                <label>
+                    <input type = "radio" name = "validation1" id ="Incorrect1" value = "1" onclick="Change(1);enableSubmitButton(1)">
+                    <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
+                </label>
+            </div>
+
+
+
+
+
+    </td>
+</tr>
+<!-- Second block -->
+<tr class="row m-0">
+    <td class="d-inline-block col-5">
+        <p class="text-primary"><img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
+    </td>
+    <td class="d-inline-block col-5"><textarea class="form-control" id="Textarea2" rows="5" disabled=true>Handwritten letters will never go out of style!</textarea></td>
+    <td class="d-inline-block col-2">
+        <br>
+        <!-- button -->
+        <div class="customize-radio">
+            <label>
+                <input type = "radio" name = "validation2" id ="Correct2" value = "0" onclick="Change(2)">
+                <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
+            </label>
+            <label>
+                <input type = "radio" name = "validation2" id ="Incorrect2" value = "1" onclick="Change(1)">
+                <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
+            </label>
+        </div>
+
+    </td>
+</tr>
+
+<!-- Third block -->
+<tr class="row m-0">
+    <td class="d-inline-block col-5">
+        <p class="text-primary"><img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
+    </td>
+    <td class="d-inline-block col-5"><textarea disabled class="form-control" id="Textarea3" rows="5" >Handwritten letters will never go out of style!</textarea></td>
+    <td class="d-inline-block col-2">
+        <p></p>
+        <!-- button of correct -->
+        <div class="customize-radio">
+            <label>
+                <input type = "radio" name = "validation3" id ="Correct3" value = "0" onclick="Change(2)">
+                <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
+            </label>
+            <label>
+                <input type = "radio" name = "validation3" id ="Incorrect3" value = "1" onclick="Change(1)">
+                <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
+            </label>
+        </div>
+
+    </td>
+</tr>
+<!-- fourth block -->
+<tr class="row m-0">
+    <td class="d-inline-block col-5">
+        <p class="text-primary"><img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
+    </td>
+    <td class="d-inline-block col-5"><textarea disabled class="form-control" id="Textarea4"  rows="5" >Handwritten letters will never go out of style!</textarea></td>
+    <td class="d-inline-block col-2">
+        <br><p></p>
+        <!-- button of correct -->
+        <button type="button" class="btn btn-default btn-sm" onclick="ChangeDisabled(9)">
+            <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
+        </button>
+        <!-- button of incorrect -->
+        <button type = "button" class="btn btn-default btn-sm" onclick="ChangeDisabled(4)">
+            <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
+        </button>
+    </td>
+</tr>
+
+<!-- fifth block -->
+</tr>
+<tr class="row m-0">
+    <td class="d-inline-block col-5">
+        <p class="text-primary"><img src="{% static 'sample_image/pic1.jpg' %}" class="img-fluid img-thumbnail" alt="Sheep">
+    </td>
+    <td class="d-inline-block col-5"><textarea disabled class="form-control" id="Textarea5" rows="3" >Handwritten letters will never go out of style!</textarea></td>
+    <td class="d-inline-block col-2">
+        <br>
+        <!-- button of correct -->
+        <button type="button" class="btn btn-default btn-sm" onclick="ChangeDisabled(10)">#}
+            <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
+        </button>
+        <!-- button of incorrect -->
+        <button type = "button" class="btn btn-default btn-sm" onclick="ChangeDisabled(5)">
+            <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
+        </button>
+    </td>
+</tr> 
