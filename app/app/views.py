@@ -114,16 +114,14 @@ def homeview(request):
     result = Ann.objects.all()
     for all_item in result:
         if all_item.img_path in remove_data.keys():
-            remove_data[all_item.img_path[16:]].append(all_item.status)
+            remove_data[all_item.img_path].append(all_item.status)
         else:
-            remove_data[all_item.img_path[16:]] = list([all_item.status])
+            remove_data[all_item.img_path] = list([all_item.status])
     
     for key, value in remove_data.items():
         if value == 'illegible' or value == 'legible':
             all_pic.remove(key)
-    
-    
-
+ 
     num_pic = len(all_pic)
     random_pic += random.sample(all_pic, num_pic)
 
@@ -163,16 +161,20 @@ def homeview(request):
             for item in result:
 
                 # check whether img exists in the pic_text
-                if item.img_path in pic_text.keys():
+                if item.img_path in pic_text.keys()::
                     # if img exists in the pic_text and the len of its length is 1
                     if len(pic_text[item.img_path]) == 1:
-                        if item.text not in pic_text[item.img_path]:
+                        # if item.text is not in pic_text[item.img_path]
+                        if cmp_txt(item.text, pic_text[item.img_path]):
                             pic_text[item.img_path].append(item.text)
+                        # if item.text is in pic_text[item.img_path]
                         else:
                             Ann.objects(img_path = item.img_path).update(status = "legible")
                     elif len(pic_text[item.img_path]) >= 2:
-                        if item.text not in pic_text[item.img_path]:
+                        # if item.text is not in pic_text[item.img_path]
+                        if cmp_txt(item.text, pic_text[item.img_path]):
                             Ann.objects(img_path = item.img_path).update(status = "illegible")
+                        # if item.text is in pic_text[item.img_path]
                         else:
                             Ann.objects(img_path = item.img_path).update(status = "legible")
                 else:
@@ -273,6 +275,7 @@ def validation(request):
         s3_img_list.append(dic['Key'])
     all_pic = [i for i in s3_img_list]
     num_pic = len(all_pic)
+    random_pic = []
     random_pic += random.sample(all_pic, num_pic)
 
 
