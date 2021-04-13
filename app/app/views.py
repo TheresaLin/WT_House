@@ -266,7 +266,19 @@ def homeview(request):
 
 
 def validation(request):
-    return render(request, 'validation.html')
+    s3 = boto3.client('s3')
+    # get img list from s3 bucket
+    s3_img_list = []
+    for dic in s3.list_objects(Bucket = 'segmentedimagesoutdir', Prefix='Images_Segmented_outputdir')['Contents']:
+        s3_img_list.append(dic['Key'])
+    all_pic = [i for i in s3_img_list]
+
+
+    return render(request, 'validation.html',
+                  {
+                      'all_pic': random_pic,
+                  }
+    )
 
 def check_data(request):
     all_data = []
