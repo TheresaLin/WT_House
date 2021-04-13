@@ -161,7 +161,7 @@ def homeview(request):
             for item in result:
 
                 # check whether img exists in the pic_text
-                if item.img_path in pic_text.keys()::
+                if item.img_path in pic_text.keys():
                     # if img exists in the pic_text and the len of its length is 1
                     if len(pic_text[item.img_path]) == 1:
                         # if item.text is not in pic_text[item.img_path]
