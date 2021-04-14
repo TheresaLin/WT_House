@@ -106,6 +106,7 @@
 			onload();
     }
     const sliced_list = [];
+    const formatted_arr_text = [];
     var flag = false;
     var k = 0;
     var remainder = 5;
@@ -151,16 +152,32 @@
         //onload();
         //$(function(){ window.location.hash = "#text"+parseInt(k-5); })
     }
+
+    function loads3txt(path) {
+	    var req = new XMLHttpRequest();
+	    req.open("GET", path, false);
+	    req.send(null);
+	    if(req.status == 200) {
+   		console.log(req.responseText);
+	    	return req.responseText;
+	    } else {
+	    	return "";
+ 	    }
+    }
+
     function next(sliced_list) {
         const current_page = Number(sessionStorage.getItem("currentPage"));
         const paged_list = sliced_list[current_page];
         for (let i = 0; i < paged_list.length; i++) {
             $("#next" + parseInt(k - 1)).attr("style", "display:none;");
-            $("#val_first").append(` <tr class="row m-0">
+	    var imgname = sliced_list[i];
+	    var path = "https://segmentedimagesoutdir.s3.amazonaws.com/validating_text/" +  formatted_arr_text[ formatted_arr_text.indexOf(imgname.substring(17, imgname.length - 4) + ".txt") ];
+            const cortxt = loads3txt(path);
+	    $("#val_first").append(` <tr class="row m-0">
                               <td class="d-inline-block col-5">
                                     <img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
 						            <input type="hidden" name="val_pic`+ parseInt(k + i) + `" id="val_pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}"></td>
-					          <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="3" value='{{ csrf_token }}' disabled=true></textarea><div id = 'submitSentence`+ parseInt(k + i) +`'></div></td>
+		    <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="3" value='${cortext}' disabled=true></textarea><div id = 'submitSentence`+ parseInt(k + i) +`'></div></td>
                               <td class="d-inline-block col-2">
                               <br>
                                     <div class="customize-radio">
@@ -186,14 +203,13 @@
         console.log("hello")
         sessionStorage.setItem("currentPage", String(0));
         const string_all_pic = document.getElementById("all_pic").value;
-        const formatted_arr = [];
+	const formatted_arr = [];
         string_all_pic.substring(1, string_all_pic.length - 1).split(", ").forEach((item) => {
             formatted_arr.push(item.substring(1, item.length - 1));
         });
 
         //要找對應的.txt
         const string_all_text = document.getElementById("all_text").value;
-        const formatted_arr_text = [];
         string_all_text.substring(1, string_all_text.length - 1).split(", ").forEach((item) => {
             formatted_arr_text.push(item.substring(1, item.length - 1));
         });
@@ -209,14 +225,17 @@
             var page = Number(sessionStorage.getItem("currentPage"));
             console.log(page)
             //Here
-            var imgname = first_sliced_list[i]
-            const cor_txt = formatted_arr_text.find(imgname.substring(17, imgname.length - 4))
-            console.log(cor_txt)
+	    var imgname = first_sliced_list[i];
+	    console.log(formatted_arr_text);
+            var path = "https://segmentedimagesoutdir.s3.amazonaws.com/" +  formatted_arr_text[ formatted_arr_text.indexOf('validating_text/' + imgname.substring(17, imgname.length - 4) + ".txt") ];
+            const cortxt = loads3txt(path);
+	    console.log("my: ", cortxt);
+
             $("#val_first").append(` <tr class="row m-0">
                               <td class="d-inline-block col-5">
                                     <img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
 						            <input type="hidden" name="val_pic`+ parseInt(k + i) + `" id="val_pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}"></td>
-					          <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="3" value="https://segmentedimagesoutdir.s3.amazonaws.com/validating_text/${cor_txt}.txt" disabled=true></textarea><div id = 'submitSentence`+ parseInt(k + i)+`'></div></td>
+		    <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="3" value="${cortxt}" disabled=true>${cortxt}</textarea><div id = 'submitSentence`+ parseInt(k + i)+`'></div></td>
                               <td class="d-inline-block col-2">
                               <br>
                                  <div class="customize-radio">
