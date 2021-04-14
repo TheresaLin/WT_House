@@ -92,13 +92,15 @@ def lookup_view(request):
 
 # ignore whitespace and case
 # return true if input_txt isnt matched to any string in db_txt_list
+# db_txt_list: [txt1, txt2, ...]
+# return idx, status
 def cmp_txt(input_txt, db_txt_list):
-    flag = True
-    new_input_txt = input_txt.lower()
-    for txt in db_txt_list:
-        new_db_txt = txt.lower()
-        flag = flag and (new_input_txt.replace(" ", "") != new_db_txt.replace(" ", ""))
-    return flag
+    new_input_txt = input_txt.lower().replace(" ", "")
+    for i in range(len(db_txt_list)):
+        new_db_txt = db_txt_list[i].lower().replace(" ", "")
+        if new_input_txt == new_db_txt:
+            return i, True
+    return -1, False
 
 def homeview(request):
     s3 = boto3.client('s3')
@@ -154,10 +156,18 @@ def homeview(request):
             
             #logging.getLogger(__name__).error('result' + str(result))
             text_list = []
+            '''
+            pic_text = {
+                'img_path': [
+                    [text1, cip1], [text2, cip2], ..
+                ]
+            }
+            '''
             pic_text = {}
             ann = Ann()
 
             # iterate all of document in the annotation collection
+            '''
             for item in result:
 
                 # check whether img exists in the pic_text
@@ -165,11 +175,13 @@ def homeview(request):
                     # if img exists in the pic_text and the len of its length is 1
                     if len(pic_text[item.img_path]) == 1:
                         # if item.text is not in pic_text[item.img_path]
-                        if cmp_txt(item.text, pic_text[item.img_path]):
-                            pic_text[item.img_path].append(item.text)
-                        # if item.text is in pic_text[item.img_path]
-                        else:
+                        if cmp_txt(item.text, item.clientip, pic_text[item.img_path]) == 'append':
+                            pic_text[item.img_path].append( [item.text, item.clientip] )
+                        # if item.text is in pic_text[item.img_path] and client ip is different
+                        elif cmp_txt(item.text, item.clientip, pic_text[item.img_path]) == 'legible':
                             Ann.objects(img_path = item.img_path).update(status = "legible")
+                        elif cmp_txt(item.text, item.clientip, pic_text[item.img_path]) == 'unconfirmed':
+                            Ann.objects(img_path = item.img_path).update(status = "unconfirmed")
                     elif len(pic_text[item.img_path]) >= 2:
                         # if item.text is not in pic_text[item.img_path]
                         if cmp_txt(item.text, pic_text[item.img_path]):
@@ -180,62 +192,71 @@ def homeview(request):
                 else:
                     pic_text[item.img_path] = [item.text]
                     Ann.objects(img_path = item.img_path).update(status = "unconfirmed")
+            '''
+            legible_list = []
+            illegible_list = []
 
+            for item in result:
+                if item.img_path not in legible_list and item.img_path not in illegible_list:
+                    if item.img_path in pic_text.keys():
+                        idx, stat = cmp_txt(item.text, pic_text[item.img_path][0])
+                        if stat == True:    ## if in list of text
+                            if item.text != '':
+                                # if ip is different
+                                if item.clientip != pic_text[item.img_path][1][idx]:
+                                    Ann.objects(img_path = item.img_path).update(status = "legible")
+                                    legible_list.append(item.img_path)
+                            # if text is empty
+                            else:
+                                # if ip is different
+                                if item.clientip != pic_text[item.img_path][1][idx]:
+                                    Ann.objects(img_path = item.img_path).update(status = "illegible")
+                                    illegible_list.append(item.img_path)
+                        elif len(pic_text[item.img_path][0]) == 1:
+                            pic_text[item.img_path][0].append(item.text)
+                            pic_text[item.img_path][1].append(item.clientip)
+                        elif len(pic_text[item.img_path][0]) >= 2:
+                            Ann.objects(img_path = item.img_path).update(status = "illegible")
+                            illegible_list.append(item.img_path)
+                    else:
+                        pic_text[item.img_path] = [[item.text], [item.clientip]]
+                        Ann.objects(img_path = item.img_path).update(status = "unconfirmed")
 
 
             # check whether the img(user annotated) exists in the pic_text
             if files in pic_text.keys():
                 # save the information to txt file and change the status when the text is in the pic_text
-                if not cmp_txt(text, pic_text[files]):
-                    logging.getLogger(__name__).error('already in pic_Text')
-                    Ann.objects(img_path = files).update(status = "legible")
-                    #hash = random.getrandbits(50)
-                    files_mod = files[74:-4] + ".txt"
-                    # write to localhost first
-                    f = open(str(django_settings.BASE_DIR) + '/static/annotation/' + files_mod, 'w+')
-                    f.write(text)
-                    f.close()
-                    # then upload to s3 bucket
-                    s3_client = boto3.client('s3')
-                    s3_client.upload_file(str(django_settings.BASE_DIR) + '/static/annotation/' + files_mod, 'segmentedimagesoutdir', 'annotation/' + files_mod)
+                idx, stat = cmp_txt(text, pic_text[files][0])
+                ## if in list of text
+                if stat == True:
+                    if text != '':
+                        # if ip is different
+                        if cip != pic_text[files][1][idx]:
+                            logging.getLogger(__name__).error('already in pic_Text')
+                            Ann.objects(img_path = files).update(status = "legible")
+                            files_mod = files[74:-4] + ".txt"
+                            # write to localhost first
+                            f = open(str(django_settings.BASE_DIR) + '/static/annotation/' + files_mod, 'w+')
+                            f.write(text)
+                            f.close()
+                            # then upload to s3 bucket
+                            s3_client = boto3.client('s3')
+                            s3_client.upload_file(str(django_settings.BASE_DIR) + '/static/annotation/' + files_mod, 'segmentedimagesoutdir', 'annotation/' + files_mod)
+                    # if text is empty
+                    else:
+                        # if ip is different
+                        if cip != pic_text[files][1][idx]:
+                            Ann.objects(img_path = files).update(status = "illegible")
 
                 
             ann.img_path = files
             ann.text = text
             ann.status = status
+            ann.clientip = cip
             ann.save() 
-
-            # else:
-            #
-            # pic_text[item.img_path] = item.text
-            # logging.getLogger(__name__).error('pic_text' + str(pic_text))
-            #
-            #
-            # # check whether the text exists in database
-            # # if yes, the text will be saved with a txt file in annotation directory; if not, it will be saved in database
-            # if files in pic_text:
-            #     hash = random.getrandbits(50)
-            #     files_mod = files[16:-4]+"_"+str(hash)+".txt"
-            #     f = open(django_settings.STATICFILES_DIRS[0] + '/annotation/' + files_mod, 'w+')
-            #     f.write(text)
-            #     f.close()
-            #
-            #
-            # else:
-            #     ann.img_path = files
-            #     ann.text = text
-            #     ann.status = status
-            #     ann.save()
-            #     # return HttpResponse("Hello")
-
 
         return render(request, 'index.html',
             {
-                # 'img1': "/static/image/"+random_pic[0],
-                # 'img2': "/static/image/"+random_pic[1],
-                # 'img3': "/static/image/"+random_pic[2],
-                # 'img4': "/static/image/"+random_pic[3],
-                # 'img5': "/static/image/"+random_pic[4],
                 'visitors': visitors
             }
         )
@@ -246,11 +267,6 @@ def homeview(request):
             request,
             'index.html',
             {
-                # 'img1': "/static/image/"+random_pic[0],
-                # 'img2': "/static/image/"+random_pic[1],
-                # 'img3': "/static/image/"+random_pic[2],
-                # 'img4': "/static/image/"+random_pic[3],
-                # 'img5': "/static/image/"+random_pic[4],
                 'all_pic': random_pic,
                 'visitors': visitors
             }
@@ -281,7 +297,7 @@ def check_data(request):
     every_data = []
     result = Ann.objects.all()
     for item in result:
-        every_data = list([item.img_path, item.text, item.status])
+        every_data = list([item.img_path, item.text, item.status, item.clientip])
         all_data.append(every_data)
     return render(request, 'check_data.html',
     {

@@ -31,3 +31,4 @@ class Ann(Document):
     img_path = StringField()
     text = StringField()
     status = StringField()
+    clientip = StringField()
