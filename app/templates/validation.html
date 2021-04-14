@@ -100,6 +100,7 @@
 				$('#correct'+id).attr("value","1");
                 document.getElementById('val_text'+id).disabled = true;
                 $('#submitSentence'+id).html(``);
+				send(id);
             }
 			onload();
     }
@@ -116,7 +117,7 @@
                 if (remainder!= 5){
                     finalFlag = False;
                 }
-				send();
+				//send();
                 //data = {};
                 //for(i = 0; i < sliced_list[current_page].length; i++) {
                 //    pictures.push({
@@ -135,7 +136,7 @@
                 //   .catch(error => console.error('Error:', error))
                 //   .then(response => {
                 //     sessionStorage.setItem("currentPage", String(current_page + 1));
-                //     next(sliced_list);
+                     next(sliced_list);
                 //     console.log('Success:', response);
                 //   });
                 sessionStorage.setItem("currentPage", String(current_page + 1));
@@ -263,18 +264,18 @@
 			}
                 const request = {pictures: pictures};
                 console.log("pictures:",pictures);
-                // fetch('', {
-                //   headers :{
-                //   "X-CSRFToken":document.cookie.split(';')[0].substring(10)},
-                //   credentials: 'same-origin',
-                //   body: JSON.stringify(request),
-                //   method: "POST"}).then(res => res.json())
-                //   .catch(error => console.error('Error:', error))
-                //   .then(response => {
-                //     sessionStorage.setItem("currentPage", String(current_page + 1));
+                 fetch('', {
+                   headers :{
+                   "X-CSRFToken":document.cookie.split(';')[0].substring(10)},
+                   credentials: 'same-origin',
+                   body: JSON.stringify(request),
+                   method: "POST"}).then(res => res.json())
+                   .catch(error => console.error('Error:', error))
+                   .then(response => {
+                     sessionStorage.setItem("currentPage", String(current_page + 1));
                 //     next(sliced_list);
-                //     console.log('Success:', response);
-                //   });
+                     console.log('Success:', response);
+                   });
 	}
     </script>
 {% endblock %}
