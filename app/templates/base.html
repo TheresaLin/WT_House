@@ -88,7 +88,7 @@
   function next(sliced_list) {
 
     const current_page = Number(sessionStorage.getItem("currentPage"));
-    const paged_list = sliced_list[current_page];
+    const paged_list = sliced_list[current_page + 1];
 
     for (let i = 0; i < paged_list.length; i++) {
 
