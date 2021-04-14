@@ -86,9 +86,12 @@
 		console.log("value:",value);
 		var correctVal = document.getElementById("correct" + id).value;
         var incorrectVal = document.getElementById("incorrect" + id).value;
+		console.log("correctVal:",correctVal);
+		console.log("incorrectVal:",incorrectVal);
 		if(correctVal==0&&incorrectVal==0){
 			sum++;			
 		}
+		console.log("sum:",sum);
             if (value === 0) {
 				$('#incorrect'+id).attr("value","1");
 				$('#correct'+id).attr("value","0");
@@ -109,11 +112,12 @@
     var k = 0;
     var remainder = 5;
     var finalFlag = false;
+	const pictures = [];
     function bind(page) {
         if (flag) {
             const current_page = Number(sessionStorage.getItem("currentPage"));
             if (Number(current_page) < sliced_list.length - 1 || remainder != 5) {
-                const pictures = []
+                
                 if (remainder!= 5){
                     finalFlag = False;
                 }
