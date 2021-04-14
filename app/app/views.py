@@ -122,7 +122,7 @@ def homeview(request):
     
     for key, value in remove_data.items():
         if value == 'illegible' or value == 'legible':
-            all_pic.remove(key)
+            all_pic.remove(key[74:])
  
     num_pic = len(all_pic)
     random_pic += random.sample(all_pic, num_pic)
@@ -278,17 +278,24 @@ def validation(request):
     s3 = boto3.client('s3')
     # get img list from s3 bucket
     s3_img_list = []
-    for dic in s3.list_objects(Bucket = 'segmentedimagesoutdir', Prefix='Images_Segmented_outputdir')['Contents']:
+    s3_text_list = []
+    for dic in s3.list_objects(Bucket = 'segmentedimagesoutdir', Prefix='validating_image')['Contents']:
         s3_img_list.append(dic['Key'])
     all_pic = [i for i in s3_img_list]
     num_pic = len(all_pic)
     random_pic = []
     random_pic += random.sample(all_pic, num_pic)
 
+    for dic in s3.list_objects(Bucket = 'segmentedimagesoutdir', Prefix='validating_text')['Contents']:
+        s3_text_list.append(dic['Key'])
+    all_text = [i for i in s3_text_list]
+
+
 
     return render(request, 'validation.html',
                   {
                       'all_pic': random_pic,
+                      'all_text': all_text
                   }
     )
 

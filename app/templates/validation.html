@@ -46,6 +46,7 @@
     </div>
     </body>
     <input type="hidden" id ="all_pic" name="all_pic" value="{{ all_pic }}">
+    <input type="hidden" id ="all_text" name="all_text" value="{{ all_text }}">
     <!-- <script>
         // how to get the value of Radio(multiple selection) https://www.runoob.com/try/try.php?filename=tryjsref_radio_value
         function displayResult(){
@@ -86,12 +87,9 @@
 		console.log("value:",value);
 		var correctVal = document.getElementById("correct" + id).value;
         var incorrectVal = document.getElementById("incorrect" + id).value;
-		console.log("correctVal:",correctVal);
-		console.log("incorrectVal:",incorrectVal);
 		if(correctVal==0&&incorrectVal==0){
 			sum++;			
 		}
-		console.log("sum:",sum);
             if (value === 0) {
 				$('#incorrect'+id).attr("value","1");
 				$('#correct'+id).attr("value","0");
@@ -112,12 +110,11 @@
     var k = 0;
     var remainder = 5;
     var finalFlag = false;
-	const pictures = [];
     function bind(page) {
         if (flag) {
             const current_page = Number(sessionStorage.getItem("currentPage"));
             if (Number(current_page) < sliced_list.length - 1 || remainder != 5) {
-                
+                const pictures = []
                 if (remainder!= 5){
                     finalFlag = False;
                 }
@@ -193,7 +190,15 @@
         string_all_pic.substring(1, string_all_pic.length - 1).split(", ").forEach((item) => {
             formatted_arr.push(item.substring(1, item.length - 1));
         });
-        // console.log(currentPage)
+
+        //要找對應的.txt
+        const string_all_text = document.getElementById("all_text").value;
+        const formatted_arr_text = [];
+        string_all_text.substring(1, string_all_text.length - 1).split(", ").forEach((item) => {
+            formatted_arr_text.push(item.substring(1, item.length - 1));
+        });
+
+        console.log(formatted_arr_text[0],formatted_arr_text)
         const size = 5
         for (let i = 0; i < formatted_arr.length; i += size) {
             sliced_list.push(formatted_arr.slice(i, i + size));
