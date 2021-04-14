@@ -198,22 +198,25 @@
             formatted_arr_text.push(item.substring(1, item.length - 1));
         });
 
-        console.log(formatted_arr_text[0],formatted_arr_text)
+        console.log(formatted_arr_text)
+
         const size = 5
         for (let i = 0; i < formatted_arr.length; i += size) {
             sliced_list.push(formatted_arr.slice(i, i + size));
         }
         const first_sliced_list = sliced_list[0];
-        console.log(first_sliced_list)
         for (let i = 0; i < first_sliced_list.length; i++) {
-            console.log("hi")
             var page = Number(sessionStorage.getItem("currentPage"));
             console.log(page)
+            //Here
+            var imgname = first_sliced_list[i]
+            const cor_txt = formatted_arr_text.find(imgname.substring(17, imgname.length - 4))
+            console.log(cor_txt)
             $("#val_first").append(` <tr class="row m-0">
                               <td class="d-inline-block col-5">
                                     <img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
 						            <input type="hidden" name="val_pic`+ parseInt(k + i) + `" id="val_pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}"></td>
-					          <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="3" value='{{ csrf_token }}' disabled=true></textarea><div id = 'submitSentence`+ parseInt(k + i)+`'></div></td>
+					          <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="3" value="https://segmentedimagesoutdir.s3.amazonaws.com/validating_text/${cor_txt}.txt" disabled=true></textarea><div id = 'submitSentence`+ parseInt(k + i)+`'></div></td>
                               <td class="d-inline-block col-2">
                               <br>
                                  <div class="customize-radio">
