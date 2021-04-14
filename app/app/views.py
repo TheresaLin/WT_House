@@ -122,7 +122,7 @@ def homeview(request):
     
     for key, value in remove_data.items():
         if value == 'illegible' or value == 'legible':
-            all_pic.remove(key)
+            all_pic.remove(key[47:])
  
     num_pic = len(all_pic)
     random_pic += random.sample(all_pic, num_pic)
