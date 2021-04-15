@@ -142,8 +142,8 @@
                 //   .catch(error => console.error('Error:', error))
                 //   .then(response => {
                 
-                       sessionStorage.setItem("currentPage", String(current_page + 1));
-		       next(formatted_arr_text, sliced_list);
+                sessionStorage.setItem("currentPage", String(current_page + 1));
+		        next(formatted_arr_text, sliced_list);
                 //     console.log('Success:', response);
                 //   });
                 
@@ -289,31 +289,35 @@
 		const current_page = Number(sessionStorage.getItem("currentPage"));
 		if(id==""){
 			for(i = 0; i < sliced_list[current_page].length; i++) {
+
+                var eval_button = document.getElementsByName("validation"+k-remainder+i).value;
                     pictures.push({
-                        "pic": $(`#pic${k-remainder+i}`).val(),
-                        "text": $(`#text${k-remainder+i}`).val()
+                        "pic": $(`#val_pic${k-remainder+i}`).val(),
+                        "text": $(`#val_text${k-remainder+i}`).val(),
+                        "eval_cnt": eval_button
                     });
                 }
 			}else{
 				pictures.push({
-                        "pic": $(`#pic${id}`).val(),
-                        "text": $(`#text${id}`).val()
+                        "pic": $(`#val_pic${id}`).val(),
+                        "text": $(`#val_text${id}`).val(),
+                        "eval_cnt": eval_button
                     });
 			}
                 const request = {pictures: pictures};
                 console.log("pictures:",pictures);
                 // fetch('', {
-                  // headers :{
-                   //"X-CSRFToken":document.cookie.split(';')[0].substring(10)},
-                   //credentials: 'same-origin',
-                   //body: JSON.stringify(request),
-                   //method: "POST"}).then(res => res.json())
-                   //.catch(error => console.error('Error:', error))
-                   //.then(response => {
-                     //sessionStorage.setItem("currentPage", String(current_page + 1));
-                //     next(sliced_list);
-                     //console.log('Success:', response);
-                  // });
+                //   headers :{
+                //    "X-CSRFToken":document.cookie.split(';')[0].substring(10)},
+                //    credentials: 'same-origin',
+                //    body: JSON.stringify(request),
+                //    method: "POST"}).then(res => res.json())
+                //    .catch(error => console.error('Error:', error))
+                //    .then(response => {
+                //      sessionStorage.setItem("currentPage", String(current_page + 1));
+                //     //next(sliced_list);
+                //      console.log('Success:', response);
+                //   });
 	}
     </script>
 {% endblock %}
