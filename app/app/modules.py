@@ -40,6 +40,5 @@ class Val(Document):
 
     _id = SequenceField(required=True, primary_key=True)
     img_path = StringField()
-    org_text = StringField()
-    mod_text = StringField()
+    text = StringField()
     eval_cnt = IntField()

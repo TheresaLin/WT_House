@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.http import HttpResponse, FileResponse
-from .modules import Examples, Ann, Validation
+from .modules import Examples, Ann, Val
 from .forms import img_text_form
 import random
 import csv
@@ -294,7 +294,9 @@ def validation(request):
         json_data = json.loads(request.body)
         for i in json_data['pictures']:
             img_path = i['pic']
-            i['text']
+            text = i['text']
+            eval_cnt = i['eval_cnt']
+
         results = Val.objects.all()
 
     return render(request, 'validation.html',
