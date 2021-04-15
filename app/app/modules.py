@@ -32,3 +32,14 @@ class Ann(Document):
     text = StringField()
     status = StringField()
     clientip = StringField()
+
+class Val(Document):
+    meta = {
+            'collection': 'validation'
+    }
+
+    _id = SequenceField(required=True, primary_key=True)
+    img_path = StringField()
+    org_text = StringField()
+    mod_text = StringField()
+    eval_cnt = IntField()

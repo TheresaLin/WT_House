@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.http import HttpResponse, FileResponse
-from .modules import Examples, Ann
+from .modules import Examples, Ann, Validation
 from .forms import img_text_form
 import random
 import csv
@@ -289,8 +289,13 @@ def validation(request):
     for dic in s3.list_objects(Bucket = 'segmentedimagesoutdir', Prefix='validating_text')['Contents']:
         s3_text_list.append(dic['Key'])
     all_text = [i for i in s3_text_list]
-
-
+    
+    if request.method == 'POST':
+        json_data = json.loads(request.body)
+        for i in json_data['pictures']:
+            img_path = i['pic']
+            i['text']
+        results = Val.objects.all()
 
     return render(request, 'validation.html',
                   {
