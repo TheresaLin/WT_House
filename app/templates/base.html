@@ -144,9 +144,9 @@
   }
  
 	function lostText(id){
-		if(id==k-remainder-1&&!finalFlag){
-			sendPost();
-		}
+		//if(id==k-remainder-1&&!finalFlag){
+			sendPost(id);
+		//}
 	}
   
 	function getText(id){
@@ -177,24 +177,24 @@
 			sendPost();
 		}
 	}
-	function sendPost(){
+	function sendPost(id){
 		 const current_page = Number(sessionStorage.getItem("currentPage"));
 			const pictures = [];
-			if(finalFlag){
-				for(i = 0; i < sliced_list[current_page].length; i++) {
-					pictures.push({
-						"pic": $(`#pic${k-remainder+i}`).val(),
-						"text": $(`#text${k-remainder+i}`).val()
-					});
-				}
-			}else{
-				for(i = 0; i < sliced_list[current_page].length; i++) {
+			// if(finalFlag){
+			// 	for(i = 0; i < sliced_list[current_page].length; i++) {
+			// 		pictures.push({
+			// 			"pic": $(`#pic${k-remainder+i}`).val(),
+			// 			"text": $(`#text${k-remainder+i}`).val()
+			// 		});
+			// 	}
+			// }else{
+			// 	for(i = 0; i < sliced_list[current_page].length; i++) {
 				pictures.push({
-					"pic": $(`#pic${k-remainder-5+i}`).val(),
-					"text": $(`#text${k-remainder-5+i}`).val()
+					"pic": $(`#pic${id}`).val(),
+					"text": $(`#text${id}`).val()
 					});
-				}
-			}
+			// 	}
+			// }
 			console.log("pictures:",pictures);
 			const request = {pictures: pictures};
 
