@@ -322,6 +322,18 @@ def check_data(request):
         'annotated' : result
     })
 
+def check_data_val(request):
+    all_data = []
+    every_data = []
+    result = Val.objects.all()
+    for item in result:
+        every_data = list([item.img_path, item.text, item.eval_cnt])
+        all_data.append(every_data)
+    return render(request, 'check_data_val.html',
+    {
+        'validated' : result
+    })
+
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
