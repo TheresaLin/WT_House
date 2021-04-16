@@ -96,7 +96,7 @@
       $("#first").append(`<tr>
 					                   <td class='w-50'><img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
 						                   <input type="hidden" name="pic`+ parseInt(k + i) + `" id="pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}"></td>
-					                   <td><textarea class='form-control' id='text`+ parseInt(k + i) + `' name='text` + parseInt(k + i) + `' onfocus='getText(`+parseInt(k+i)+`)' onblur='lostText(`+parseInt(k+i)+`)'  rows="1" value='{{ csrf_token }}' required></textarea></td>
+					                   <td><textarea class='form-control' id='text`+ parseInt(k + i) + `' name='text` + parseInt(k + i) + `' onfocus='getText(`+parseInt(k+i)+`)'  rows="1" value='{{ csrf_token }}' required></textarea></td>
 				                  </tr>`);
     }
     k += paged_list.length;
@@ -128,7 +128,7 @@
       $("#first").append(`<tr>
 					                  <td class='w-50'><img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
 						                  <input type="hidden" name="pic`+ parseInt(k + i) + `" id="pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}"></td>
-					                  <td><textarea class='form-control' id='text`+ parseInt(k + i) + `'  name='text` + parseInt(k + i) + `' onfocus='getText(`+parseInt(k+i)+`)' onblur='lostText(`+parseInt(k+i)+`)' rows="1" value='{{ csrf_token }}' required></textarea></td>
+					                  <td><textarea class='form-control' id='text`+ parseInt(k + i) + `'  name='text` + parseInt(k + i) + `' onfocus='getText(`+parseInt(k+i)+`)'  rows="1" value='{{ csrf_token }}' required></textarea></td>
 				                  </tr>`);
 
     }
@@ -143,11 +143,6 @@
     bind(current_page);
   }
  
-	function lostText(id){
-		if(id==k-remainder-1&&!finalFlag){
-			sendPost();
-		}
-	}
   
 	function getText(id){
 		if(k==formatted_arr.length){
@@ -162,10 +157,8 @@
 		console.log("remainder:",remainder);
 		if(id==k-1&&!finalFlag){
 			go();
-		//}else if(id==k-remainder-1&&id!=0&&!finalFlag||(finalFlag&&id==k-1)){
-		}else if(finalFlag&&id==k-1){
-			 //isFinalText(id);
-			 setTimeout("sendLastPost()", "10000");
+		}else if(id==k-remainder&&id!=0&&!finalFlag||(finalFlag&&id==k-1)){
+			 isFinalText(id);
 		}
 	}
 	
@@ -180,20 +173,11 @@
 	function sendPost(){
 		 const current_page = Number(sessionStorage.getItem("currentPage"));
 			const pictures = [];
-			if(finalFlag){
-				for(i = 0; i < sliced_list[current_page].length; i++) {
-					pictures.push({
-						"pic": $(`#pic${k-remainder+i}`).val(),
-						"text": $(`#text${k-remainder+i}`).val()
-					});
-				}
-			}else{
-				for(i = 0; i < sliced_list[current_page].length; i++) {
-				pictures.push({
-					"pic": $(`#pic${k-remainder-5+i}`).val(),
-					"text": $(`#text${k-remainder-5+i}`).val()
-					});
-				}
+			for(i = 0; i < sliced_list[current_page].length; i++) {
+			pictures.push({
+				"pic": $(`#pic${k-remainder-5+i}`).val(),
+				"text": $(`#text${k-remainder-5+i}`).val()
+				});
 			}
 			console.log("pictures:",pictures);
 			const request = {pictures: pictures};
@@ -217,7 +201,6 @@
 		go();
 		$("#text"+parseInt(k-1)).blur();
 	}
-	
 	
 </script>
 

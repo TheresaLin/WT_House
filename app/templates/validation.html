@@ -313,7 +313,7 @@
                     method: "POST"}).then(res => res.json())
                     .catch(error => console.error('Error:', error))
                     .then(response => {
-                      sessionStorage.setItem("currentPage", String(current_page + 1));
+                      //sessionStorage.setItem("currentPage", String(current_page + 1));
                      //next(sliced_list);
                       console.log('Success:', response);
                    });
