@@ -297,13 +297,17 @@ def validation(request):
             text = i['text']
             eval_cnt = i['eval_cnt']
 
-        results = Val.objects.all()
+            val = Val()
+            val.img_path = img_path
+            val.text = text
+            val.eval_cnt = eval_cnt
+            val.save()
 
     return render(request, 'validation.html',
-                  {
-                      'all_pic': random_pic,
-                      'all_text': all_text
-                  }
+        {
+            'all_pic': random_pic,
+            'all_text': all_text
+        }
     )
 
 def check_data(request):
