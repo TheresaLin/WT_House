@@ -14,6 +14,13 @@ import json
 import string
 import boto3
 
+def remove_punc(text):
+    punc = '''!()-[]{};:'"\, <>./?@#$%^&*_~'''
+    for i in text:
+        for p in punc:
+            text = text.replace(p, "")
+    return text
+
 def honeypot(request):
     path = 'hp.txt'
     return render(request, path)
@@ -281,6 +288,7 @@ def validation(request):
     s3_text_list = []
     for dic in s3.list_objects(Bucket = 'segmentedimagesoutdir', Prefix='validating_image')['Contents']:
         s3_img_list.append(dic['Key'])
+    del s3_img_list[0]
     all_pic = [i for i in s3_img_list]
     num_pic = len(all_pic)
     random_pic = []

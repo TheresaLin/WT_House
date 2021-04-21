@@ -5,15 +5,29 @@
     <head>
 
         <style type="text/css">
+        /* https://qastack.cn/programming/17541614/use-images-instead-of-radio-buttons
+        http://frontendsupport.blogspot.com/2018/06/cool-radio-buttons-with-images.html */
+            .correctButton {
+                background: url('https://api.iconify.design/bi:hand-thumbs-up-fill.svg?color=Green&width=48&height=48') no-repeat center center;
+            }
+            .incorrectButton{
+                background: url('https://api.iconify.design/bi-hand-thumbs-down-fill.svg?color=Red&width=48&height=48') no-repeat center center;
+            }
+            .customize-radio label > input[type = 'radio']:checked ~ span.correctButton{
+                background: url('https://api.iconify.design/bi:hand-thumbs-up-fill.svg?width=48&height=48') no-repeat center center;}
+            .customize-radio label > input[type = 'radio']:checked ~ span.incorrectButton{
+                background: url('https://api.iconify.design/bi-hand-thumbs-down-fill.svg?width=48&height=48') no-repeat center center;}
             .customize-radio label > input[type = 'radio'] {
                 visibility: hidden;
                 position: absolute;
             }
-            .customize-radio label > input[type = 'radio']:checked ~ span.haha-img{
-                background-image: url('haha.png');
-            }
-            .customize-radio label > input[type = 'radio']:checked ~ span.kiss-img{
-                background-image: url('kiss.png');
+            .customize-radio label > input[type = 'radio'] ~ span{
+                cursor: pointer;
+                width: 48px;
+                height: 48px;
+                display: inline-block;
+                background-size: 48px 48px;
+                background-repeat: no-repeat;
             }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -35,6 +49,8 @@
                             <th class="d-inline-block col-2"scope="col">Is it correct?</th>
                         </tr>
                         </thead>
+                        <tr><td><video controls autoplay width=95%>
+                            <source src="{{ "https://segmentedimagesoutdir.s3.amazonaws.com/instruction_video/instruction.mp4" }}" type="video/mp4"> </source></td></tr>
                         <tbody id = "val_first">
                         
                                                
@@ -73,13 +89,13 @@
 				$('#incorrect'+id).attr("value","1");
 				$('#correct'+id).attr("value","0");
                 document.getElementById('val_text'+id).disabled = false;
-                $('#submitSentence'+id).html(`<button type="button" name="correspondingText" id="correspondingText1`+id+`"   onclick="send(`+ id+`,`+ value + `)"> Submit </button>`);
+                // $('#submitSentence'+id).html(`<button type="button" name="correspondingText" id="correspondingText1`+id+`"   onclick="send(`+ id+`,`+ value + `)"> Submit </button>`);
 				console.log("button:",$('#submitSentence'+id).html());
             } else {
 				$('#incorrect'+id).attr("value","0");
 				$('#correct'+id).attr("value","1");
                 document.getElementById('val_text'+id).disabled = true;
-                $('#submitSentence'+id).html(``);
+                // $('#submitSentence'+id).html(``);
 				send(id, value);
             }
 	    console.log("next tt");		
@@ -101,9 +117,7 @@
                 if (remainder!= 5){
                     finalFlag = False;
                 }
-	
-		    
-                
+
                 sessionStorage.setItem("currentPage", String(current_page + 1));
 		        next(formatted_arr_text, sliced_list);
                
@@ -140,16 +154,16 @@
                               <td class="d-inline-block col-5">
                                     <img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
 						            <input type="hidden" name="val_pic`+ parseInt(k + i) + `" id="val_pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${paged_list[i]}"></td>
-		    <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="1" value='${cortxt}' disabled=true>${cortxt}</textarea><div id = 'submitSentence`+ parseInt(k + i) +`'></div></td>
+		    <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="1" value='${cortxt}' disabled=true onkeydown="EnterPress(`+parseInt(k + i)+` ,0)">${cortxt}</textarea><div id = 'submitSentence`+ parseInt(k + i) +`'></div></td>
                               <td class="d-inline-block col-2">
                                     <div class="customize-radio">
                                     <label>
                                     <input type = "radio" name = "validation`+ parseInt(k + i) + `" id ="correct`+ parseInt(k + i) + `" value = "0" onclick="ChangeDisabled(`+parseInt(k + i)+` ,1);enableSubmitButton(`+parseInt(k + i)+` ,1)">
-                                    <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
+                                    <span class="correctButton"></span>
                                     </label>
                                     <label>
                                     <input type = "radio" name = "validation`+ parseInt(k + i) + `" id ="incorrect`+ parseInt(k + i) + `" value = "0" onclick="ChangeDisabled(`+parseInt(k + i)+` ,0);enableSubmitButton(`+parseInt(k + i)+` ,0)">
-                                    <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
+                                    <span class="incorrectButton"></span>
                                     </label>
                                     </div>
 				            </tr>`
@@ -159,7 +173,6 @@
         flag = false;
         bind(current_page);
     }
-
 
     $(document).ready(function () {
         console.log("hello")
@@ -199,17 +212,16 @@
                               <td class="d-inline-block col-5">
                                     <img src='{{ "https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}" }}' class="img-fluid img-thumbnail" alt="Sheep">
 						            <input type="hidden" name="val_pic`+ parseInt(k + i) + `" id="val_pic`+ parseInt(k + i) + `" value="https://segmentedimagesoutdir.s3.amazonaws.com/${first_sliced_list[i]}"></td>
-		    <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="1" value="${cortxt}" disabled=true>${cortxt}</textarea><div id = 'submitSentence`+ parseInt(k + i)+`'></div></td>
+		    <td class="d-inline-block col-5"><textarea class='form-control' id='val_text`+ parseInt(k + i) + `' name='val_text` + parseInt(k + i) + `' rows="1" value="${cortxt}" disabled=true onkeydown="EnterPress(`+parseInt(k + i)+` ,0)">${cortxt}</textarea><div id = 'submitSentence`+ parseInt(k + i)+`'></div></td>
                               <td class="d-inline-block col-2">
-                 
                                  <div class="customize-radio">
                                     <label>
                                     <input type = "radio" name = "validation`+ parseInt(k + i) + `" id ="correct`+ parseInt(k + i) + `" value = "0" onclick="ChangeDisabled(`+parseInt(k + i)+` ,1);enableSubmitButton(`+parseInt(k + i)+` ,1)">
-                                    <span class="iconify" data-icon="bi-hand-thumbs-up-fill" data-inline="false" style="color: Green;" data-width="48" data-height="48"></span>
+                                    <span class="correctButton"></span>
                                     </label>
                                     <label>
                                     <input type = "radio" name = "validation`+ parseInt(k + i) + `" id ="incorrect`+ parseInt(k + i) + `" value = "0" onclick="ChangeDisabled(`+parseInt(k + i)+` ,0);enableSubmitButton(`+parseInt(k + i)+` ,0)">
-                                    <span class="iconify" data-icon="bi-hand-thumbs-down-fill" data-inline="false" style="color: Red;" data-width="48" data-height="48"></span>
+                                    <span class="incorrectButton"></span>
                                     </label>
                                     </div>
 				            </tr>`
@@ -227,7 +239,6 @@
         console.log(current_page)
 
     }
-
 
     function onload() {
         var nextflag = false;
@@ -278,7 +289,29 @@
                       console.log('Success:', response);
                    });
 	}
+
+    // function entersubmit(id){
+    // id =     
+    // let correspondingText = document.getElementById();
+    // correspondingText.addEventListener("keypress", function(event) {
+    //     if (event.keyCode === 13) {
+    //         event.preventDefault();
+    //         document.getElementById("correspondingText1`+id+`").click();
+    //         }
+    //         }
+    //         )
+    //     }
+    function EnterPress(id,value){ 
+        if(event.keyCode === 13){ 
+            event.preventDefault();
+            send(id, value);
+            ChangeDisabled(id,1);
+        }
+    } 
     </script>
+
+
+
 {% endblock %}
 
 

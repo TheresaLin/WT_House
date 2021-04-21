@@ -14,14 +14,17 @@
 
   		<div class="collapse navbar-collapse" id="navbarSupportedContent">
     			<ul class="navbar-nav mr-auto">
-      				<li class="nav-item active">
-        				<a class="nav-link" href="http://100.25.119.150">Home <span class="sr-only">(current)</span></a>
-      				</li>
-    			</ul>
-                <ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
-					  <a class="nav-link" href="http://100.25.119.150/check_data">Ann_Data <span class="sr-only"></span></a>
-					</li>
+						<a class="nav-link" href="http://100.25.119.150/check_data">Ann_Data <span class="sr-only"></span></a>
+					  </li>
+					
+					<li class="nav-item active">
+        				<a class="nav-link" href="http://100.25.119.150">Annotation Page<span class="sr-only">(current)</span></a>
+      				</li>
+					
+					<li class="nav-item active">
+        				<a class="nav-link" href="http://100.25.119.150/validation">Validation Page<span class="sr-only">(current)</span></a>
+      				</li>
 			  </ul>
   		</div>
 		</nav>
@@ -31,7 +34,7 @@
 				<th scope="col">Text</th>
 				<th scope="col">Evaluation</th>
 			</tr>
-		{% for i in annotated %}
+		{% for i in validated %}
     		<tr>	
     			<td>{{ i.img_path }}</td>
 				<td>{{ i.text }}</td>
