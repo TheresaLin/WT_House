@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-
+<div class="container">
+	<div class = "row">
+		<div class="col-5"></div>
+		<div class="col-6"></div>
+		<div class="col-1">
+			<button type="button" class="btn btn-primary float-right">
+				Visitors <span class="badge bg-secondary">{{ visitors }}</span>
+		</div>
+	</div>
+</button>
+</div>
     <html>
     <head>
 
@@ -14,9 +24,9 @@
                 background: url('https://api.iconify.design/bi-hand-thumbs-down-fill.svg?color=Red&width=48&height=48') no-repeat center center;
             }
             .customize-radio label > input[type = 'radio']:checked ~ span.correctButton{
-                background: url('https://api.iconify.design/bi:hand-thumbs-up-fill.svg?width=48&height=48') no-repeat center center;}
+                background: url('https://api.iconify.design/bi:hand-thumbs-up-fill.svg?color=Green&width=48&height=48') no-repeat center center; opacity: 0.3;}
             .customize-radio label > input[type = 'radio']:checked ~ span.incorrectButton{
-                background: url('https://api.iconify.design/bi-hand-thumbs-down-fill.svg?width=48&height=48') no-repeat center center;}
+                background: url('https://api.iconify.design/bi-hand-thumbs-down-fill.svg?color=Red&width=48&height=48') no-repeat center center; opacity: 0.3;}
             .customize-radio label > input[type = 'radio'] {
                 visibility: hidden;
                 position: absolute;
@@ -77,20 +87,20 @@
         //}
     }
     function enableSubmitButton(id,value) {
-		console.log("id:",id);
-		console.log("value:",value);
+		// console.log("id:",id);
+		// console.log("value:",value);
 		var correctVal = document.getElementById("correct" + id).value;
         var incorrectVal = document.getElementById("incorrect" + id).value;
 		if(correctVal==0&&incorrectVal==0){
 			sum++;
-            console.log("sum:",sum);			
+            // console.log("sum:",sum);			
 		}
             if (value === 0) {
 				$('#incorrect'+id).attr("value","1");
 				$('#correct'+id).attr("value","0");
                 document.getElementById('val_text'+id).disabled = false;
                 // $('#submitSentence'+id).html(`<button type="button" name="correspondingText" id="correspondingText1`+id+`"   onclick="send(`+ id+`,`+ value + `)"> Submit </button>`);
-				console.log("button:",$('#submitSentence'+id).html());
+				// console.log("button:",$('#submitSentence'+id).html());
             } else {
 				$('#incorrect'+id).attr("value","0");
 				$('#correct'+id).attr("value","1");
@@ -98,7 +108,6 @@
                 // $('#submitSentence'+id).html(``);
 				send(id, value);
             }
-	    console.log("next tt");		
 	    onload();
     }
     const sliced_list = [];
@@ -111,7 +120,7 @@
     function bind(page) {
         if (flag) {
 		const current_page = Number(sessionStorage.getItem("currentPage"));
-            console.log("ccc:",current_page);
+            // console.log("ccc:",current_page);
 		if (Number(current_page) < sliced_list.length - 1 || remainder != 5) {
 		
                 if (remainder!= 5){
@@ -135,7 +144,7 @@
 	    req.open("GET", path, false);
 	    req.send(null);
 	    if(req.status == 200) {
-   		console.log(req.responseText);
+   		// console.log(req.responseText);
 	    	return req.responseText;
 	    } else {
 	    	return "";
@@ -175,14 +184,13 @@
     }
 
     $(document).ready(function () {
-        console.log("hello")
         sessionStorage.setItem("currentPage", String(0));
         const string_all_pic = document.getElementById("all_pic").value;
 	const formatted_arr = [];
         string_all_pic.substring(1, string_all_pic.length - 1).split(", ").forEach((item) => {
             formatted_arr.push(item.substring(1, item.length - 1));
         });
-	console.log(formatted_arr);
+	// console.log(formatted_arr);
 
         //要找對應的.txt
         const string_all_text = document.getElementById("all_text").value;
@@ -191,7 +199,6 @@
         });
 	
         //formatted_arr_text.splice(0,1);
-        console.log(formatted_arr_text);
 
         const size = 5
         for (let i = 0; i < formatted_arr.length; i += size) {
@@ -200,13 +207,13 @@
         const first_sliced_list = sliced_list[0];
         for (let i = 0; i < first_sliced_list.length; i++) {
             var page = Number(sessionStorage.getItem("currentPage"));
-            console.log(page)
-            //Here
+            // console.log(page)
+
 	    var imgname = first_sliced_list[i];
-	    console.log(formatted_arr_text);
+	    // console.log(formatted_arr_text);
             var path = "https://segmentedimagesoutdir.s3.amazonaws.com/" +  formatted_arr_text[ formatted_arr_text.indexOf('validating_text/' + imgname.substring(17, imgname.length - 4) + ".txt") ];
             const cortxt = loads3txt(path);
-	    console.log("my: ", cortxt);
+	    // console.log("my: ", cortxt);
 
             $("#val_first").append(` <tr class="row m-0">
                               <td class="d-inline-block col-5">
@@ -236,7 +243,7 @@
         const current_page = Number(sessionStorage.getItem("currentPage"));
         flag = true;
         bind(current_page);
-        console.log(current_page)
+        // console.log(current_page)
 
     }
 
@@ -273,7 +280,7 @@
                     });
 			}
                 const request = {pictures: pictures};
-                console.log("pictures:",pictures);
+                // console.log("pictures:",pictures);
                 fetch('', {
                     headers :{
                     "X-CSRFToken":document.cookie.split(';')[0].substring(10)},

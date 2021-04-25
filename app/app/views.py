@@ -128,8 +128,11 @@ def homeview(request):
             remove_data[all_item.img_path] = list([all_item.status])
     
     for key, value in remove_data.items():
-        if value == 'illegible' or value == 'legible':
+        if 'legible' in value or 'illegible' in value:
             all_pic.remove(key[47:])
+
+    if 'Images_Segmented_outputdir/(1)_331.jpg' in all_pic:
+        logging.error('oh my god')
  
     num_pic = len(all_pic)
     random_pic += random.sample(all_pic, num_pic)
@@ -158,51 +161,22 @@ def homeview(request):
             files = i['pic']
             text = i['text']
             status = "unconfirmed"
-
-        # return HttpResponse(files[16:])
             
             #logging.getLogger(__name__).error('result' + str(result))
-            text_list = []
-            '''
-            pic_text = {
-                'img_path': [
-                    [text1, cip1], [text2, cip2], ..
-                ]
-            }
-            '''
+            
             pic_text = {}
             ann = Ann()
+            ann.img_path = files
+            ann.text = text
+            ann.status = status
+            ann.clientip = cip
+            ann.save() 
 
             # iterate all of document in the annotation collection
-            '''
-            for item in result:
-
-                # check whether img exists in the pic_text
-                if item.img_path in pic_text.keys():
-                    # if img exists in the pic_text and the len of its length is 1
-                    if len(pic_text[item.img_path]) == 1:
-                        # if item.text is not in pic_text[item.img_path]
-                        if cmp_txt(item.text, item.clientip, pic_text[item.img_path]) == 'append':
-                            pic_text[item.img_path].append( [item.text, item.clientip] )
-                        # if item.text is in pic_text[item.img_path] and client ip is different
-                        elif cmp_txt(item.text, item.clientip, pic_text[item.img_path]) == 'legible':
-                            Ann.objects(img_path = item.img_path).update(status = "legible")
-                        elif cmp_txt(item.text, item.clientip, pic_text[item.img_path]) == 'unconfirmed':
-                            Ann.objects(img_path = item.img_path).update(status = "unconfirmed")
-                    elif len(pic_text[item.img_path]) >= 2:
-                        # if item.text is not in pic_text[item.img_path]
-                        if cmp_txt(item.text, pic_text[item.img_path]):
-                            Ann.objects(img_path = item.img_path).update(status = "illegible")
-                        # if item.text is in pic_text[item.img_path]
-                        else:
-                            Ann.objects(img_path = item.img_path).update(status = "legible")
-                else:
-                    pic_text[item.img_path] = [item.text]
-                    Ann.objects(img_path = item.img_path).update(status = "unconfirmed")
-            '''
             legible_list = []
             illegible_list = []
 
+            # result is Ann.objects.all()
             for item in result:
                 if item.img_path not in legible_list and item.img_path not in illegible_list:
                     if item.img_path in pic_text.keys():
@@ -255,12 +229,6 @@ def homeview(request):
                         if cip != pic_text[files][1][idx]:
                             Ann.objects(img_path = files).update(status = "illegible")
 
-                
-            ann.img_path = files
-            ann.text = text
-            ann.status = status
-            ann.clientip = cip
-            ann.save() 
 
         return render(request, 'index.html',
             {
@@ -290,31 +258,121 @@ def validation(request):
         s3_img_list.append(dic['Key'])
     del s3_img_list[0]
     all_pic = [i for i in s3_img_list]
-    num_pic = len(all_pic)
     random_pic = []
+    remove_data = {}
+    result = Val.objects.all()
+    for all_item in result:
+        if all_item.img_path in remove_data.keys():
+            remove_data[all_item.img_path].append(all_item.status)
+        else:
+            remove_data[all_item.img_path] = list([all_item.status])
+
+    for key, value in remove_data.items():
+        if 'legible' in value or 'illegible' in value:
+            all_pic.remove(key[47:])
+    
+    num_pic = len(all_pic)
     random_pic += random.sample(all_pic, num_pic)
 
     for dic in s3.list_objects(Bucket = 'segmentedimagesoutdir', Prefix='validating_text')['Contents']:
         s3_text_list.append(dic['Key'])
     all_text = [i for i in s3_text_list]
+
+    # get client ip first
+    cip = get_client_ip(request)
+    cur_saved_ip = []
+    
+    with open(str(django_settings.BASE_DIR) + '/static/val_clientip.txt', 'r') as lip:
+        cur_saved_ip = lip.read().split(',')
+    cur_saved_ip.pop()
+    visitors = len(cur_saved_ip)
+    if cip not in cur_saved_ip:
+        f = open(str(django_settings.BASE_DIR) + '/static/val_clientip.txt', 'a+')
+        f.write(cip + ',')
+        visitors = visitors + 1
     
     if request.method == 'POST':
         json_data = json.loads(request.body)
         for i in json_data['pictures']:
             img_path = i['pic']
             text = i['text']
+            status = "unconfirmed"
             eval_cnt = i['eval_cnt']
 
             val = Val()
             val.img_path = img_path
             val.text = text
+            val.status = status
+            val.clientip = cip
             val.eval_cnt = eval_cnt
             val.save()
+
+            pic_text = {}
+            val = Val()
+
+            # iterate all of document in the annotation collection
+            legible_list = []
+            illegible_list = []
+
+            # result is Val.objects.all()
+            for item in result:
+                if item.img_path not in legible_list and item.img_path not in illegible_list:
+                    if item.img_path in pic_text.keys():
+                        idx, stat = cmp_txt(item.text, pic_text[item.img_path][0])
+                        if stat == True:    ## if in list of text
+                            if item.text != '':
+                                # if ip is different
+                                if item.clientip != pic_text[item.img_path][1][idx]:
+                                    Val.objects(img_path = item.img_path).update(status = "legible")
+                                    legible_list.append(item.img_path)
+                            # if text is empty
+                            else:
+                                # if ip is different
+                                if item.clientip != pic_text[item.img_path][1][idx]:
+                                    Val.objects(img_path = item.img_path).update(status = "illegible")
+                                    illegible_list.append(item.img_path)
+                        elif len(pic_text[item.img_path][0]) == 1:
+                            pic_text[item.img_path][0].append(item.text)
+                            pic_text[item.img_path][1].append(item.clientip)
+                        elif len(pic_text[item.img_path][0]) >= 2:
+                            Val.objects(img_path = item.img_path).update(status = "illegible")
+                            illegible_list.append(item.img_path)
+                    else:
+                        pic_text[item.img_path] = [[item.text], [item.clientip]]
+                        Val.objects(img_path = item.img_path).update(status = "unconfirmed")
+            
+             # check whether the img(user annotated) exists in the pic_text
+            if img_path in pic_text.keys():
+                # save the information to txt file and change the status when the text is in the pic_text
+                idx, stat = cmp_txt(text, pic_text[img_path][0])
+                ## if in list of text
+                if stat == True:
+                    if text != '':
+                        # if ip is different
+                        if cip != pic_text[img_path][1][idx]:
+                            
+                            Val.objects(img_path = img_path).update(status = "legible")
+                            logging.getLogger(__name__).error(img_path)
+                            files_mod = img_path[64:-4] + ".txt"
+                            # write to localhost first
+                            f = open(str(django_settings.BASE_DIR) + '/static/validation/' + files_mod, 'w+')
+                            f.write(text)
+                            f.close()
+                            # then upload to s3 bucket
+                            s3_client = boto3.client('s3')
+                            s3_client.upload_file(str(django_settings.BASE_DIR) + '/static/validation/' + files_mod, 'segmentedimagesoutdir', 'validation/' + files_mod)
+                    # if text is empty
+                    else:
+                        # if ip is different
+                        if cip != pic_text[files][1][idx]:
+                            Val.objects(img_path = files).update(status = "illegible")
+
 
     return render(request, 'validation.html',
         {
             'all_pic': random_pic,
-            'all_text': all_text
+            'all_text': all_text,
+            'visitors': visitors
         }
     )
 
@@ -335,7 +393,7 @@ def check_data_val(request):
     every_data = []
     result = Val.objects.all()
     for item in result:
-        every_data = list([item.img_path, item.text, item.eval_cnt])
+        every_data = list([item.img_path, item.text, item.status, item.clientip, item.eval_cnt])
         all_data.append(every_data)
     return render(request, 'check_data_val.html',
     {

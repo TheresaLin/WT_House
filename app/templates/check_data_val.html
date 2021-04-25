@@ -28,16 +28,36 @@
 			  </ul>
   		</div>
 		</nav>
+		<!-- <table  class="table table-hover">
+			<tr>
+				<th scope="col">Image Path</th>
+				<th scope="col">Text</th>
+				<th scope="col">Image Status</th>
+				<th scope="col">Client IP</th>
+				<th scope="col">Evaluation</th>
+			</tr>
+    		<tr>	
+    			<td>{{ i.img_path }}</td>
+				<td>{{ i.text }}</td>
+				<td>{{ i.status }}</td>
+				<td>{{ i.clientip }}</td>
+    			<td>{{ i.eval_cnt }}</td>
+    		</tr>	
+		</table> -->
 		<table  class="table table-hover">
 			<tr>
 				<th scope="col">Image Path</th>
 				<th scope="col">Text</th>
+				<th scope="col">Image Status</th>
+				<th scope="col">Client IP</th>
 				<th scope="col">Evaluation</th>
 			</tr>
 		{% for i in validated %}
     		<tr>	
     			<td>{{ i.img_path }}</td>
 				<td>{{ i.text }}</td>
+				<td>{{ i.status }}</td>
+				<td>{{ i.clientip }}</td>
     			<td>{{ i.eval_cnt }}</td>
     		</tr>	
 		{% endfor %}
