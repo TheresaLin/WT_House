@@ -71,9 +71,28 @@ Create database for our project with following command (Otherwise, annotation wo
 use examples
 ```
 This command would help us switch into the database of `examples`.  
-Then we would store data in collection of `annotation` with following command:  
+
+Then, create a role with user and password with  following command:
+```
+db.createUser({
+    user: 'theresa', 
+    pwd: 'theresa', 
+    roles: ["readWrite"]
+    })
+```
+You can find the corresponding setting in `setting.py`:
+```
+from mongoengine import connect
+connect(db = 'examples', 
+        host ='127.0.0.1',
+        username = 'theresa',
+        password = 'theresa'
+)
+```
+Then we would store data in collection of `annotation` and `validation` with following command:  
 ```
 db.createCollection('annotation')
+db.createCollection('validation')
 ```
 Now everything in database is ready. Run server up and enjoy it in next section.  
 

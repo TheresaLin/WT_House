@@ -29,34 +29,6 @@ def test_1(request):
     return render(request, '1.html')
 
 def some_view(request):
-    # all_pic = []
-    # onlyfiles = [f for f in listdir(django_settings.STATICFILES_DIRS[0] + '/image/' ) if isfile(join(django_settings.STATICFILES_DIRS[0] + '/image/', f))]
-    # all_pic += random.sample(onlyfiles, 5)
-
-    # if(path.isfile('workfile_2.txt')==True):
-    #     hash = random.getrandbits(2)
-    #     file2 = 'workfile_'+str(hash)+'.txt'
-    #     f = open(file2, 'w')
-    #     f.write('Thereas\n')
-    #     f.write('Hi Theresa!\n')
-    #     f.write('Theresa\n')
-    #     f.close()
-
-
-    #     return HttpResponse(all_pic)
-
-    # else:
-    #     hash = random.getrandbits(2)
-    #     file2 = 'workfile_'+str(hash)+'.txt'
-    #     f = open(file2, 'w')
-    #     f.write('This is a test\n')
-    #     f.write('Hi User!\n')
-    #     f.write('Welcome to Python Easy!\n')
-    #     f.close()
-
-    #     d='Theresa'
-
-    #     return HttpResponse(d)
     if request.method == 'POST':
     # create a form instance and populate it with data from the request:
         form = img_text_form(request.POST)

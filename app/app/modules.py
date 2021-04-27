@@ -5,7 +5,7 @@ from mongoengine import *
 class Examples(Document):
     # poem
     meta = {
-        # 数据库中显示的名字
+
         'collection': 'examples'
     }
 
@@ -14,10 +14,10 @@ class Examples(Document):
     path = StringField()
     text = StringField()
 
-    # 可以定义查询集
+
     @queryset_manager
     def show_newest(doc_cls, queryset):
-        # 通过poem_id降序显示
+
         return queryset.order_by('-_id')
 
 

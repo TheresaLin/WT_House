@@ -92,28 +92,20 @@ WSGI_APPLICATION = 'app.wsgi.application'
 MONGODB_DATABASES = {
     "default": {
         'ENGINE' : 'django_mongodb_engine',
-        #'ENGINE': 'djongo',
         "name": "examples",
         "host": '127.0.0.1',
-        "tz_aware": True, # 设置时区
+        "tz_aware": True, 
     },
 }
 
 
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # different from 'ENGINE': 'django.db.backends.dummy'
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 from mongoengine import connect
-connect('examples', host='127.0.0.1')
-# Password validation
+connect(db = 'examples', 
+        host ='127.0.0.1',
+        username = 'theresa',
+        password = 'theresa'
+)
+# Password validationß
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
