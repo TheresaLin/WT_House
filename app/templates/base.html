@@ -12,7 +12,32 @@
   <script src="https://cdn.jsdelivr.net/sharer.js/latest/sharer.min.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+  <style>
+  
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+    
+    li {
+      float: left;
+    }
+    
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    
+    li a:hover {
+      background-color: #111;
+    }
+    </style>
 
 </head>
 
@@ -25,20 +50,21 @@
 {% block header %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">Home</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home</a>
+      </li>
       <li class="nav-item active">
         <a class="nav-link" href="/">Annotation</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/validation/">Validation</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about/">About Us</a>
+      </li>
+    
     </ul>
   </div>
 
@@ -74,7 +100,7 @@
       if (Number(current_page) < sliced_list.length - 1 || remainder != 5) {
         
 
-		next(sliced_list);
+		    next(sliced_list);
         sessionStorage.setItem("currentPage", String(current_page + 1));
 
       } else {
@@ -107,11 +133,9 @@
 
   $(document).ready(function () {
     sessionStorage.setItem("currentPage", String(0));
-
-	const string_all_pic = document.getElementById("all_pic").value;
-	
+	  const string_all_pic = document.getElementById("all_pic").value;
     string_all_pic.substring(1, string_all_pic.length - 1).split(", ").forEach((item) => {
-      formatted_arr.push(item.substring(1, item.length - 1));
+    formatted_arr.push(item.substring(1, item.length - 1));
     });
 	
     const size = 5
@@ -207,7 +231,7 @@
 				}).then(res => res.json())
 				.catch(error => console.error('Error:', error))
 				.then(response => {
-				sessionStorage.setItem("currentPage", String(current_page + 1));
+				//sessionStorage.setItem("currentPage", String(current_page + 1));
 				console.log('Success:', response);
 			});
 					

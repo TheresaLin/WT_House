@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<body>
+
+<!-- START THE FEATURETTES -->
+<div class="container">
+<!-- <hr class="featurette-divider"> -->
+
+<div class="row featurette">
+  <div class="col-md-7">
+    <h4 class="featurette-heading">Team Karvas</h4><h6><span class="text-muted">Product Owner : Rachael Cecilia Dsouza<br>Scrum Master : Sai Sumanth Sriram<br>Main Developer : Anudeep  Vurity, Krupanka Vijay, Venkata Vamsi Ram Patibandla Sumanth Bhargav </span></h6>
+    <p class="lead">Team Karvas is responsible for using autoencoders for image cleaning and building a combination of algorithms along with the OTSU method for segmentation.The segementation function built improves the quality of the images and segments the text in the handwritten documents which is made available to predict text by the handwriting recognition/annotation model .
+    </p>
+  </div>
+  <div class="col-md-5">
+    <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image" src="{%static '/team_pic/karvas.jpeg' %}">
+  </div>
+</div>
+
+<hr class="featurette-divider">
+
+<div class="row featurette">
+  <div class="col-md-7 order-md-2">
+    <h4 class="featurette-heading">Team WT House</h4><h6><span class="text-muted">Product Owner : Jing Ting Huang<br> Scrum Master, Developer : Wei Hao Wu<br>Main Developer, GitHub Manager : Chun Jou Lin </span></h6>
+    <p class="lead">Team WT House is responsible for building up the Web App to collect the annotated text and images from users. The annotation page collects the annotated data by letting users input what they see in the images and based on the comparision function to extract the legible image. The validation page collects the validated data by letting users evaluate the modeling results and based on evaluation function to validate the model results.
+    </p>
+  </div>
+  <div class="col-md-5 order-md-1">
+    <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image" src="{%static '/team_pic/wthouse.jpg' %}">
+  </div>
+</div>
+
+<hr class="featurette-divider">
+
+<div class="row featurette">
+  <div class="col-md-7">
+    <h4 class="featurette-heading">Team Ninjas</h4><h6><span class="text-muted">Product Owner, Main Developer : Nikhith Theddu<br> Scrum Master, Developer : Sumanth Bhagav Kanchi<br> Developer : Ananya Maragoni, Hemalekha Pillarishetty, Sai Atchutha Reddy Syamala, Tharun Kanamneni</span></h6>
+    <p class="lead">Team Ninjas is responsible for using the Convolutional Neural Network based Long-Short Term Memory Model to extract the text from the segmented image and developed a doOCR function to extract the text and output the data in user desired format. At the end of the project, team Ninjas integrates the code with Team Karvas and provided the segmented image and predicted text to Team WT House
+    </p>
+  </div>
+  <div class="col-md-5">
+    <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image" src="{%static '/team_pic/ninjas.jpg' %}">
+  </div>
+</div>
+</div>
+</body>
+
+{% endblock %}

@@ -27,5 +27,6 @@ urlpatterns = [
     path('some_view/',views.some_view),
     path('check_data/',views.check_data),
     path('check_data_val/',views.check_data_val),
+    path('about/',views.team),
     path(r'robots.txt', views.honeypot)
 ]
